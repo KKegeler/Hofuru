@@ -1,23 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour {
 
-    public float maxShurikenCount;
-    public float maxTeleportPower;
+    public int maxShurikenCount;
 
-    private float curShurikenCount;
+    private float maxTimeHoldPower;
+    private int curShurikenCount;
     private float curHealth;
-    private float curTeleportPower;
+    private float curTimeHoldPower;
+
+    private Text hud_ShurikenAnzeige;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        this.curShurikenCount = this.maxShurikenCount;
+        this.hud_ShurikenAnzeige = GameObjectBank.instance.hud_ShurikenCounter;
+        hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
+    }
+
+    public int GetCurrentShurikenCount() {
+        return this.curShurikenCount;
+    }
+
+    public void AddSchuriken(int amount) {
+        this.curShurikenCount += amount;
+        hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
+    } 
+
+    public void DecreaseCurrSchurikenCount() {
+        if (this.curShurikenCount > 0) {
+            this.curShurikenCount--;
+            hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameObjectBank : MonoBehaviour {
     public static GameObjectBank instance;
@@ -9,6 +10,7 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject playerMeleeTrigger;
     public GameObject teleportTarget;
     public GameObject blut;
+    public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
 
     public GameObject[] prefabsForPooling;

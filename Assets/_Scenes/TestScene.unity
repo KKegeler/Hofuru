@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 51171116}
   - component: {fileID: 51171113}
   - component: {fileID: 51171117}
+  - component: {fileID: 51171118}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -331,6 +332,7 @@ MonoBehaviour:
   playerMeleeTrigger: {fileID: 554588018}
   teleportTarget: {fileID: 1679312316}
   blut: {fileID: 1759966272}
+  hud_ShurikenCounter: {fileID: 1912267834}
   greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
   prefabsForPooling:
   - {fileID: 0}
@@ -372,6 +374,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _score: 0
   _time: 0
+--- !u!114 &51171118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51171112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21ebf0fcf5c4da47b774240ec105548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShurikenCount: 5
 --- !u!1001 &51748548
 Prefab:
   m_ObjectHideFlags: 0

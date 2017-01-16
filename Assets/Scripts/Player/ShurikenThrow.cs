@@ -8,16 +8,19 @@ public class ShurikenThrow : MonoBehaviour {
     private bool isMeasuering;
     private bool canShoot;
     private float delta;
-    //int i = 0;
+    private PlayerStats pStats;
+    
 
     // Use this for initialization
     void Start() {
+        this.pStats = GameObjectBank.instance.GetComponent<PlayerStats>();
         player = GameObjectBank.instance.player;
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Shoot")) {
+        if (Input.GetButtonDown("Shoot") && pStats.GetCurrentShurikenCount() > 0) {
+            this.pStats.DecreaseCurrSchurikenCount();
             this.Throw(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }    
     }

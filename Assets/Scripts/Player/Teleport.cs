@@ -45,7 +45,7 @@ public class Teleport : MonoBehaviour {
         }
         if (isActive) {
             //Vector3 moveDelta = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR") * -1, 0) * Time.unscaledDeltaTime * targetSpeed;
-            if (Vector3.Distance(teleportTarget.transform.position, player.transform.position) > maxDistance) {
+            if (Vector3.Distance(teleportTarget.transform.position, player.transform.position) > maxDistance + 3) {
                 teleportTarget.GetComponent<SpriteRenderer>().color = Color.red;
             }
             else {

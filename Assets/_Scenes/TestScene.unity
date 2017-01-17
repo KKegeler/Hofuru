@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21ebf0fcf5c4da47b774240ec105548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShurikenCount: 5
+  maxShurikenCount: 50
 --- !u!1001 &51748548
 Prefab:
   m_ObjectHideFlags: 0
@@ -1033,6 +1033,21 @@ Prefab:
       propertyPath: firstSelected
       value: 
       objectReference: {fileID: 584221625}
+    - target: {fileID: 212398229181907852, guid: 772fafe99a87bf24ebd148d61ba47835,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212398229181907852, guid: 772fafe99a87bf24ebd148d61ba47835,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212398229181907852, guid: 772fafe99a87bf24ebd148d61ba47835,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
   m_IsPrefabParent: 0

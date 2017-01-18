@@ -11,12 +11,14 @@ public class Teleport : MonoBehaviour {
     private PlayerMovement pm;
     private MeleeAttack ma;
     private TimeController timeController;
+    private CameraController cameraController;
     private bool isActive;
 
     void Start() {
         isActive = false;
         player = this.gameObject;
         timeController = GameObjectBank.instance.GetComponent<TimeController>();
+        cameraController = GameObjectBank.instance.GetComponent<CameraController>();
         teleportTarget = GameObjectBank.instance.teleportTarget;
         pm = player.GetComponent<PlayerMovement>();
         ma = player.GetComponent<MeleeAttack>();
@@ -30,6 +32,7 @@ public class Teleport : MonoBehaviour {
             ma.EnableMelee();
             teleportTarget.SetActive(false);
             timeController.SetOriginTime();
+            cameraController.ResetZoom();
         }
         if (Input.GetButtonDown("TeleportCall")) {
             isActive = true;
@@ -38,7 +41,8 @@ public class Teleport : MonoBehaviour {
                 // ma.DisableMelee();
                 teleportTarget.SetActive(true);
                 teleportTarget.transform.position = player.transform.position;
-                timeController.FreezeTime(0.3f, 0.05f, 10);
+                timeController.FreezeTime(0.4f, 0.02f, 20);
+                cameraController.ZoomIn(0.2f, 17);
                 teleportTarget.GetComponent<BoxCollider2D>().size = player.GetComponent<BoxCollider2D>().size;
             }
 
@@ -65,6 +69,7 @@ public class Teleport : MonoBehaviour {
             isActive = false;
             teleportTarget.SetActive(false);
             timeController.SetOriginTime();
+            cameraController.ResetZoom();
         }
 
     }

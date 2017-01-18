@@ -12,6 +12,7 @@ public class Teleport : MonoBehaviour {
     private MeleeAttack ma;
     private TimeController timeController;
     private CameraController cameraController;
+    private PlayerStats ps;
     private bool isActive;
 
     void Start() {
@@ -19,6 +20,7 @@ public class Teleport : MonoBehaviour {
         player = this.gameObject;
         timeController = GameObjectBank.instance.GetComponent<TimeController>();
         cameraController = GameObjectBank.instance.GetComponent<CameraController>();
+        ps = GameObjectBank.instance.GetComponent<PlayerStats>();
         teleportTarget = GameObjectBank.instance.teleportTarget;
         pm = player.GetComponent<PlayerMovement>();
         ma = player.GetComponent<MeleeAttack>();
@@ -26,7 +28,7 @@ public class Teleport : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonUp("TeleportCall")) {
+        if (Input.GetButtonUp("TeleportCall") || ps.GetCurrentTimefreezeTime() <= 0) {
             isActive = false;
             pm.EnableMovement();
             ma.EnableMelee();
@@ -34,7 +36,7 @@ public class Teleport : MonoBehaviour {
             timeController.SetOriginTime();
             cameraController.ResetZoom();
         }
-        if (Input.GetButtonDown("TeleportCall")) {
+        if (Input.GetButtonDown("TeleportCall") && ps.GetCurrentTimefreezeTime() > 0) {
             isActive = true;
             if (isActive) {
                 pm.DisableMovement();
@@ -43,7 +45,7 @@ public class Teleport : MonoBehaviour {
                 teleportTarget.transform.position = player.transform.position;
                 timeController.FreezeTime(0.4f, 0.02f, 20);
                 cameraController.ZoomIn(0.2f, 17);
-                teleportTarget.GetComponent<BoxCollider2D>().size = player.GetComponent<BoxCollider2D>().size;
+                teleportTarget.GetComponent<BoxCollider2D>().size = player.GetComponent<BoxCollider2D>().size;             
             }
 
         }
@@ -57,6 +59,7 @@ public class Teleport : MonoBehaviour {
             }
             teleportTarget.transform.position = player.transform.position + new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * maxDistance;
             //teleportTarget.transform.Translate(moveDelta);
+            ps.ReduceCurrentFreezeTime(Time.unscaledDeltaTime);
         }
 
         if (isActive && Input.GetButtonDown("TeleportConfirm")) {
@@ -71,6 +74,8 @@ public class Teleport : MonoBehaviour {
             timeController.SetOriginTime();
             cameraController.ResetZoom();
         }
-
+        if (!isActive && ps.GetCurrentTimefreezeTime() < ps.maxTimefreezeTime) {
+            ps.InCreaseCurrentFreezeTime(Time.unscaledDeltaTime / 2);
+        }
     }
 }

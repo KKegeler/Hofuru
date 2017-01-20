@@ -51,6 +51,10 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public bool GetIsGrounded() {
+        return this.isGrounded;
+    }
+
     void FixedUpdate() {
         //Movement Horizontal
         /*
@@ -156,4 +160,6 @@ public class PlayerMovement : MonoBehaviour {
         this.rigiBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         this.EndSlide();
     }
+
+
 }

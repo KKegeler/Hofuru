@@ -78,4 +78,17 @@ public class Teleport : MonoBehaviour {
             ps.InCreaseCurrentFreezeTime(Time.unscaledDeltaTime / 2);
         }
     }
+
+    public void EndTimeFreeze() {
+        isActive = false;
+        pm.EnableMovement();
+        ma.EnableMelee();
+        teleportTarget.SetActive(false);
+        timeController.SetOriginTime();
+        cameraController.ResetZoom();
+    }
+
+    public bool IsTimeFreezing() {
+        return isActive;
+    }
 }

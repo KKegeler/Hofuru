@@ -36,7 +36,7 @@ public class Teleport : MonoBehaviour {
             timeController.SetOriginTime();
             cameraController.ResetZoom();
         }
-        if (Input.GetButtonDown("TeleportCall") && ps.GetCurrentTimefreezeTime() > 0) {
+        if (Input.GetButtonDown("TeleportCall") && ps.GetCurrentTimefreezeTime() > ps.minTimeNeededToFreeze) {
             isActive = true;
             if (isActive) {
                 pm.DisableMovement();

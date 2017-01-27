@@ -8,6 +8,8 @@ using Framework.Messaging;
 public class Statistics : MonoBehaviour
 {
     #region Variablen
+    public static Statistics Instance;
+
     [SerializeField]
     private float _score;
     [SerializeField]
@@ -25,6 +27,14 @@ public class Statistics : MonoBehaviour
         }
     }
     #endregion
+
+    private void Awake()
+    {
+        if (!Instance)
+            Instance = this;
+        if (Instance != this)
+            Destroy(gameObject);
+    }
 
     private void Start()
     {

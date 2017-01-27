@@ -13,8 +13,6 @@ public class GameObjectBank : MonoBehaviour {
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
 
-    public GameObject[] prefabsForPooling;
-
     public void Awake() {
         if (instance == null)
             instance = this;

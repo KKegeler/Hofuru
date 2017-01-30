@@ -34,7 +34,7 @@ public class PlayerDeath : Death {
     }
 
     public override void HandleDeath() {
-
+        DataSerializer.Save();
         this.isDead = true;
         this.pm.enabled = false;
         if (tp.IsTimeFreezing()) {

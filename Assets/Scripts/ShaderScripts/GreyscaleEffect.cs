@@ -3,23 +3,23 @@
 public class GreyscaleEffect : MonoBehaviour
 {
     #region Variablen
-    private Shader curShader;
-    [Range(0f, 1f)]
-    public float greyscaleAmount = 0.0f;
-    private Material curMaterial;
+    private Shader _curShader;
+    [SerializeField] [Range(0f, 1f)]
+    private float _greyscale;
+    private Material _curMaterial;
     #endregion
 
     #region Properties
-    Material material
+    Material CurMaterial
     {
         get
         {
-            if (curMaterial == null)
+            if (_curMaterial == null)
             {
-                curMaterial = new Material(curShader);
-                curMaterial.hideFlags = HideFlags.HideAndDontSave;
+                _curMaterial = new Material(_curShader);
+                _curMaterial.hideFlags = HideFlags.HideAndDontSave;
             }
-            return curMaterial;
+            return _curMaterial;
         }
     }
     #endregion
@@ -32,18 +32,18 @@ public class GreyscaleEffect : MonoBehaviour
             return;
         }
 
-        curShader = GameObjectBank.instance.greyscaleShader;
+        _curShader = GameObjectBank.instance.greyscaleShader;
 
-        if (!curShader || !curShader.isSupported)
+        if (!_curShader || !_curShader.isSupported)
             enabled = false;
     }
 
     void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
     {
-        if (curShader)
+        if (_curShader)
         {
-            material.SetFloat("_LuminosityAmount", greyscaleAmount);
-            Graphics.Blit(sourceTex, destTex, material);
+            CurMaterial.SetFloat("_LuminosityAmount", _greyscale);
+            Graphics.Blit(sourceTex, destTex, CurMaterial);
         }
         else
             Graphics.Blit(sourceTex, destTex);
@@ -51,8 +51,8 @@ public class GreyscaleEffect : MonoBehaviour
 
     void OnDisable()
     {
-        if (curMaterial)
-            DestroyImmediate(curMaterial);
+        if (_curMaterial)
+            DestroyImmediate(_curMaterial);
     }
 
 }

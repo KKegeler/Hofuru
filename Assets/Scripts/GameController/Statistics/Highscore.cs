@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Score-Daten zur Serialisierung
+/// </summary>
 [Serializable]
 public class Highscore
 {

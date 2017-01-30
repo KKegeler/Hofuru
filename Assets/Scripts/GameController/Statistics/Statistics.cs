@@ -54,6 +54,9 @@ public class Statistics : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.F2))
+            DataSerializer.Reset();
     }
 
     #region Handler

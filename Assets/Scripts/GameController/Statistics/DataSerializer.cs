@@ -52,8 +52,6 @@ public static class DataSerializer
             _scoreList = (List<Highscore>)bf.Deserialize(file);
             file.Close();     
         }
-        else
-            Debug.LogWarningFormat("File \"{0}\" not found!\n", FilePath);
 
         if (_scoreList == null)
             _scoreList = new List<Highscore>();
@@ -71,11 +69,11 @@ public static class DataSerializer
 
     private static void TestLog()
     {
-        if (_scoreList.Count <= 0)
-            Debug.Log("No entrys in ScoreList!\n");
+        if (_scoreList.Count == 0)
+            Debug.Log("No entries in ScoreList!\n");
 
         for (int i = 0; i < _scoreList.Count; ++i)
-            Debug.LogFormat("{0}: {1}", i + 1, _scoreList[i].score);
+            Debug.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);
     }
 
 }

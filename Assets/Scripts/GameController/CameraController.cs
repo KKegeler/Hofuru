@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         this.resetZoomRoutine = ResetZoomRoutine(0.05f);
-        this.player = GameObjectBank.instance.player;
-        this.mainCamera = GameObjectBank.instance.mainCamera.GetComponent<Camera>();
+        this.player = GameObjectBank.Instance.player;
+        this.mainCamera = GameObjectBank.Instance.mainCamera.GetComponent<Camera>();
         this.originalSize = mainCamera.orthographicSize;
         newCamPos = new Vector3(0.0f, 0.0f, mainCamera.transform.position.z);
     }

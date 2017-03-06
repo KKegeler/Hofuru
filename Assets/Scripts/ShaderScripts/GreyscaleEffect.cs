@@ -2,7 +2,7 @@
 
 public class GreyscaleEffect : MonoBehaviour
 {
-    #region Variablen
+    #region Variables
     private Shader _curShader;
     [SerializeField] [Range(0f, 1f)]
     private float _greyscale;
@@ -10,7 +10,7 @@ public class GreyscaleEffect : MonoBehaviour
     #endregion
 
     #region Properties
-    Material CurMaterial
+    private Material CurMaterial
     {
         get
         {
@@ -32,7 +32,7 @@ public class GreyscaleEffect : MonoBehaviour
             return;
         }
 
-        _curShader = GameObjectBank.instance.greyscaleShader;
+        _curShader = GameObjectBank.Instance.greyscaleShader;
 
         if (!_curShader || !_curShader.isSupported)
             enabled = false;

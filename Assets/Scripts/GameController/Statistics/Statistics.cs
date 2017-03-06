@@ -7,7 +7,7 @@ using Framework.Messaging;
 /// </summary>
 public class Statistics : MonoBehaviour
 {
-    #region Variablen
+    #region Variables
     private static Statistics _instance;
     [SerializeField]
     private float _score;

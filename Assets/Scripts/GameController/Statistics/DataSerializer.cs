@@ -2,15 +2,16 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using Framework.Log;
 
 /// <summary>
 /// Speichert und lädt Score-Daten
 /// </summary>
 public static class DataSerializer
 {
-    #region Variablen
+    #region Variables
     private static List<Highscore> _scoreList = new List<Highscore>(6);
-    private const string _fileName = "Scores.mango";
+    private const string _FILE_NAME = "Scores.mango";
     private const ushort _SAVE_NUM = 5;
     #endregion
 
@@ -22,7 +23,7 @@ public static class DataSerializer
 
     private static string FilePath
     {
-        get { return Path.Combine(Application.persistentDataPath, _fileName); }
+        get { return Path.Combine(Application.persistentDataPath, _FILE_NAME); }
     }
     #endregion
 
@@ -64,16 +65,16 @@ public static class DataSerializer
         if (File.Exists(FilePath))
             File.Delete(FilePath);
         else
-            Debug.LogWarningFormat("File \"{0}\" not found!\n", FilePath);
+            CustomLogger.LogWarningFormat("File \"{0}\" not found!\n", FilePath);
     }
 
     private static void TestLog()
     {
         if (_scoreList.Count == 0)
-            Debug.Log("No entries in ScoreList!\n");
+            CustomLogger.Log("No entries in ScoreList!\n");
 
         for (int i = 0; i < _scoreList.Count; ++i)
-            Debug.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);
+            CustomLogger.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);
     }
 
 }

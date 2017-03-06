@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class GameObjectBank : MonoBehaviour {
-    public static GameObjectBank instance;
+    #region Variables
+    private static GameObjectBank _instance;
+
     public GameObject player;
     public GameObject gameController;
     public GameObject mainCamera;
@@ -12,11 +13,19 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject blut;
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
+    #endregion
+
+    #region Properties
+    public static GameObjectBank Instance
+    {
+        get { return _instance; }
+    }
+    #endregion
 
     public void Awake() {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this);
+        if (!_instance)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
     }
 }

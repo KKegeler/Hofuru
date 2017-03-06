@@ -14,7 +14,7 @@ public class EnemyMachine : StateMachine {
 
     new public void Start() {
         base.Start();
-        Transform player = GameObjectBank.instance.player.transform;
+        Transform player = GameObjectBank.Instance.player.transform;
         states.Add("PATROL", new PatrolState(this, player));
         if (shooting) {
             states.Add("SHOOT", new ShooterState(this, player));

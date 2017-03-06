@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour {
         this.originalJumpPower = this.jumpPower;
         this.animator = this.GetComponent<Animator>();
         this.rigiBody = this.GetComponent<Rigidbody2D>();
-        this.timeController = GameObjectBank.instance.gameController.GetComponent<TimeController>();
-        this.mainCamera = GameObjectBank.instance.mainCamera.GetComponent<Camera>();
+        this.timeController = GameObjectBank.Instance.gameController.GetComponent<TimeController>();
+        this.mainCamera = GameObjectBank.Instance.mainCamera.GetComponent<Camera>();
         this.playerCollider = this.GetComponent<BoxCollider2D>();
     }
 

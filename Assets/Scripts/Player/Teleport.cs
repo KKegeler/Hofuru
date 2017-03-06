@@ -18,10 +18,10 @@ public class Teleport : MonoBehaviour {
     void Start() {
         isActive = false;
         player = this.gameObject;
-        timeController = GameObjectBank.instance.GetComponent<TimeController>();
-        cameraController = GameObjectBank.instance.GetComponent<CameraController>();
-        ps = GameObjectBank.instance.GetComponent<PlayerStats>();
-        teleportTarget = GameObjectBank.instance.teleportTarget;
+        timeController = GameObjectBank.Instance.GetComponent<TimeController>();
+        cameraController = GameObjectBank.Instance.GetComponent<CameraController>();
+        ps = GameObjectBank.Instance.GetComponent<PlayerStats>();
+        teleportTarget = GameObjectBank.Instance.teleportTarget;
         pm = player.GetComponent<PlayerMovement>();
         ma = player.GetComponent<MeleeAttack>();
     }

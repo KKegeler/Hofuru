@@ -12,7 +12,7 @@ public class TimeController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         //TODO: GAMECONSTANTS!
-        this.camController = GameObjectBank.instance.gameController.GetComponent<CameraController>();
+        this.camController = GameObjectBank.Instance.gameController.GetComponent<CameraController>();
         originTimeScale = Time.timeScale;
         originFixedDeltaTime = Time.fixedDeltaTime;
     }
@@ -51,7 +51,7 @@ public class TimeController : MonoBehaviour {
         animCurve.RemoveKey(animCurve.keys.Length - 1);
         animCurve.AddKey(new Keyframe(1, minvalue));
         for (int i = 0; i < steps; i++) {
-           // Debug.Log(animCurve.Evaluate((float)i / (float)steps));
+           // CustomLogger.Log(animCurve.Evaluate((float)i / (float)steps));
             Time.timeScale = animCurve.Evaluate((float) i / (float) steps);
             Time.fixedDeltaTime = originFixedDeltaTime * Time.timeScale;
             yield return new WaitForSecondsRealtime(stepTime);

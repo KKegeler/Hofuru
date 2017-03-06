@@ -5,7 +5,7 @@ using Framework.Messaging;
 
 public class ScoreText : MonoBehaviour
 {
-    #region Variablen
+    #region Variables
     private Text _scoreText;
     #endregion
 

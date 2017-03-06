@@ -13,8 +13,8 @@ public class ShurikenThrow : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        this.pStats = GameObjectBank.instance.GetComponent<PlayerStats>();
-        player = GameObjectBank.instance.player;
+        this.pStats = GameObjectBank.Instance.GetComponent<PlayerStats>();
+        player = GameObjectBank.Instance.player;
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ public class PlayerMeleeHandling : MonoBehaviour {
     public float meleeForce;
 
     void Start() {
-        this.player = GameObjectBank.instance.player;
+        this.player = GameObjectBank.Instance.player;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -23,7 +23,7 @@ public class PlayerMeleeHandling : MonoBehaviour {
         }
         hc.ReduceHealth(60);
         this.GetComponent<Collider2D>().enabled = false;
-        Instantiate(GameObjectBank.instance.blut, other.transform.position, Quaternion.Euler(new Vector3(0,0,Random.Range(-100, 100))));
+        Instantiate(GameObjectBank.Instance.blut, other.transform.position, Quaternion.Euler(new Vector3(0,0,Random.Range(-100, 100))));
         otherRigi.AddForce(dir * meleeForce, ForceMode2D.Impulse);
 
     }

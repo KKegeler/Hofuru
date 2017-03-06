@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Framework.Log;
 
 public class Bhv_Flee : MonoBehaviour {
 
@@ -33,7 +33,7 @@ public class Bhv_Flee : MonoBehaviour {
         {
             me.velocity = Vector2.up * me.velocity.y;
         }
-        Debug.Log(speed);
+        CustomLogger.Log(speed);
         animator.SetFloat("speed", speed);
     }
 

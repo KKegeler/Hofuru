@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
+using Framework.Log;
 
 namespace Framework
 {
     /// <summary>
-    /// Basisklasse für Singletons
+    /// Base class for Singletons.
+    ///  Do not place objects of derived classes in the Hierarchy!
     /// </summary>
-    /// <typeparam name="T">Abgeleitete Klasse</typeparam>
-    public class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>
+    /// <typeparam name="T">Derived class</typeparam>
+    public abstract class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>
     {
-        #region Variablen
+        #region Variables
         private static T __Instance;
         protected bool _alive = true;
         #endregion
@@ -20,7 +22,7 @@ namespace Framework
             {
                 if (!__Instance)
                 {
-                    T[] managers = FindObjectOfType(typeof(T)) as T[];
+                    T[] managers = FindObjectsOfType(typeof(T)) as T[];
                     if (managers != null)
                     {
                         if (managers.Length == 1)
@@ -30,7 +32,7 @@ namespace Framework
                         }
                         else if (managers.Length > 1)
                         {
-                            Debug.LogWarningFormat("More than one instance of {0} exists!",
+                            CustomLogger.LogWarningFormat("More than one instance of {0} exists!",
                                 __Instance.name);
                             for (int i = 0; i < managers.Length; ++i)
                             {
@@ -62,12 +64,17 @@ namespace Framework
         }
         #endregion
 
-        void OnDestroy()
+        /// <summary>
+        /// Can be used for preloading
+        /// </summary>
+        public void WakeUp() { }
+
+        private void OnDestroy()
         {
             _alive = false;
         }
 
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             _alive = false;
         }

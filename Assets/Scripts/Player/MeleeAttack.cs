@@ -15,8 +15,8 @@ public class MeleeAttack : MonoBehaviour {
     // Use this for initialization
     void Start() {
         this.meleeCoolDownTime = 0.35f;
-        playerMeleeTrigger = GameObjectBank.instance.playerMeleeTrigger.GetComponent<BoxCollider2D>();
-        player = GameObjectBank.instance.player;
+        playerMeleeTrigger = GameObjectBank.Instance.playerMeleeTrigger.GetComponent<BoxCollider2D>();
+        player = GameObjectBank.Instance.player;
         animator = player.GetComponent<Animator>();
         meleeDisabled = false;
         canAttack = true;

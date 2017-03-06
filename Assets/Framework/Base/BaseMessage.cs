@@ -1,7 +1,7 @@
 ﻿namespace Framework
 {
     /// <summary>
-    /// Basisklasse für Nachrichten
+    /// Base class for Messages
     /// </summary>
     public class BaseMessage
     {

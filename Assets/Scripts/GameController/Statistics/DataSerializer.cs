@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Framework.Log;
 
 /// <summary>
-/// Speichert und lädt Score-Daten
+/// Lädt und speichert Score-Daten
 /// </summary>
 public static class DataSerializer
 {
@@ -27,6 +27,9 @@ public static class DataSerializer
     }
     #endregion
 
+    /// <summary>
+    /// Speichert Highscores in Datei
+    /// </summary>
     public static void Save()
     {
         Highscore score = new Highscore(Statistics.Instance.FinalScore);
@@ -43,6 +46,9 @@ public static class DataSerializer
         file.Close();
     }
 
+    /// <summary>
+    /// Lädt Highscores aus Datei
+    /// </summary>
     public static void Load()
     {
         if (File.Exists(FilePath))
@@ -60,6 +66,9 @@ public static class DataSerializer
         // TestLog();
     }
 
+    /// <summary>
+    /// Löscht Datei, falls vorhanden
+    /// </summary>
     public static void Reset()
     {
         if (File.Exists(FilePath))
@@ -71,7 +80,10 @@ public static class DataSerializer
     private static void TestLog()
     {
         if (_scoreList.Count == 0)
+        {
             CustomLogger.Log("No entries in ScoreList!\n");
+            return;
+        }
 
         for (int i = 0; i < _scoreList.Count; ++i)
             CustomLogger.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);

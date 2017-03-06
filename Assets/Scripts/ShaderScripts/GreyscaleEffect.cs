@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Graustufeneffekt bei Tod des Spielers
+/// </summary>
 public class GreyscaleEffect : MonoBehaviour
 {
     #region Variables
     private static GreyscaleEffect _instance;
 
-    private Shader _curShader;
+    private Shader _shader;
     [Range(0f, 1f)]
     private float _greyscale = 0;
     [SerializeField] [Range(0.5f, 3f)]
-    private float _blendTime = 1;
-    private Material _curMaterial;
+    private float _blendTime = 0.5f;
+    private Material _mat;
     #endregion
 
     #region Properties
@@ -20,16 +23,16 @@ public class GreyscaleEffect : MonoBehaviour
         get { return _instance; }
     }
 
-    private Material CurMaterial
+    private Material Mat
     {
         get
         {
-            if (_curMaterial == null)
+            if (_mat == null)
             {
-                _curMaterial = new Material(_curShader);
-                _curMaterial.hideFlags = HideFlags.HideAndDontSave;
+                _mat = new Material(_shader);
+                _mat.hideFlags = HideFlags.HideAndDontSave;
             }
-            return _curMaterial;
+            return _mat;
         }
     }
     #endregion
@@ -50,18 +53,18 @@ public class GreyscaleEffect : MonoBehaviour
             return;
         }
 
-        _curShader = GameObjectBank.Instance.greyscaleShader;
+        _shader = GameObjectBank.Instance.greyscaleShader;
 
-        if (!_curShader || !_curShader.isSupported)
+        if (!_shader || !_shader.isSupported)
             enabled = false;
     }
 
     private void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
     {
-        if (_curShader)
+        if (_shader)
         {
-            CurMaterial.SetFloat("_LuminosityAmount", _greyscale);
-            Graphics.Blit(sourceTex, destTex, CurMaterial);
+            Mat.SetFloat("_LuminosityAmount", _greyscale);
+            Graphics.Blit(sourceTex, destTex, Mat);
         }
         else
             Graphics.Blit(sourceTex, destTex);
@@ -77,15 +80,14 @@ public class GreyscaleEffect : MonoBehaviour
         while (_greyscale < 1f)
         {
             _greyscale += Time.deltaTime / _blendTime;
-            _greyscale = Mathf.Clamp01(_greyscale);
             yield return new WaitForEndOfFrame();
         }
     }
 
     private void OnDisable()
     {
-        if (_curMaterial)
-            DestroyImmediate(_curMaterial);
+        if (_mat)
+            DestroyImmediate(_mat);
     }
 
 }

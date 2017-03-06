@@ -16,7 +16,7 @@ namespace Framework
                 = new Dictionary<string, List<MessageHandlerDelegate>>();
             private Queue<BaseMessage> _messageQueue = new Queue<BaseMessage>();
             private Stack<string> _typeStack = new Stack<string>();
-            private Stack<MessageHandlerDelegate> _handlerStack = 
+            private Stack<MessageHandlerDelegate> _handlerStack =
                 new Stack<MessageHandlerDelegate>();
             private bool _isTriggered;
 
@@ -55,7 +55,7 @@ namespace Framework
             }
 
             /// <summary>
-            /// Calls handlers of the listeners
+            /// Calls handlers
             /// </summary>
             /// <param name="msg">Message</param>
             /// <returns>Could the message be handled by the listener?</returns>
@@ -104,23 +104,16 @@ namespace Framework
                 if (!_listenerDict.ContainsKey(msgName))
                     _listenerDict.Add(msgName, new List<MessageHandlerDelegate>());
 
-                bool contains = _listenerDict[msgName].Contains(handler);
+                if (_listenerDict[msgName].Contains(handler))
+                    return false;
 
                 // If this was called from TriggerMessage add the listener later
                 if (_isTriggered)
                 {
-                    if (!contains)
-                    {
-                        _typeStack.Push(msgName);
-                        _handlerStack.Push(handler);
-                        return true;
-                    }
-                    else
-                        return false;
+                    _typeStack.Push(msgName);
+                    _handlerStack.Push(handler);
+                    return true;
                 }
-
-                if (contains)
-                    return false;
 
                 _listenerDict[msgName].Add(handler);
                 return true;

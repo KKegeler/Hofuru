@@ -35,6 +35,9 @@ public class PlayerDeath : Death {
 
     public override void HandleDeath() {
         DataSerializer.Save();
+        if (GreyscaleEffect.Instance)
+            GreyscaleEffect.Instance.BlendToGrey();
+
         this.isDead = true;
         this.pm.enabled = false;
         if (tp.IsTimeFreezing()) {

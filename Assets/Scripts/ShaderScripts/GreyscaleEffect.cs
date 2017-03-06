@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class GreyscaleEffect : MonoBehaviour
 {
     #region Variables
+    private static GreyscaleEffect _instance;
+
     private Shader _curShader;
-    [SerializeField] [Range(0f, 1f)]
-    private float _greyscale;
+    [Range(0f, 1f)]
+    private float _greyscale = 0;
+    [SerializeField] [Range(0.5f, 3f)]
+    private float _blendTime = 1;
     private Material _curMaterial;
     #endregion
 
     #region Properties
+    public static GreyscaleEffect Instance
+    {
+        get { return _instance; }
+    }
+
     private Material CurMaterial
     {
         get
@@ -24,7 +34,15 @@ public class GreyscaleEffect : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    private void Awake()
+    {
+        if (!_instance)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
+    }
+
+    private void Start()
     {
         if (!SystemInfo.supportsImageEffects)
         {
@@ -38,7 +56,7 @@ public class GreyscaleEffect : MonoBehaviour
             enabled = false;
     }
 
-    void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
+    private void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
     {
         if (_curShader)
         {
@@ -49,7 +67,22 @@ public class GreyscaleEffect : MonoBehaviour
             Graphics.Blit(sourceTex, destTex);
     }
 
-    void OnDisable()
+    public void BlendToGrey()
+    {
+        StartCoroutine(Blend());
+    }
+
+    private IEnumerator Blend()
+    {
+        while (_greyscale < 1f)
+        {
+            _greyscale += Time.deltaTime / _blendTime;
+            _greyscale = Mathf.Clamp01(_greyscale);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void OnDisable()
     {
         if (_curMaterial)
             DestroyImmediate(_curMaterial);

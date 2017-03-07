@@ -45,4 +45,14 @@ public class EnemyMachine : StateMachine {
         Destroy(this);
     }
 
+    public void FreezeMachine()
+    {
+        currentState.PauseState(true);
+    }
+
+    public void UnfreezeMachine()
+    {
+        currentState.PauseState(false);
+    }
+
 }

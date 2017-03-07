@@ -47,4 +47,9 @@ public class FightState : EnemyState
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
     }
 
+    public override void PauseState(bool disable)
+    {
+        stateMachine.GetComponent<Bhv_HoldPosition>().enabled = !disable;
+        stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+    }
 }

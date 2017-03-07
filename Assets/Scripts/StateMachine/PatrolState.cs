@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PatrolState : EnemyState
 {
@@ -88,6 +89,12 @@ public class PatrolState : EnemyState
     {
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_Seek>());
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
+    }
+
+    public override void PauseState(bool disable)
+    {
+        stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
+        stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
     }
 
 }

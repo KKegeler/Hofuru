@@ -10,4 +10,6 @@ public interface State
 
     void ExitState();
 
+    void PauseState(bool disable);
+
 }

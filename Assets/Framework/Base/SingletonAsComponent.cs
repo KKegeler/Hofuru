@@ -11,7 +11,7 @@ namespace Framework
     public abstract class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>
     {
         #region Variables
-        private static T __Instance;
+        private static T _instance;
         protected bool _alive = true;
         #endregion
 
@@ -20,20 +20,20 @@ namespace Framework
         {
             get
             {
-                if (!__Instance)
+                if (!_instance)
                 {
                     T[] managers = FindObjectsOfType(typeof(T)) as T[];
                     if (managers != null)
                     {
                         if (managers.Length == 1)
                         {
-                            __Instance = managers[0];
-                            return __Instance;
+                            _instance = managers[0];
+                            return _instance;
                         }
                         else if (managers.Length > 1)
                         {
                             CustomLogger.LogWarningFormat("More than one instance of {0} exists!",
-                                __Instance.name);
+                                _instance.name);
                             for (int i = 0; i < managers.Length; ++i)
                             {
                                 T manager = managers[i];
@@ -43,23 +43,22 @@ namespace Framework
                     }
 
                     GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-                    __Instance = obj.GetComponent<T>();
-                    DontDestroyOnLoad(__Instance.gameObject);
+                    _instance = obj.GetComponent<T>();
+                    DontDestroyOnLoad(_instance.gameObject);
                 }
 
-                return __Instance;
+                return _instance;
             }
-            set { __Instance = value as T; }
         }
 
         public static bool IsAlive
         {
             get
             {
-                if (__Instance == null)
+                if (_instance == null)
                     return false;
 
-                return __Instance._alive;
+                return _instance._alive;
             }
         }
         #endregion

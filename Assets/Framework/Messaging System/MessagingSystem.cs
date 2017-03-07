@@ -18,15 +18,15 @@ namespace Framework
             private Stack<string> _typeStack = new Stack<string>();
             private Stack<MessageHandlerDelegate> _handlerStack =
                 new Stack<MessageHandlerDelegate>();
-            private bool _isTriggered;
+            private bool _trigger;
 
-            private const float _MAX_QUEUE_PROCESSING_TIME = 0.03334f;
+            private const float _MAX_QUEUE_PROCESSING_TIME = 0.03334f; // 30 FPS
             #endregion
 
             #region Properties
             public static MessagingSystem Instance
             {
-                get { return ((MessagingSystem)_Instance); }
+                get { return _Instance as MessagingSystem; }
             }
             #endregion
 
@@ -34,23 +34,20 @@ namespace Framework
             {
                 float timer = 0f;
 
-                // Check for Messages that were send while TriggerMessage was active
+                // Add unregistered listeners from TriggerMessage
                 while (_typeStack.Count > 0)
                     _listenerDict[_typeStack.Pop()].Add(_handlerStack.Pop());
 
                 // Iterate through all messages or return early if it takes too long
                 while (_messageQueue.Count > 0)
                 {
-                    if (_MAX_QUEUE_PROCESSING_TIME > 0f)
-                        if (timer > _MAX_QUEUE_PROCESSING_TIME)
+                    if (timer > _MAX_QUEUE_PROCESSING_TIME)
                             return;
 
                     BaseMessage msg = _messageQueue.Dequeue();
-                    if (!TriggerMessage(msg))
-                        CustomLogger.LogWarningFormat("Error when processing message: {0}", msg.name);
+                    TriggerMessage(msg);
 
-                    if (_MAX_QUEUE_PROCESSING_TIME > 0f)
-                        timer += Time.deltaTime;
+                    timer += Time.deltaTime;
                 }
             }
 
@@ -59,16 +56,16 @@ namespace Framework
             /// </summary>
             /// <param name="msg">Message</param>
             /// <returns>Could the message be handled by the listener?</returns>
-            private bool TriggerMessage(BaseMessage msg)
+            private void TriggerMessage(BaseMessage msg)
             {
-                _isTriggered = true;
+                _trigger = true;
                 string msgName = msg.name;
 
                 if (!_listenerDict.ContainsKey(msgName))
                 {
-                    CustomLogger.LogFormat("MessagingSystem: Message \"{0}\" has no listeners!", msgName);
-                    _isTriggered = false;
-                    return false;
+                    CustomLogger.LogFormat("Message \"{0}\" is not registered!\n", msgName);
+                    _trigger = false;
+                    return;
                 }
 
                 // Iterate through the handlers of the listeners
@@ -76,13 +73,13 @@ namespace Framework
                 {
                     if (_listenerDict[msgName][i](msg))
                     {
-                        _isTriggered = false;
-                        return true;
+                        _trigger = false;
+                        return;
                     }
                 }
 
-                _isTriggered = false;
-                return true;
+                _trigger = false;
+                return;
             }
 
             /// <summary>
@@ -95,7 +92,7 @@ namespace Framework
             {
                 if (type == null)
                 {
-                    CustomLogger.LogWarning("AttachListener failed due to no message specified!\n");
+                    CustomLogger.LogWarning("AttachListener failed! Message was null!\n");
                     return false;
                 }
 
@@ -108,7 +105,7 @@ namespace Framework
                     return false;
 
                 // If this was called from TriggerMessage add the listener later
-                if (_isTriggered)
+                if (_trigger)
                 {
                     _typeStack.Push(msgName);
                     _handlerStack.Push(handler);
@@ -129,7 +126,7 @@ namespace Framework
             {
                 if (type == null)
                 {
-                    CustomLogger.LogWarning("DetachListener failed due to no message specified!\n");
+                    CustomLogger.LogWarning("DetachListener failed! Message was null!\n");
                     return false;
                 }
 

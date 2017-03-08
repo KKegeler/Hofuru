@@ -57,13 +57,11 @@ public static class DataSerializer
             FileStream file = File.Open(FilePath, FileMode.Open);
 
             _scoreList = (List<Highscore>)bf.Deserialize(file);
-            file.Close();     
+            file.Close();
         }
 
         if (_scoreList == null)
             _scoreList = new List<Highscore>();
-
-        // TestLog();
     }
 
     /// <summary>
@@ -72,21 +70,22 @@ public static class DataSerializer
     public static void Reset()
     {
         if (File.Exists(FilePath))
+        {
             File.Delete(FilePath);
+            _scoreList.Clear();
+        }
         else
             CustomLogger.LogWarningFormat("File \"{0}\" not found!\n", FilePath);
     }
 
-    private static void TestLog()
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    public static void TestLog()
     {
         if (_scoreList.Count == 0)
-        {
             CustomLogger.Log("No entries in ScoreList!\n");
-            return;
-        }
-
-        for (int i = 0; i < _scoreList.Count; ++i)
-            CustomLogger.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);
+        else
+            for (int i = 0; i < _scoreList.Count; ++i)
+                CustomLogger.LogFormat("{0}: {1}\n", i + 1, _scoreList[i].score);
     }
 
 }

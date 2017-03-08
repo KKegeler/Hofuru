@@ -57,6 +57,9 @@ public class Statistics : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F2))
             DataSerializer.Reset();
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            DataSerializer.TestLog();
     }
 
     #region Handler

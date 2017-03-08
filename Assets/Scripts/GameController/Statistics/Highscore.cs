@@ -11,13 +11,14 @@ public class Highscore
     public readonly float score;
     #endregion
 
-    #region Constructor
+    #region Constructors
     public Highscore(float scoreVal)
     {
         score = scoreVal;
     }
     #endregion
 
+    #region Sorting
     private class SortDescendingHelper : IComparer<Highscore>
     {
         public int Compare(Highscore x, Highscore y)
@@ -37,5 +38,6 @@ public class Highscore
     {
         return new SortDescendingHelper();
     }
+    #endregion
 
 }

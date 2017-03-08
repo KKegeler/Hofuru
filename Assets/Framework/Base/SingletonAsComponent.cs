@@ -4,8 +4,7 @@ using Framework.Log;
 namespace Framework
 {
     /// <summary>
-    /// Base class for Singletons.
-    ///  Do not place objects of derived classes in the Hierarchy!
+    /// Base class for Singletons
     /// </summary>
     /// <typeparam name="T">Derived class</typeparam>
     public abstract class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>

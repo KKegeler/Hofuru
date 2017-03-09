@@ -49,6 +49,7 @@ public class Statistics : MonoBehaviour
     {
         MessagingSystem.Instance.AttachListener(typeof(ScoreMessage), ScoreHandler);
         DataSerializer.Load();
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     private void Update()

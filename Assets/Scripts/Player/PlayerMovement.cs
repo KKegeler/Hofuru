@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public float maxSpeed;
     public float jumpPower;
-    public float maxJumpCount;
+    public int maxJumpCount;
 
     private Camera mainCamera;
     private int jumpCount;

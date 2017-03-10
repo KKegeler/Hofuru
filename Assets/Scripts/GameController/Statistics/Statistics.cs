@@ -8,6 +8,7 @@ using Framework.Messaging;
 public class Statistics : MonoBehaviour
 {
     #region Variablen
+    private static Statistics _instance;
     [SerializeField]
     private float _score;
     [SerializeField]
@@ -15,6 +16,11 @@ public class Statistics : MonoBehaviour
     #endregion
 
     #region Properties
+    public static Statistics Instance
+    {
+        get { return _instance; }
+    }
+
     public float Score
     {
         get { return _score; }
@@ -24,16 +30,33 @@ public class Statistics : MonoBehaviour
             MessagingSystem.Instance.QueueMessage(new ScoreTextMessage(_score));
         }
     }
+
+    public float FinalScore
+    {
+        get { return CalculateFinalScore(); }
+    }
     #endregion
+
+    private void Awake()
+    {
+        if (!_instance)
+            _instance = this;
+        if (_instance != this)
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
         MessagingSystem.Instance.AttachListener(typeof(ScoreMessage), ScoreHandler);
+        DataSerializer.Load();
     }
 
     private void Update()
     {
         _time += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.F2))
+            DataSerializer.Reset();
     }
 
     #region Handler
@@ -45,6 +68,12 @@ public class Statistics : MonoBehaviour
         return true;
     }
     #endregion
+
+    private float CalculateFinalScore()
+    {
+        // Do crazy math stuff here
+        return _score;
+    }
 
     private void OnDestroy()
     {

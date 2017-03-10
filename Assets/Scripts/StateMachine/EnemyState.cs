@@ -14,4 +14,6 @@ public abstract class EnemyState : State
 
     public abstract void ExitState();
 
+    public abstract void PauseState(bool disable);
+
 }

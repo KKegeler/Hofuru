@@ -161,5 +161,9 @@ public class PlayerMovement : MonoBehaviour {
         this.EndSlide();
     }
 
+    public bool DoesSlide() {
+        return this.doesSlide;
+    }
+
 
 }

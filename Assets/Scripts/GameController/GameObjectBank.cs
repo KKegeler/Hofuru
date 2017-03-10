@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class GameObjectBank : MonoBehaviour {
@@ -14,6 +13,7 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject blut;
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
+    public Camera backgroundCam;
 
     public static GameObjectBank Instance
     {

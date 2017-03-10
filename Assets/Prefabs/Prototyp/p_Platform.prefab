@@ -16,13 +16,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000012006806962}
-  - 212: {fileID: 212000010407416272}
-  - 61: {fileID: 61000013023985798}
-  - 114: {fileID: 114000011766890882}
-  - 252: {fileID: 252000010515763430}
+  - component: {fileID: 4000012006806962}
+  - component: {fileID: 212000010407416272}
+  - component: {fileID: 61000013023985798}
+  - component: {fileID: 114000011766890882}
+  - component: {fileID: 252000010515763430}
   m_Layer: 0
   m_Name: p_Platform
   m_TagString: Untagged
@@ -39,10 +39,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.38, y: 4.22, z: 0}
   m_LocalScale: {x: 33.12087, y: 2.7253234, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61000013023985798
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -82,7 +82,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -90,7 +92,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -111,10 +113,10 @@ SurfaceEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_Speed: 1
   m_SpeedVariation: 0
   m_ForceScale: 0.1
-  m_UseContactForce: 0
+  m_UseContactForce: 1
   m_UseFriction: 0
   m_UseBounce: 0

@@ -359,6 +359,7 @@ MonoBehaviour:
   hud_ShurikenCounter: {fileID: 1912267834}
   greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
   eventSystem: {fileID: 1920484743}
+  groundChecker: {fileID: 2054909314}
 --- !u!4 &51171115
 Transform:
   m_ObjectHideFlags: 0
@@ -2395,18 +2396,8 @@ Prefab:
       objectReference: {fileID: 584221625}
     - target: {fileID: 61427403318048236, guid: 772fafe99a87bf24ebd148d61ba47835,
         type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61427403318048236, guid: 772fafe99a87bf24ebd148d61ba47835,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 61427403318048236, guid: 772fafe99a87bf24ebd148d61ba47835,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.75
+      propertyPath: m_Offset.y
+      value: -0.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
@@ -3193,6 +3184,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023354548}
+--- !u!1 &2054909314 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1813332402993818, guid: 772fafe99a87bf24ebd148d61ba47835,
+    type: 2}
+  m_PrefabInternal: {fileID: 1384300438}
 --- !u!1001 &2092567658
 Prefab:
   m_ObjectHideFlags: 0

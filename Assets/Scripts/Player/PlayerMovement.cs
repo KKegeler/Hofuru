@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
     private TimeController timeController;
     private BoxCollider2D playerCollider;
     private bool isSlideInterrupted;
+    private BoxCollider2D groundCollider;
 
     // Use this for initialization
     void Start() {
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         this.timeController = GameObjectBank.Instance.gameController.GetComponent<TimeController>();
         this.mainCamera = GameObjectBank.Instance.mainCamera.GetComponent<Camera>();
         this.playerCollider = this.GetComponent<BoxCollider2D>();
+        groundCollider = GameObjectBank.Instance.groundChecker.GetComponent<BoxCollider2D>();
     }
 
     void Update() {
@@ -139,6 +141,7 @@ public class PlayerMovement : MonoBehaviour {
         this.animator.SetBool("isSliding", false);
         this.playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y * 2);
         this.playerCollider.offset = playerCollider.offset + new Vector2(0, 0.45f);
+        groundCollider.offset = groundCollider.offset - new Vector2(0, 0.45f);
         this.maxSpeed /= 1.25f;
     }
 
@@ -150,6 +153,7 @@ public class PlayerMovement : MonoBehaviour {
         this.animator.SetBool("isSliding", true);
         this.playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y / 2);
         this.playerCollider.offset = playerCollider.offset - new Vector2(0, 0.45f);
+        groundCollider.offset = groundCollider.offset + new Vector2(0, 0.45f);
         this.maxSpeed *= 1.25f;
     }
 

@@ -15,6 +15,7 @@ public class GameObjectBank : MonoBehaviour {
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
     public EventSystem eventSystem;
+    public GameObject groundChecker;
 
     public static GameObjectBank Instance
     {

@@ -19,6 +19,7 @@ public class PlayerMeleeHandling : MonoBehaviour {
         Rigidbody2D otherRigi = other.GetComponent<Rigidbody2D>();
         Health hc = other.gameObject.GetComponent<Health>();
         Vector2 dir = Vector2.right;
+        other.GetComponent<Enemy>().FreezeForSeconds(1);
         if (player.transform.position.x > other.gameObject.transform.position.x) {
             dir = Vector2.left;
         }

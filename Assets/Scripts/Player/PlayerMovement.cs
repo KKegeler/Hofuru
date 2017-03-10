@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D rigiBody;
     private TimeController timeController;
     private BoxCollider2D playerCollider;
+    private bool isSlideInterrupted;
 
     // Use this for initialization
     void Start() {
@@ -163,6 +164,19 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool DoesSlide() {
         return this.doesSlide;
+    }
+
+    public void InterruptSlide() {
+        this.StartCoroutine(Freeze(0.5f));
+        this.EndSlide();
+    }
+
+    private IEnumerator Freeze(float duration) {
+        cantMove = true;
+        this.moveValue = 0;
+        this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        yield return new WaitForSeconds(duration);
+        cantMove = false;
     }
 
 

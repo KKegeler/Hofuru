@@ -7,7 +7,7 @@ using Framework.Messaging;
 /// </summary>
 public class Statistics : MonoBehaviour
 {
-    #region Variablen
+    #region Variables
     private static Statistics _instance;
     [SerializeField]
     private float _score;
@@ -49,6 +49,7 @@ public class Statistics : MonoBehaviour
     {
         MessagingSystem.Instance.AttachListener(typeof(ScoreMessage), ScoreHandler);
         DataSerializer.Load();
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     private void Update()
@@ -57,6 +58,9 @@ public class Statistics : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F2))
             DataSerializer.Reset();
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            DataSerializer.TestLog();
     }
 
     #region Handler

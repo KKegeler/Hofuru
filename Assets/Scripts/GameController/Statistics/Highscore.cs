@@ -7,13 +7,18 @@ using System.Collections.Generic;
 [Serializable]
 public class Highscore
 {
+    #region Variables
     public readonly float score;
-    
+    #endregion
+
+    #region Constructors
     public Highscore(float scoreVal)
     {
         score = scoreVal;
     }
+    #endregion
 
+    #region Sorting
     private class SortDescendingHelper : IComparer<Highscore>
     {
         public int Compare(Highscore x, Highscore y)
@@ -33,5 +38,6 @@ public class Highscore
     {
         return new SortDescendingHelper();
     }
+    #endregion
 
 }

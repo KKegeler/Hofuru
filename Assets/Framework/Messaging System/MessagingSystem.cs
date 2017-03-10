@@ -1,30 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Framework.Log;
 
 namespace Framework
 {
     namespace Messaging
     {
         /// <summary>
-        /// Globales Messaging-System
+        /// Global Messaging-System
         /// </summary>
         public class MessagingSystem : SingletonAsComponent<MessagingSystem>
         {
-            #region Variablen
+            #region Variables
             private Dictionary<string, List<MessageHandlerDelegate>> _listenerDict
                 = new Dictionary<string, List<MessageHandlerDelegate>>();
             private Queue<BaseMessage> _messageQueue = new Queue<BaseMessage>();
-            private Stack<string> _typeStack = new Stack<string>();
-            private Stack<MessageHandlerDelegate> _handlerStack = new Stack<MessageHandlerDelegate>();
-            private const float _MAX_QUEUE_PROCESSING_TIME = 0.03334f;
-            private bool _isTriggered;
+
+            private Stack<string> _addTypeStack = new Stack<string>();
+            private Stack<MessageHandlerDelegate> _addHandlerStack =
+                new Stack<MessageHandlerDelegate>();
+            private Stack<string> _removeTypeStack = new Stack<string>();
+            private Stack<MessageHandlerDelegate> _removeHandlerStack =
+                new Stack<MessageHandlerDelegate>();
+
+            private static bool _trigger;
+            private const float _MAX_QUEUE_PROCESSING_TIME = 0.03334f; // 30 FPS
             #endregion
 
             #region Properties
             public static MessagingSystem Instance
             {
-                get { return ((MessagingSystem)_Instance); }
-                set { _Instance = value; }
+                get { return (MessagingSystem)_Instance; }
             }
             #endregion
 
@@ -32,65 +38,69 @@ namespace Framework
             {
                 float timer = 0f;
 
-                while (_typeStack.Count > 0)
-                    _listenerDict[_typeStack.Pop()].Add(_handlerStack.Pop());
+                // Add listeners from TriggerMessage
+                while (_addTypeStack.Count > 0)
+                    _listenerDict[_addTypeStack.Pop()].Add(_addHandlerStack.Pop());
 
+                // Remove listeners from TriggerMessage
+                while (_removeTypeStack.Count > 0)
+                    _listenerDict[_removeTypeStack.Pop()].Remove(_removeHandlerStack.Pop());
+
+                // Iterate the messages or return early if it takes too long
                 while (_messageQueue.Count > 0)
                 {
-                    if (_MAX_QUEUE_PROCESSING_TIME > 0f)
-                        if (timer > _MAX_QUEUE_PROCESSING_TIME)
-                            return;
+                    if (timer > _MAX_QUEUE_PROCESSING_TIME)
+                        return;
 
                     BaseMessage msg = _messageQueue.Dequeue();
-                    if (!TriggerMessage(msg))
-                        Debug.LogWarningFormat("Error when processing message: {0}", msg.name);
+                    TriggerMessage(msg);                   
 
-                    if (_MAX_QUEUE_PROCESSING_TIME > 0f)
-                        timer += Time.deltaTime;
+                    timer += Time.deltaTime;
                 }
             }
 
             /// <summary>
-            /// Ruft die Handler-Funktion der Listener auf
+            /// Calls handler functions
             /// </summary>
-            /// <param name="msg">Message Klasse</param>
-            /// <returns>Konnte die Nachricht verarbeitet werden?</returns>
-            private bool TriggerMessage(BaseMessage msg)
+            /// <param name="msg">Message</param>
+            /// <returns>Could the message be handled by the listener?</returns>
+            private void TriggerMessage(BaseMessage msg)
             {
-                _isTriggered = true;
+                _trigger = true;
                 string msgName = msg.name;
 
                 if (!_listenerDict.ContainsKey(msgName))
                 {
-                    Debug.LogFormat("MessagingSystem: Message \"{0}\" has no listeners!", msgName);
-                    _isTriggered = false;
-                    return false;
+                    CustomLogger.LogWarningFormat("Message \"{0}\" is not registered!\n", msgName);
+                    _trigger = false;
+                    return;
                 }
 
+                // Iterate the handler functions
                 for (int i = 0; i < _listenerDict[msgName].Count; ++i)
                 {
                     if (_listenerDict[msgName][i](msg))
                     {
-                        _isTriggered = false;
-                        return true;
+                        _trigger = false;
+                        return;
                     }
                 }
 
-                _isTriggered = false;
-                return true;
+                _trigger = false;
+                return;
             }
 
             /// <summary>
-            /// Fügt einen Listener hinzu
+            /// Adds a listener
             /// </summary>
-            /// <param name="type">Typ der Nachricht</param>
-            /// <param name="handler">Handlerfunktion des Listeners</param>
-            /// <returns>Wurde der Listener erfolgreich hinzugefügt?</returns>
+            /// <param name="type">Message type</param>
+            /// <param name="handler">Handler</param>
+            /// <returns>Was the listener added successfully?</returns>
             public bool AttachListener(System.Type type, MessageHandlerDelegate handler)
             {
                 if (type == null)
                 {
-                    Debug.LogWarning("AttachListener failed due to no message specified!\n");
+                    CustomLogger.LogWarning("AttachListener failed! Message was null!\n");
                     return false;
                 }
 
@@ -99,38 +109,32 @@ namespace Framework
                 if (!_listenerDict.ContainsKey(msgName))
                     _listenerDict.Add(msgName, new List<MessageHandlerDelegate>());
 
-                bool contains = _listenerDict[msgName].Contains(handler);
-
-                if (_isTriggered)
-                {
-                    if (!contains)
-                    {
-                        _typeStack.Push(msgName);
-                        _handlerStack.Push(handler);
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-
-                if (contains)
+                if (_listenerDict[msgName].Contains(handler))
                     return false;
+
+                // If this was called from TriggerMessage add the listener later
+                if (_trigger)
+                {
+                    _addTypeStack.Push(msgName);
+                    _addHandlerStack.Push(handler);
+                    return true;
+                }
 
                 _listenerDict[msgName].Add(handler);
                 return true;
             }
 
             /// <summary>
-            /// Entfernt einen Listener
+            /// Removes a listener
             /// </summary>
-            /// <param name="type">Typ der Nachricht</param>
-            /// <param name="handler">Handlerfunktion des Listeners</param>
-            /// <returns>Wurde der Listener erfolgreich entfernt?</returns>
+            /// <param name="type">Message type</param>
+            /// <param name="handler">Handler</param>
+            /// <returns>Was the listener removed successfully?</returns>
             public bool DetachListener(System.Type type, MessageHandlerDelegate handler)
             {
                 if (type == null)
                 {
-                    Debug.LogWarning("DetachListener failed due to no message specified!\n");
+                    CustomLogger.LogWarning("DetachListener failed! Message was null!\n");
                     return false;
                 }
 
@@ -142,28 +146,38 @@ namespace Framework
                 if (!_listenerDict[msgName].Contains(handler))
                     return false;
 
+                // If this was called from TriggerMessage remove the listener later
+                if (_trigger)
+                {
+                    _removeTypeStack.Push(msgName);
+                    _removeHandlerStack.Push(handler);
+                    return true;
+                }
+
                 _listenerDict[msgName].Remove(handler);
                 return true;
             }
 
             /// <summary>
-            /// Sendet eine Nachricht
+            /// Sends a message
             /// </summary>
-            /// <param name="msg">Nachricht</param>
-            /// <returns>Ist ein Eintrag für diese Nachricht vorhanden?</returns>
+            /// <param name="msg">Message</param>
             public void QueueMessage(BaseMessage msg)
             {
                 if (!_listenerDict.ContainsKey(msg.name))
-                    Debug.LogWarningFormat("{0} is not registered!\n", msg.name);
+                {
+                    CustomLogger.LogWarningFormat("{0} is not registered!\n", msg.name);
+                    return;
+                }
 
                 _messageQueue.Enqueue(msg);
             }
 
             /// <summary>
-            /// Delegate Funktion, die Listener implementieren
+            /// Delegate for listeners
             /// </summary>
-            /// <param name="message">Neue Nachricht</param>
-            /// <returns>Konnte die Nachricht bearbeitet werden?</returns>
+            /// <param name="message">Message</param>
+            /// <returns>Was the message handled?</returns>
             public delegate bool MessageHandlerDelegate(BaseMessage message);
 
         }

@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GameObjectBank : MonoBehaviour {
-    public static GameObjectBank instance;
+
+    private static GameObjectBank _instance;
+
     public GameObject player;
     public GameObject gameController;
     public GameObject mainCamera;
@@ -13,10 +15,15 @@ public class GameObjectBank : MonoBehaviour {
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
 
+    public static GameObjectBank Instance
+    {
+        get { return _instance; }
+    }
+
     public void Awake() {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this);
+        if (_instance == null)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
     }
 }

@@ -12,18 +12,13 @@ public class GroundCheck : MonoBehaviour {
         pm = GetComponentInParent<PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.GetComponent<Ground>() != null) {
             pm.SetisGrounded(true);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other) {
+    void OnCollisionExit2D(Collision2D other) {
         pm.SetisGrounded(false);
     }
 }

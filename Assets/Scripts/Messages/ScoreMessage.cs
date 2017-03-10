@@ -1,4 +1,4 @@
-﻿using Framework;
+﻿using Framework.Messaging;
 
 public class ScoreMessage : BaseMessage
 {

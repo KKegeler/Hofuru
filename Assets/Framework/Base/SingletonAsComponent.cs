@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using Framework.Log;
 
 namespace Framework
 {
     /// <summary>
-    /// Basisklasse für Singletons
+    /// Base class for Singletons
     /// </summary>
-    /// <typeparam name="T">Abgeleitete Klasse</typeparam>
-    public class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>
+    /// <typeparam name="T">Derived class</typeparam>
+    public abstract class SingletonAsComponent<T> : MonoBehaviour where T : SingletonAsComponent<T>
     {
-        #region Variablen
-        private static T __Instance;
+        #region Variables
+        private static T _instance;
         protected bool _alive = true;
         #endregion
 
@@ -18,20 +19,20 @@ namespace Framework
         {
             get
             {
-                if (!__Instance)
+                if (!_instance)
                 {
-                    T[] managers = FindObjectOfType(typeof(T)) as T[];
+                    T[] managers = FindObjectsOfType(typeof(T)) as T[];
                     if (managers != null)
                     {
                         if (managers.Length == 1)
                         {
-                            __Instance = managers[0];
-                            return __Instance;
+                            _instance = managers[0];
+                            return _instance;
                         }
                         else if (managers.Length > 1)
                         {
-                            Debug.LogWarningFormat("More than one instance of {0} exists!",
-                                __Instance.name);
+                            CustomLogger.LogWarningFormat("More than one instance of {0} exists!",
+                                _instance.name);
                             for (int i = 0; i < managers.Length; ++i)
                             {
                                 T manager = managers[i];
@@ -41,33 +42,37 @@ namespace Framework
                     }
 
                     GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-                    __Instance = obj.GetComponent<T>();
-                    DontDestroyOnLoad(__Instance.gameObject);
+                    _instance = obj.GetComponent<T>();
+                    DontDestroyOnLoad(_instance.gameObject);
                 }
 
-                return __Instance;
+                return _instance;
             }
-            set { __Instance = value as T; }
         }
 
         public static bool IsAlive
         {
             get
             {
-                if (__Instance == null)
+                if (_instance == null)
                     return false;
 
-                return __Instance._alive;
+                return _instance._alive;
             }
         }
         #endregion
 
-        void OnDestroy()
+        /// <summary>
+        /// Can be used for preloading
+        /// </summary>
+        public void WakeUp() { }
+
+        private void OnDestroy()
         {
             _alive = false;
         }
 
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             _alive = false;
         }

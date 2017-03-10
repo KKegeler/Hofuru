@@ -8,7 +8,7 @@ public class SlideKick : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.pm = GameObjectBank.instance.player.GetComponent<PlayerMovement>();
+        this.pm = GameObjectBank.Instance.player.GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame

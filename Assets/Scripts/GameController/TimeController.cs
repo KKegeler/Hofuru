@@ -12,7 +12,7 @@ public class TimeController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         //TODO: GAMECONSTANTS!
-        this.camController = GameObjectBank.instance.gameController.GetComponent<CameraController>();
+        this.camController = GameObjectBank.Instance.gameController.GetComponent<CameraController>();
         originTimeScale = Time.timeScale;
         originFixedDeltaTime = Time.fixedDeltaTime;
     }

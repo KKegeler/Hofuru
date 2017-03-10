@@ -1,30 +1,51 @@
 ﻿using UnityEngine;
+using System.Collections;
 
+/// <summary>
+/// Graustufeneffekt bei Tod des Spielers
+/// </summary>
 public class GreyscaleEffect : MonoBehaviour
 {
-    #region Variablen
-    private Shader _curShader;
-    [SerializeField] [Range(0f, 1f)]
-    private float _greyscale;
-    private Material _curMaterial;
+    #region Variables
+    private static GreyscaleEffect _instance;
+
+    private Shader _shader;
+    [Range(0f, 1f)]
+    private float _greyscale = 0;
+    [SerializeField] [Range(0.5f, 3f)]
+    private float _blendTime = 0.5f;
+    private Material _mat;
     #endregion
 
     #region Properties
-    Material CurMaterial
+    public static GreyscaleEffect Instance
+    {
+        get { return _instance; }
+    }
+
+    private Material Mat
     {
         get
         {
-            if (_curMaterial == null)
+            if (_mat == null)
             {
-                _curMaterial = new Material(_curShader);
-                _curMaterial.hideFlags = HideFlags.HideAndDontSave;
+                _mat = new Material(_shader);
+                _mat.hideFlags = HideFlags.HideAndDontSave;
             }
-            return _curMaterial;
+            return _mat;
         }
     }
     #endregion
 
-    void Start()
+    private void Awake()
+    {
+        if (!_instance)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
+    }
+
+    private void Start()
     {
         if (!SystemInfo.supportsImageEffects)
         {
@@ -32,27 +53,41 @@ public class GreyscaleEffect : MonoBehaviour
             return;
         }
 
-        _curShader = GameObjectBank.instance.greyscaleShader;
+        _shader = GameObjectBank.Instance.greyscaleShader;
 
-        if (!_curShader || !_curShader.isSupported)
+        if (!_shader || !_shader.isSupported)
             enabled = false;
     }
 
-    void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
+    private void OnRenderImage(RenderTexture sourceTex, RenderTexture destTex)
     {
-        if (_curShader)
+        if (_shader)
         {
-            CurMaterial.SetFloat("_LuminosityAmount", _greyscale);
-            Graphics.Blit(sourceTex, destTex, CurMaterial);
+            Mat.SetFloat("_LuminosityAmount", _greyscale);
+            Graphics.Blit(sourceTex, destTex, Mat);
         }
         else
             Graphics.Blit(sourceTex, destTex);
     }
 
-    void OnDisable()
+    public void BlendToGrey()
     {
-        if (_curMaterial)
-            DestroyImmediate(_curMaterial);
+        StartCoroutine(Blend());
+    }
+
+    private IEnumerator Blend()
+    {
+        while (_greyscale < 1f)
+        {
+            _greyscale += Time.deltaTime / _blendTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_mat)
+            DestroyImmediate(_mat);
     }
 
 }

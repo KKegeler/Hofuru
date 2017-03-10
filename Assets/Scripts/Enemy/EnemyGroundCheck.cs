@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyGroundCheck : MonoBehaviour {
 
@@ -12,13 +10,13 @@ public class EnemyGroundCheck : MonoBehaviour {
         this.animator = this.gameObject.transform.parent.gameObject.GetComponent<Animator>();
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.GetComponent<Ground>() != null) {
             animator.SetBool("isGrounded", true);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other) {
+    void OnCollisionExit2D(Collision2D other) {
         animator.SetBool("isGrounded", false);
     }
 }

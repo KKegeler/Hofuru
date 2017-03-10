@@ -43,8 +43,11 @@ public class Enemy : MonoBehaviour {
 
     public void Unfreeze()
     {
-        stateMachine.enabled = true;
-        stateMachine.UnfreezeMachine(); // enables behaviour
+        if (stateMachine)
+        {
+            stateMachine.enabled = true;
+            stateMachine.UnfreezeMachine(); // enables behaviour
+        }
     }
 
     public void FreezeForSeconds(float sec)

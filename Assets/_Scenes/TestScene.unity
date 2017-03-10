@@ -352,13 +352,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2123761760}
   gameController: {fileID: 51171112}
-  mainCamera: {fileID: 1118444707}
+  mainCamera: {fileID: 1118444711}
   playerMeleeTrigger: {fileID: 554588018}
   teleportTarget: {fileID: 1679312316}
   blut: {fileID: 1759966272}
   hud_ShurikenCounter: {fileID: 1912267834}
   greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
-  backgroundCam: {fileID: 255455404}
+  eventSystem: {fileID: 1920484743}
 --- !u!4 &51171115
 Transform:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 75367326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: -25, z: 0}
+  m_LocalPosition: {x: -9.5, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605746677}
@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc53886d91173a4999542cf8b19c463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bgCam: {fileID: 255455407}
   _levelStart: {fileID: 1182993502}
   _levelEnd: {fileID: 759646989}
   _bgStart: {fileID: 75367327}
@@ -1870,7 +1871,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 866457722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.5, y: -25, z: 0}
+  m_LocalPosition: {x: 37.5, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605746677}

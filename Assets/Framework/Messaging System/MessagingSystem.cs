@@ -38,14 +38,6 @@ namespace Framework
             {
                 float timer = 0f;
 
-                // Add listeners from TriggerMessage
-                while (_addTypeStack.Count > 0)
-                    _listenerDict[_addTypeStack.Pop()].Add(_addHandlerStack.Pop());
-
-                // Remove listeners from TriggerMessage
-                while (_removeTypeStack.Count > 0)
-                    _listenerDict[_removeTypeStack.Pop()].Remove(_removeHandlerStack.Pop());
-
                 // Iterate the messages or return early if it takes too long
                 while (_messageQueue.Count > 0)
                 {
@@ -75,6 +67,14 @@ namespace Framework
                     _trigger = false;
                     return;
                 }
+
+                // Add listeners
+                while (_addTypeStack.Count > 0)
+                    _listenerDict[_addTypeStack.Pop()].Add(_addHandlerStack.Pop());
+
+                // Remove listeners
+                while (_removeTypeStack.Count > 0)
+                    _listenerDict[_removeTypeStack.Pop()].Remove(_removeHandlerStack.Pop());
 
                 // Iterate the handler functions
                 for (int i = 0; i < _listenerDict[msgName].Count; ++i)

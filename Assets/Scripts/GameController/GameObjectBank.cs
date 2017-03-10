@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameObjectBank : MonoBehaviour {
 
@@ -7,13 +8,13 @@ public class GameObjectBank : MonoBehaviour {
 
     public GameObject player;
     public GameObject gameController;
-    public GameObject mainCamera;
+    public Camera mainCamera;
     public GameObject playerMeleeTrigger;
     public GameObject teleportTarget;
     public GameObject blut;
     public Text hud_ShurikenCounter;
     public Shader greyscaleShader;
-    public Camera backgroundCam;
+    public EventSystem eventSystem;
 
     public static GameObjectBank Instance
     {

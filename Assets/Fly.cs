@@ -40,9 +40,4 @@ public class Fly : PoolObject {
         }
     }
 
-    public override void OnObjectReuse()
-    {
-
-    }
-
 }

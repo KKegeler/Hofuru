@@ -9,11 +9,9 @@ namespace Framework
         /// <summary>
         /// Manages pools of reusable GameObjects
         /// </summary>
-        public class PoolManager : MonoBehaviour
+        public class PoolManager : SingletonAsComponent<PoolManager>
         {
             #region Variables
-            private static PoolManager _instance;
-
             private Dictionary<int, LinkedList<ObjectInstance>> _pool =
                 new Dictionary<int, LinkedList<ObjectInstance>>();
             private Dictionary<int, int[]> _activeObjects =
@@ -24,7 +22,7 @@ namespace Framework
             #region Properties
             public static PoolManager Instance
             {
-                get { return _instance; }
+                get { return (PoolManager)_Instance; }
             }
 
             public Dictionary<int, int[]> ActiveObjects
@@ -32,14 +30,6 @@ namespace Framework
                 get { return _activeObjects; }
             }
             #endregion
-
-            private void Awake()
-            {
-                if (!_instance)
-                    _instance = this;
-                else if (_instance != this)
-                    Destroy(gameObject);
-            }
 
             /// <summary>
             /// Creates a new pool for a prefab
@@ -60,7 +50,7 @@ namespace Framework
                     GameObject poolHolder = new GameObject(
                         string.Concat(prefab.name, " Pool"));
                     _poolHolderTransform = poolHolder.transform;
-                    _poolHolderTransform.SetParent(transform);
+                    _poolHolderTransform.SetParent(PoolObjectManager.Instance.gameObject.transform);
 #endif
 
                     // Instatiate pool objects         
@@ -116,7 +106,7 @@ namespace Framework
                 if (!_pool[poolKey].First.Value.CanReuse)
                 {
                     CustomLogger.LogWarningFormat("{0} doesn't implement IPoolObject!\n",
-                        _pool[poolKey].First.Value.Name);
+                        _pool[poolKey].First.Value.Object.name);
                     return null;
                 }
 
@@ -144,6 +134,11 @@ namespace Framework
                 return obj.Object;
             }
 
+            /// <summary>
+            /// Adds a new ObjectInstance to the pool
+            /// </summary>
+            /// <param name="prefab">Prefab</param>
+            /// <param name="poolKey">InstanceID</param>
             private void InstantiateObjectInstance(GameObject prefab, int poolKey)
             {
                 ++_activeObjects[poolKey][0];
@@ -177,11 +172,6 @@ namespace Framework
                 public GameObject Object
                 {
                     get { return _obj; }
-                }
-
-                public string Name
-                {
-                    get { return _obj.name; }
                 }
                 
                 public IPoolObject PoolObj
@@ -229,6 +219,15 @@ namespace Framework
                     }
                 }
 
+            }
+
+            /// <summary>
+            /// Call before loading a new Scene
+            /// </summary>
+            public void ResetPool()
+            {
+                _pool.Clear();
+                _activeObjects.Clear();
             }
 
         }

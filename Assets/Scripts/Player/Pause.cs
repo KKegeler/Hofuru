@@ -8,12 +8,12 @@ public class Pause : MonoBehaviour {
     public GameObject firstSelected;
 
     //Methode um auf das EventSystem zugreifen zu können
-    private EventSystem eventSystem
+    protected EventSystem eventSystem
     {
         get { return GameObjectBank.Instance.eventSystem; }
     }
 
-    public void OnFocus()
+    public virtual void OnFocus()
     {
         eventSystem.SetSelectedGameObject(firstSelected);
     }

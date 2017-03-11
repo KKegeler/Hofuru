@@ -7,7 +7,7 @@ namespace Framework
         /// <summary>
         /// Base class for PoolObjects
         /// </summary>
-        public abstract class PoolObject : MonoBehaviour, IPoolObject
+        public class PoolObject : MonoBehaviour, IPoolObject
         {
             #region Variables
             private int _instanceID;
@@ -24,7 +24,7 @@ namespace Framework
             /// <summary>
             /// What happens when the object is reused
             /// </summary>
-            public abstract void OnObjectReuse();
+            public virtual void OnObjectReuse() { }
 
             /// <summary>
             /// Increases the object count in the PoolManager
@@ -48,7 +48,7 @@ namespace Framework
 
             private void OnDisable()
             {
-                if (PoolManager.Instance)
+                if (PoolManager.IsAlive)
                     DecreaseObjectCount(gameObject);
             }
 

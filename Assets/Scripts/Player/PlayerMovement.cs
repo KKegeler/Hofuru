@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void InterruptSlide() {
-        this.StartCoroutine(Freeze(0.5f));
+        this.StartCoroutine(Freeze(0.45f));
         this.EndSlide();
     }
 

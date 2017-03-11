@@ -28,7 +28,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000012006806962
 Transform:
@@ -113,10 +113,10 @@ SurfaceEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294966783
   m_Speed: 1
   m_SpeedVariation: 0
   m_ForceScale: 0.1
-  m_UseContactForce: 1
+  m_UseContactForce: 0
   m_UseFriction: 0
   m_UseBounce: 0

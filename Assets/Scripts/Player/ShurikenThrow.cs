@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Framework.Pool;
 
 public class ShurikenThrow : MonoBehaviour {
 
@@ -27,7 +27,8 @@ public class ShurikenThrow : MonoBehaviour {
 
     private void Throw(float x, float y) {
         Vector3 pos = player.transform.position + new Vector3(x, y, 0).normalized * 3;
-        GameObject shuriken = (GameObject)Instantiate(shurikenPrefab, pos, Quaternion.identity);
+        //GameObject shuriken = (GameObject)Instantiate(shurikenPrefab, pos, Quaternion.identity);
+        GameObject shuriken = PoolManager.Instance.ReuseObject2(shurikenPrefab, pos, Quaternion.identity);
         shuriken.GetComponent<Fly>().DoFly(x, y);
     }
 }

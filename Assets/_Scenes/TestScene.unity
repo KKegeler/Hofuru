@@ -1572,11 +1572,6 @@ Prefab:
       propertyPath: wayPoints.Array.data[1]
       value: 
       objectReference: {fileID: 856283735}
-    - target: {fileID: 114879008684892444, guid: ed2673813c38e604cab85af7c2a5aa2b,
-        type: 2}
-      propertyPath: meleeForce
-      value: 10000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
   m_IsPrefabParent: 0

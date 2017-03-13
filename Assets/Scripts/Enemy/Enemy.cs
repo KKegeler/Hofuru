@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
         timer = false;
         stateMachine = GetComponent<EnemyMachine>();
         animationSpeed = -1.0f;
-	}
+    }
 
     public void Update()
     {
@@ -29,12 +29,6 @@ public class Enemy : MonoBehaviour {
                 Unfreeze();
             }
         }
-        // TEST
-        //if (Input.GetKeyDown(KeyCode.F6))
-        //{
-        //    FreezeForSeconds(5.0f);
-        //}
-        // END TEST
     }
 
     public void Freeze()

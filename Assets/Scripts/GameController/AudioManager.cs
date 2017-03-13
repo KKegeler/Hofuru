@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
     private List<AudioClip> _music = new List<AudioClip>();
     [SerializeField]
     private List<AudioClip> _sfx = new List<AudioClip>();
-    [SerializeField] [Range(0.5f, 3f)]
-    private float _fadeTime = 0.5f;
+    [SerializeField] [Range(1f, 5f)]
+    private float _fadeTime = 1f;
     [Range(0f, 1f)]
     private float _volume;
 
@@ -53,6 +53,8 @@ public class AudioManager : MonoBehaviour
     {
         _source = GetComponent<AudioSource>();
         _source.loop = true;
+
+        Volume = _source.volume;
     }
 
     /// <summary>
@@ -63,7 +65,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySfx(int clipIndex, AudioSource otherSource)
     {
         AudioClip clip = _sfx[Mathf.Clamp(clipIndex, 0, _sfx.Count)];
-        otherSource.PlayOneShot(clip, _volume);
+        otherSource.PlayOneShot(clip, Volume);
     }
 
     /// <summary>
@@ -94,7 +96,7 @@ public class AudioManager : MonoBehaviour
     public void FadeIn(float time = -1)
     {
         if (time != -1)
-            _fadeTime = time;
+            _fadeTime = Mathf.Clamp(time, 1f, 5f);
 
         StopAllCoroutines();
         StartCoroutine(FadeInRoutine());
@@ -107,7 +109,7 @@ public class AudioManager : MonoBehaviour
     public void FadeOut(float time = -1)
     {
         if (time != -1)
-            _fadeTime = time;
+            _fadeTime = Mathf.Clamp(time, 1f, 5f);
 
         StopAllCoroutines();
         StartCoroutine(FadeOutRoutine());

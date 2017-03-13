@@ -2078,7 +2078,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: []
   _sfx: []
-  _fadeTime: 1
+  _fadeTime: 2
 --- !u!4 &977942357
 Transform:
   m_ObjectHideFlags: 0

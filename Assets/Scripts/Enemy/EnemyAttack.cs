@@ -12,17 +12,17 @@ public class EnemyAttack : MonoBehaviour {
     private bool inRange;
 
     public GameObject bloodParticle;
-
-    private Animator animator;
+    
     private Rigidbody2D rbPlayer;
     private Health hcPlayer;
     private GameObject blood;
+    private EnemyMeleeAnimation animation;
 
     // Use this for initialization
     void Start () {
-        animator = transform.parent.GetComponent<Animator>();
         rbPlayer = GameObjectBank.Instance.player.GetComponent<Rigidbody2D>();
         hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
+        animation = GetComponent<EnemyMeleeAnimation>();
         blood = GameObjectBank.Instance.blut;
         attackTime = Random.Range(minDelay, maxDelay);
     }
@@ -37,7 +37,7 @@ public class EnemyAttack : MonoBehaviour {
                 return;
             }
             // attack animation
-            animator.SetBool("doesMelee", true);
+            animation.PlayAnimation();
             // deal damage
             Vector2 dir = Vector2.right;
             if (transform.parent.position.x > rbPlayer.position.x)

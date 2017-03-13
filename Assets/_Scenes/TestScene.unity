@@ -360,6 +360,8 @@ MonoBehaviour:
   greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
   eventSystem: {fileID: 1920484743}
   groundChecker: {fileID: 2054909314}
+  continueButton: {fileID: 114598863068711012, guid: 0e1e94825294fa54fb33a2cc42bffd1e,
+    type: 2}
 --- !u!4 &51171115
 Transform:
   m_ObjectHideFlags: 0

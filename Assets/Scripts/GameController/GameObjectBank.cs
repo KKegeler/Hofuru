@@ -17,6 +17,8 @@ public class GameObjectBank : MonoBehaviour {
     public EventSystem eventSystem;
     public GameObject groundChecker;
 
+    public Button continueButton;
+
     public static GameObjectBank Instance
     {
         get { return _instance; }

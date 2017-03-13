@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour {
 
     public float damage;
-    public float meleeForce;
+    //public float meleeForce;
     public float minDelay;
     public float maxDelay;
 
@@ -24,6 +24,7 @@ public class EnemyAttack : MonoBehaviour {
         rbPlayer = GameObjectBank.Instance.player.GetComponent<Rigidbody2D>();
         hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
         blood = GameObjectBank.Instance.blut;
+        attackTime = Random.Range(minDelay, maxDelay);
     }
 	
 	// Update is called once per frame
@@ -46,7 +47,7 @@ public class EnemyAttack : MonoBehaviour {
             hcPlayer.ReduceHealth(damage);
             //Instantiate(GameObjectBank.Instance.blut, other.transform.position, Quaternion.Euler(new Vector3(0,0,Random.Range(-100, 100))));
             PoolManager.Instance.ReuseObject2(blood, rbPlayer.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-100, 101))));
-            rbPlayer.AddForce(dir * meleeForce, ForceMode2D.Impulse);
+            //rbPlayer.AddForce(dir * meleeForce, ForceMode2D.Impulse);
             Instantiate(bloodParticle, rbPlayer.position, Quaternion.identity);
             // new delay
             attackTime = Random.Range(minDelay, maxDelay);

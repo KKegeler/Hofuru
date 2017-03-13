@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour {
         dt = 0.0f;
         timer = false;
         stateMachine = GetComponent<EnemyMachine>();
+        animationSpeed = -1.0f;
 	}
 
     public void Update()
@@ -41,7 +42,10 @@ public class Enemy : MonoBehaviour {
         stateMachine.FreezeMachine(); // disables behaviour
         stateMachine.enabled = false;
         Animator anim = GetComponent<Animator>();
-        animationSpeed = anim.speed;
+        if (animationSpeed == -1.0f)
+        {
+            animationSpeed = anim.speed;
+        }
         anim.speed = 0.0f;
     }
 
@@ -53,6 +57,7 @@ public class Enemy : MonoBehaviour {
             stateMachine.UnfreezeMachine(); // enables behaviour
         }
         GetComponent<Animator>().speed = animationSpeed;
+        animationSpeed = -1.0f;
     }
 
     public void FreezeForSeconds(float sec)

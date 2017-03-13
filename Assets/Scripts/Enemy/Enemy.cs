@@ -47,8 +47,11 @@ public class Enemy : MonoBehaviour {
 
     public void Unfreeze()
     {
-        stateMachine.enabled = true;
-        stateMachine.UnfreezeMachine(); // enables behaviour
+        if (stateMachine)
+        {
+            stateMachine.enabled = true;
+            stateMachine.UnfreezeMachine(); // enables behaviour
+        }
         GetComponent<Animator>().speed = animationSpeed;
     }
 

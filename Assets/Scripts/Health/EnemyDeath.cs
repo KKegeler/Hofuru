@@ -32,5 +32,6 @@ public class EnemyDeath : Death {
         //this.sr.color = new Color(0, 0, 0, 0.25f);
         this.animator.SetBool("isDead", true);
         em.DisableMachine();
+        GetComponentInChildren<EnemyAttack>().enabled = false;
     }
 }

@@ -1530,11 +1530,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114679120453464610, guid: ed2673813c38e604cab85af7c2a5aa2b,
-        type: 2}
-      propertyPath: wayPoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4608935341873786, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 107
@@ -1577,14 +1572,25 @@ Prefab:
       propertyPath: wayPoints.Array.data[1]
       value: 
       objectReference: {fileID: 856283735}
-    - target: {fileID: 114679120453464610, guid: ed2673813c38e604cab85af7c2a5aa2b,
-        type: 2}
-      propertyPath: wayPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &691364611 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1178721108049006, guid: ed2673813c38e604cab85af7c2a5aa2b,
+    type: 2}
+  m_PrefabInternal: {fileID: 684961850}
+--- !u!114 &691364615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 691364611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402ba3f39512ab549a8e601878382141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &697725280
 Prefab:
   m_ObjectHideFlags: 0
@@ -2572,26 +2578,10 @@ Prefab:
       propertyPath: firstSelected
       value: 
       objectReference: {fileID: 584221625}
-    - target: {fileID: 61427403318048236, guid: 772fafe99a87bf24ebd148d61ba47835,
+    - target: {fileID: 114486734994680708, guid: 772fafe99a87bf24ebd148d61ba47835,
         type: 2}
-      propertyPath: m_UsedByEffector
+      propertyPath: meleeForce
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1162507615320260, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813332402993818, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401893989030748, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1780499522650754, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}

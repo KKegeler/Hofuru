@@ -33,7 +33,7 @@ public class PatrolState : EnemyState
             RaycastHit2D[] hits = Physics2D.RaycastAll(stateMachine.transform.position, dir, dir.magnitude);
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider.gameObject != stateMachine.gameObject) // All colliders not attached to this gameObject
+                if (!hit.transform.IsChildOf(stateMachine.transform)) // All colliders not attached to this gameObject
                 {   // Just test first collider, after this gameObject
                     if (hit.collider.transform.IsChildOf(target))
                     { // player is in sightRange and isn't hiding

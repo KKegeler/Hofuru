@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
     private bool timer;
     private float seconds;
     private EnemyMachine stateMachine;
+    private float animationSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -39,12 +40,16 @@ public class Enemy : MonoBehaviour {
     {
         stateMachine.FreezeMachine(); // disables behaviour
         stateMachine.enabled = false;
+        Animator anim = GetComponent<Animator>();
+        animationSpeed = anim.speed;
+        anim.speed = 0.0f;
     }
 
     public void Unfreeze()
     {
         stateMachine.enabled = true;
         stateMachine.UnfreezeMachine(); // enables behaviour
+        GetComponent<Animator>().speed = animationSpeed;
     }
 
     public void FreezeForSeconds(float sec)

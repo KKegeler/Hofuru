@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Framework.Log;
 
 /// <summary>
-/// Lädt und speichert Score-Daten
+/// Loads and saves score data
 /// </summary>
 public static class DataSerializer
 {
@@ -28,7 +28,7 @@ public static class DataSerializer
     #endregion
 
     /// <summary>
-    /// Speichert Highscores in Datei
+    /// Saves highscores in file
     /// </summary>
     public static void Save()
     {
@@ -47,7 +47,7 @@ public static class DataSerializer
     }
 
     /// <summary>
-    /// Lädt Highscores aus Datei
+    /// Lods highscores from file
     /// </summary>
     public static void Load()
     {
@@ -65,7 +65,7 @@ public static class DataSerializer
     }
 
     /// <summary>
-    /// Löscht Datei, falls vorhanden
+    /// Deletes file
     /// </summary>
     public static void Reset()
     {

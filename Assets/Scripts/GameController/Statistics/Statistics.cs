@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using Framework;
 using Framework.Messaging;
 
 /// <summary>
-/// Verwaltet Statistiken des Spielers
+/// Manages the player's statistics
 /// </summary>
 public class Statistics : MonoBehaviour
 {
@@ -49,17 +48,16 @@ public class Statistics : MonoBehaviour
     {
         MessagingSystem.Instance.AttachListener(typeof(ScoreMessage), ScoreHandler);
         DataSerializer.Load();
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     private void Update()
     {
         _time += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.R))
             DataSerializer.Reset();
 
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.T))
             DataSerializer.TestLog();
     }
 

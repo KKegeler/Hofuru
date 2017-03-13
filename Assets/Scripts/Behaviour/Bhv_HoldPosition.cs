@@ -12,6 +12,7 @@ public class Bhv_HoldPosition : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         me = GetComponent<Rigidbody2D>();
+        GetComponent<Animator>().SetFloat("speed", 0.0f);
         alpha = 0.05f;
 	}
 	

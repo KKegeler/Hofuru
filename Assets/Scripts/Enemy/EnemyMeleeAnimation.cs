@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMeleeAnimation : MonoBehaviour {
-    
+
+    [HideInInspector] public const float animTime = 0.555f;
+
     private Animator animator;
     private float time;
     private bool play;
 
+    private EnemyAttack attack;
+
     // Use this for initialization
     void Start () {
         animator = transform.parent.GetComponent<Animator>();
+        attack = GetComponent<EnemyAttack>();
         time = 0.0f;
         play = false;
     }
@@ -21,8 +26,9 @@ public class EnemyMeleeAnimation : MonoBehaviour {
         {
             if(time <= 0.0f)
             {
-                animator.SetBool("doesMelee", false);
+                animator.SetBool("doesAttack", false);
                 play = false;
+                attack.DealDamage();
                 return;
             }
             time -= Time.deltaTime;
@@ -31,8 +37,8 @@ public class EnemyMeleeAnimation : MonoBehaviour {
 
     public void PlayAnimation()
     {
-        time = 0.0066f; // animation duration is about 0.01 and animation speed is 1.5
+        time = animTime; // animation duration is 0.833 and animation speed is 1.5
         play = true;
-        animator.SetBool("doesMelee", true);
+        animator.SetBool("doesAttack", true);
     }
 }

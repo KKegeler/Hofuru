@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour {
     void Start() {
         this.curShurikenCount = this.maxShurikenCount;
         this.curTimefreezeTime = this.maxTimefreezeTime;
-        this.hud_ShurikenAnzeige = GameObjectBank.instance.hud_ShurikenCounter;
+        this.hud_ShurikenAnzeige = GameObjectBank.Instance.hud_ShurikenCounter;
         this.originalFreezeTimeSliderColor = sliderFillImage.color;
         hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
     }

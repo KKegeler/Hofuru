@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Framework.Pool;
 
-public class Fly : MonoBehaviour {
+public class Fly : PoolObject {
 
     public float speed;
     public float rotationSpeed;
@@ -11,13 +11,13 @@ public class Fly : MonoBehaviour {
     private Rigidbody2D rigiBody;
     private Collider2D privCollider;
 
-    // Use this for initialization
-    void Awake() {
+    private void Awake()
+    {
         this.privTranse = this.GetComponent<Transform>();
         this.rigiBody = this.GetComponent<Rigidbody2D>();
         this.privCollider = this.GetComponent<Collider2D>();
-
     }
+
     // Update is called once per frame
     void FixedUpdate() {
         if (isFlying) {
@@ -39,4 +39,5 @@ public class Fly : MonoBehaviour {
             this.privCollider.enabled = false;
         }
     }
+
 }

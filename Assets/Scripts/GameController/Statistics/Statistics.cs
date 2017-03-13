@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using Framework;
 using Framework.Messaging;
 
 /// <summary>
-/// Verwaltet Statistiken des Spielers
+/// Manages the player's statistics
 /// </summary>
 public class Statistics : MonoBehaviour
 {
-    #region Variablen
+    #region Variables
     private static Statistics _instance;
     [SerializeField]
     private float _score;
@@ -55,8 +54,11 @@ public class Statistics : MonoBehaviour
     {
         _time += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.R))
             DataSerializer.Reset();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            DataSerializer.TestLog();
     }
 
     #region Handler

@@ -43,16 +43,29 @@ public class PatrolState : EnemyState
                 }
             }
         }
-        // Behaviour //
-        float distWP = (stateMachine.transform.position - wP.position).sqrMagnitude;
-        // wayPoint reached?
-        if (distWP <= 2.0f)
-        {
-            NextWayPoint();
-            wP = stateMachine.wayPoints[currentWayPoint];
-            seek.target = wP;
-            look.target = wP;
-        }
+        //// Behaviour //
+        //float distWP = (stateMachine.transform.position - wP.position).sqrMagnitude;
+        //// wayPoint reached?
+        //if (distWP <= 2.0f)
+        //{
+        //    NextWayPoint();
+        //    wP = stateMachine.wayPoints[currentWayPoint];
+        //    seek.target = wP;
+        //    look.target = wP;
+        //}
+    }
+
+    public void WayPointReachedCallback()
+    {
+        wP.gameObject.GetComponent<WayPointTrigger>().active = false;
+        NextWayPoint();
+        wP = stateMachine.wayPoints[currentWayPoint];
+        WayPointTrigger wT = wP.gameObject.GetComponent<WayPointTrigger>();
+        wT.attachedEnemy = stateMachine.gameObject;
+        wT.pState = this;
+        wT.active = true;
+        seek.target = wP;
+        look.target = wP;
     }
 
     /// <summary>
@@ -74,6 +87,10 @@ public class PatrolState : EnemyState
     {
         currentWayPoint = 0;
         wP = stateMachine.wayPoints[currentWayPoint];
+        WayPointTrigger wT = wP.gameObject.GetComponent<WayPointTrigger>();
+        wT.attachedEnemy = stateMachine.gameObject;
+        wT.pState = this;
+        wT.active = true;
         up = true;
 
         seek = stateMachine.gameObject.AddComponent<Bhv_Seek>();

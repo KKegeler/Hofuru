@@ -3,34 +3,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Framework.Messaging;
 using Framework.Pool;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class MainMenu : Window {
 
     public Button continueButton;
     public Camera mainCam;
    
-    public Button[] buttons;
-
-    public GameObject playButton;
-
-    public Button optionsButton;
-    
-    public Canvas menu;
-
-    public bool onSelectBool;
-
-
     void Start()
     {
         MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
         continueButton.gameObject.SetActive(false);
-        /*for(int i = 0;i<buttons.Length;i++){
-            buttons[i].animator.Stop();
-        }
-        buttons[1].animator.Play("Highlighted");*/
-        
     }
 
     public bool PauseHandler(BaseMessage msg)
@@ -67,12 +49,6 @@ public class MainMenu : Window {
     public void options()
     {
         manager.Open(1);
-    }
-
-    public void pressed()
-    {
-        //EventSystem.current.SetSelectedGameObject(null);
-        //EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
     }
 
      private void OnDestroy()

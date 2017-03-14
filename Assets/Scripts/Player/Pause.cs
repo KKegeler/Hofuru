@@ -5,20 +5,6 @@ using Framework.Messaging;
 
 public class Pause : MonoBehaviour {
 
-    public bool isPaused = false;
-    public GameObject firstSelected;
-
-    //Methode um auf das EventSystem zugreifen zu können
-   /* protected EventSystem eventSystem
-    {
-        get { return GameObjectBank.Instance.eventSystem; }
-    }
-
-    public virtual void OnFocus()
-    {
-        eventSystem.SetSelectedGameObject(firstSelected);
-    }*/
-
     public void Paused()
     {
         MessagingSystem.Instance.QueueMessage(new PauseMessage(true));

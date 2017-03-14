@@ -740,7 +740,7 @@ Animator:
   m_GameObject: {fileID: 611647811}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c1fdc53021f38744c9777dd66f3f64f3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d661523ed3049e4bab5eeaa40424a19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2969,7 +2969,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3684,16 +3684,6 @@ MonoBehaviour:
   firstSelected: {fileID: 1614998319}
   continueButton: {fileID: 17364720}
   mainCam: {fileID: 1255359660}
-  buttons:
-  - {fileID: 17364720}
-  - {fileID: 1614998322}
-  - {fileID: 611647814}
-  - {fileID: 1514725174}
-  - {fileID: 2041091933}
-  playButton: {fileID: 1614998319}
-  optionsButton: {fileID: 611647814}
-  menu: {fileID: 1629472459}
-  onSelectBool: 0
 --- !u!114 &2146715760
 MonoBehaviour:
   m_ObjectHideFlags: 0

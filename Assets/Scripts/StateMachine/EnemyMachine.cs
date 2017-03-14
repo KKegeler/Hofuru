@@ -10,10 +10,16 @@ public class EnemyMachine : StateMachine {
     public float sightRange;
     public float attackDistance;
     public float patrolSpeed;
+    public GameObject wayPointPrototype;
+    public float wPDistance;
     public Transform[] wayPoints;
 
     new public void Start() {
         base.Start();
+        if (wayPoints.Length == 0)
+        {
+            InitializeWayPoints();
+        }
         Transform player = GameObjectBank.Instance.player.transform;
         states.Add("PATROL", new PatrolState(this, player));
         if (shooting) {
@@ -24,6 +30,17 @@ public class EnemyMachine : StateMachine {
         }
         currentState = (states.ContainsKey(initState.ToUpper())) ? states[initState.ToUpper()] : states["PATROL"];
         currentState.EnterState();
+    }
+
+    private void InitializeWayPoints()
+    {
+        wayPoints = new Transform[2];
+        GameObject wP = Instantiate(wayPointPrototype, GameObjectBank.Instance.levelElements.transform, true);
+        wP.transform.position = transform.position + wPDistance * Vector3.left;
+        wayPoints[0] = wP.transform;
+        wP = Instantiate(wayPointPrototype, GameObjectBank.Instance.levelElements.transform, true);
+        wP.transform.position = transform.position - wPDistance * Vector3.left;
+        wayPoints[1] = wP.transform;
     }
 
     new public void Update() {

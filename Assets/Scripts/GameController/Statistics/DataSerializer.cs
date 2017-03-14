@@ -10,7 +10,7 @@ using Framework.Log;
 public static class DataSerializer
 {
     #region Variables
-    private static List<Highscore> _scoreList = new List<Highscore>(6);
+    private static List<Highscore> _scoreList = new List<Highscore>();
     private const string _FILE_NAME = "Scores.mango";
     private const ushort _SAVE_NUM = 5;
     #endregion
@@ -34,7 +34,7 @@ public static class DataSerializer
     {
         Highscore score = new Highscore(Statistics.Instance.FinalScore);
         _scoreList.Add(score);
-        _scoreList.Sort(Highscore.SortDescending());
+        _scoreList.Sort();
 
         if (_scoreList.Count > _SAVE_NUM)
             _scoreList.RemoveAt(_scoreList.Count - 1);

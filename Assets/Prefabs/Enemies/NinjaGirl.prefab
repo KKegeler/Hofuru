@@ -252,16 +252,17 @@ MonoBehaviour:
   sightRange: 40
   attackDistance: 3
   patrolSpeed: 12
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  wayPointPrototype: {fileID: 1061317150133060, guid: a72c88fecf7b23541a2b4aca14e98433,
+    type: 2}
+  wPDistance: 20
+  wayPoints: []
 --- !u!114 &114879008684892444
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1178721108049006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c362fb73bffda94e8ab97c9c404de58, type: 3}
   m_Name: 

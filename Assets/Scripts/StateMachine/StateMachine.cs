@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public abstract class StateMachine : MonoBehaviour {
@@ -23,8 +22,6 @@ public abstract class StateMachine : MonoBehaviour {
         currentState.ExitState();
         currentState = states[newState];
         currentState.EnterState();
-        // test
-        Debug.Log(newState);
     }
 
 }

@@ -570,7 +570,7 @@ Animator:
   m_GameObject: {fileID: 481464046}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dc1a534744cf0b548a19a8c7d10aa829, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d661523ed3049e4bab5eeaa40424a19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -652,7 +652,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 1514725174}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
@@ -676,6 +676,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2146715759}
         m_MethodName: options
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2146715759}
+        m_MethodName: pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -729,7 +740,7 @@ Animator:
   m_GameObject: {fileID: 611647811}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c1fdc53021f38744c9777dd66f3f64f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -845,7 +856,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 379330239}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
@@ -941,7 +952,7 @@ Animator:
   m_GameObject: {fileID: 742997546}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c1fdc53021f38744c9777dd66f3f64f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1420,7 +1431,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 742997547}
     m_SelectOnLeft: {fileID: 1947066244}
     m_SelectOnRight: {fileID: 1947066244}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1497,7 +1508,7 @@ Animator:
   m_GameObject: {fileID: 1095895342}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c1fdc53021f38744c9777dd66f3f64f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1952,7 +1963,7 @@ Prefab:
     - target: {fileID: 114598863068711012, guid: 0e1e94825294fa54fb33a2cc42bffd1e,
         type: 2}
       propertyPath: m_Transition
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114598863068711012, guid: 0e1e94825294fa54fb33a2cc42bffd1e,
         type: 2}
@@ -2132,7 +2143,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 2041091933}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
@@ -2198,7 +2209,7 @@ Animator:
   m_GameObject: {fileID: 1514725171}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d661523ed3049e4bab5eeaa40424a19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2428,7 +2439,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 611647814}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
@@ -2505,7 +2516,7 @@ Animator:
   m_GameObject: {fileID: 1614998319}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d661523ed3049e4bab5eeaa40424a19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2955,7 +2966,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 742997547}
     m_SelectOnLeft: {fileID: 1095895344}
     m_SelectOnRight: {fileID: 1095895344}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3032,7 +3043,7 @@ Animator:
   m_GameObject: {fileID: 1947066242}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c1fdc53021f38744c9777dd66f3f64f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3151,7 +3162,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 17364720}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.9508113, b: 0.28676468, a: 1}
@@ -3265,7 +3276,7 @@ Animator:
   m_GameObject: {fileID: 2041091932}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 094133aa5c3c8274aa82dcda4a717b2e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d661523ed3049e4bab5eeaa40424a19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3545,6 +3556,8 @@ MonoBehaviour:
   musicSlider: {fileID: 379330239}
   musicText: {fileID: 1240184240}
   qualityText: {fileID: 1886265664}
+  optionsButton: {fileID: 611647814}
+  menu: {fileID: 1629472459}
 --- !u!1 &2146715753
 GameObject:
   m_ObjectHideFlags: 0
@@ -3558,6 +3571,7 @@ GameObject:
   - component: {fileID: 2146715755}
   - component: {fileID: 2146715758}
   - component: {fileID: 2146715759}
+  - component: {fileID: 2146715760}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -3676,5 +3690,37 @@ MonoBehaviour:
   - {fileID: 611647814}
   - {fileID: 1514725174}
   - {fileID: 2041091933}
+  playButton: {fileID: 1614998319}
   optionsButton: {fileID: 611647814}
-  normal: {fileID: 0}
+  menu: {fileID: 1629472459}
+  onSelectBool: 0
+--- !u!114 &2146715760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2146715753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1372454034}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1614998319}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []

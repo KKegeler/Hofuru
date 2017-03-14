@@ -1,10 +1,31 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Framework.Messaging;
 
 public class Pause : MonoBehaviour {
 
+    private bool isPaused;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
+    }
+
+    public bool PauseHandler(BaseMessage msg){
+        PauseMessage pauseMsg = (PauseMessage)msg;
+        if(pauseMsg.isPaused == true)
+        {
+            isPaused = true;
+        }else
+        {
+            isPaused = false;
+        }
+        return false;
+    }
     public void Paused()
     {
         MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
@@ -13,7 +34,7 @@ public class Pause : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused)
         {
             Paused();
         }

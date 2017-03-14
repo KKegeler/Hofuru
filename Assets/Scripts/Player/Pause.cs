@@ -24,14 +24,16 @@ public class Pause : MonoBehaviour {
     }
     public void Paused()
     {
-        MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
+        MessagingSystem.Instance.QueueMessage(new PauseMessage(true));       
+
         Time.timeScale = 0;
-        SceneManager.LoadScene(0,LoadSceneMode.Additive);
+        SceneManager.LoadScene(0, LoadSceneMode.Additive);
     }
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused || 
-            Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused)
+        if ((Input.GetKeyDown(KeyCode.Escape) || 
+            Input.GetKeyDown(KeyCode.Joystick1Button7)) 
+            && !isPaused)
         {
             Paused();
         }

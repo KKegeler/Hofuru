@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Framework.Messaging;
 using UnityEngine.SceneManagement;
 
-public class MainMenuAdditive : MonoBehaviour {
+public class MainMenuAdditive : MonoBehaviour
+{
+    public void Continue()
+    {
+        StartCoroutine(Unload());
+    }
 
-	public void Continue()
-	{
-		Time.timeScale = 1;
-		MessagingSystem.Instance.QueueMessage(new PauseMessage(false));
-		Scene menu = SceneManager.GetSceneByName("MainMenu");
-		SceneManager.UnloadSceneAsync(menu);
-		
-	}
+    private IEnumerator Unload()
+    {
+        yield return SceneManager.UnloadSceneAsync("MainMenu");
+
+        Time.timeScale = 1;
+        MessagingSystem.Instance.QueueMessage(new PauseMessage(false));
+    }
+
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Framework.Messaging;
 using UnityEngine;
 
 public class PlayerDeath : Death {
@@ -34,8 +33,8 @@ public class PlayerDeath : Death {
     }
 
     public override void HandleDeath() {
-        DataSerializer.Save();
-        GreyscaleEffect.Instance.ActivateEffect();
+
+        GameManager.Instance.State = GameState.GAME_OVER;
 
         this.isDead = true;
         this.pm.enabled = false;

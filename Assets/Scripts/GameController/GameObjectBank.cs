@@ -16,6 +16,7 @@ public class GameObjectBank : MonoBehaviour {
     public Shader greyscaleShader;
     public EventSystem eventSystem;
     public GameObject groundChecker;
+    public GameObject slideKickTrigger;
 
     public static GameObjectBank Instance
     {

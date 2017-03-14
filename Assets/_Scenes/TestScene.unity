@@ -360,6 +360,7 @@ MonoBehaviour:
   greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
   eventSystem: {fileID: 1920484743}
   groundChecker: {fileID: 2054909314}
+  slideKickTrigger: {fileID: 676300399}
 --- !u!4 &51171115
 Transform:
   m_ObjectHideFlags: 0
@@ -1523,6 +1524,11 @@ MonoBehaviour:
   _levelEnd: {fileID: 759646989}
   _bgStart: {fileID: 75367327}
   _bgEnd: {fileID: 866457723}
+--- !u!1 &676300399 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1162507615320260, guid: 772fafe99a87bf24ebd148d61ba47835,
+    type: 2}
+  m_PrefabInternal: {fileID: 1384300438}
 --- !u!1001 &684961850
 Prefab:
   m_ObjectHideFlags: 0

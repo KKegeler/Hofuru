@@ -8,6 +8,8 @@ public class MainMenu : Window {
 
     public Button continueButton;
     public Camera mainCam;
+
+    public Animation animationMenu;
    
     void Start()
     {
@@ -48,6 +50,7 @@ public class MainMenu : Window {
 
     public void options()
     {
+        
         manager.Open(1);
     }
 

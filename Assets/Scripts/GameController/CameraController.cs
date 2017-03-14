@@ -32,6 +32,10 @@ public class CameraController : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        height = mainCamera.orthographicSize * 2;
+        width = height * Screen.width / Screen.height;
+        height *= 0.5f;
+        width *= 0.5f;
         newCamPos.x = Mathf.Clamp((followEffort * player.position.x + (1.0f - followEffort) * camTf.position.x), width, 300);
         newCamPos.y = Mathf.Clamp((followEffort * player.position.y + (1.0f - followEffort) * camTf.position.y), height, 300);
         camTf.position = newCamPos;
@@ -54,7 +58,7 @@ public class CameraController : MonoBehaviour {
             this.mainCamera.orthographicSize = minValue;
         }
     }
-
+    
     IEnumerator ResetZoomRoutine(float duration) {
         float stepTime = duration / 20;
         float amount = (originalSize - mainCamera.orthographicSize) / 20;

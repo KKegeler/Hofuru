@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flam: {fileID: 198597744738166528}
-  player: {fileID: 0}
+  player: {fileID: 1177950849891654, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
 --- !u!198 &198597744738166528
 ParticleSystem:
   m_ObjectHideFlags: 1

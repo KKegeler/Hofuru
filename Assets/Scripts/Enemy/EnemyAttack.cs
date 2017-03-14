@@ -9,8 +9,8 @@ public class EnemyAttack : MonoBehaviour {
     public float maxDelay;
 
     private float attackTime;
-    private float halfAnimTime;
-    private bool animPlaying;
+    private float damageTime;
+    private bool dealDamage;
     private bool inRange;
 
     public GameObject bloodParticle;
@@ -29,13 +29,21 @@ public class EnemyAttack : MonoBehaviour {
         animator = transform.parent.GetComponent<Animator>();
         blood = GameObjectBank.Instance.blut;
         attackTime = 0.15f; // a little reaktion time
-        halfAnimTime = EnemyMeleeAnimation.animTime * 0.8f;
-        animPlaying = false;
+        dealDamage = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
         animator.SetBool("doesMelee", inRange);
+        if (dealDamage)
+        {
+            if(damageTime <= 0.0f)
+            {
+                DealDamage();
+                dealDamage = false;
+            }
+            damageTime -= Time.deltaTime;
+        }
         if (inRange)
         {
             if (attackTime > 0.0f)
@@ -45,11 +53,18 @@ public class EnemyAttack : MonoBehaviour {
             }
             animation.PlayAnimation();
             // new delay
-            attackTime = Random.Range(minDelay, maxDelay);
+            attackTime = Random.Range(minDelay, maxDelay) + EnemyMeleeAnimation.animTime; // attack delay must be min animTime
         }
 	}
 
-    public void DealDamage()
+    // Is called from Animator at State exit from "GroundAttack" via EnemyDamageDeal-Script
+    public void SetDamageTimer()
+    {
+        dealDamage = true;
+        damageTime = 0.15f;
+    }
+
+    private void DealDamage()
     {
         Vector2 dir = Vector2.right;
         if (transform.parent.position.x > rbPlayer.position.x)

@@ -31,6 +31,8 @@ public class PlayerMeleeHandling : MonoBehaviour {
             Quaternion.Euler(new Vector3(0, 0, Random.Range(-100, 101))));
 
         otherRigi.AddForce(dir * meleeForce, ForceMode2D.Impulse);
-        Instantiate(bloodParticle, other.transform.position, Quaternion.identity);
+        //Instantiate(bloodParticle, other.transform.position, Quaternion.identity);
+        PoolManager.Instance.ReuseObject(bloodParticle, other.transform.position, 
+            Quaternion.identity);
     }
 }

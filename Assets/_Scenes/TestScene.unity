@@ -361,6 +361,7 @@ MonoBehaviour:
   eventSystem: {fileID: 1920484743}
   groundChecker: {fileID: 2054909314}
   levelElements: {fileID: 712424010}
+  slideKickTrigger: {fileID: 1384300439}
 --- !u!4 &51171115
 Transform:
   m_ObjectHideFlags: 0
@@ -1567,6 +1568,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114679120453464610, guid: ed2673813c38e604cab85af7c2a5aa2b,
+        type: 2}
+      propertyPath: wayPointPrototype
+      value: 
+      objectReference: {fileID: 1061317150133060, guid: a72c88fecf7b23541a2b4aca14e98433,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
   m_IsPrefabParent: 0
@@ -2468,6 +2475,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1384300439 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1162507615320260, guid: 772fafe99a87bf24ebd148d61ba47835,
+    type: 2}
+  m_PrefabInternal: {fileID: 1384300438}
 --- !u!1 &1527258798
 GameObject:
   m_ObjectHideFlags: 0

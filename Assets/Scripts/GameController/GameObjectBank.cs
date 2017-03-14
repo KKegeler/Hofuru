@@ -17,6 +17,7 @@ public class GameObjectBank : MonoBehaviour {
     public EventSystem eventSystem;
     public GameObject groundChecker;
     public GameObject levelElements;
+    public GameObject slideKickTrigger;
 
     public static GameObjectBank Instance
     {

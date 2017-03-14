@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4976819695653182}
   - component: {fileID: 212896428939419508}
   - component: {fileID: 114851597578093370}
+  - component: {fileID: 61764453321805756}
   m_Layer: 0
   m_Name: Flammenfalle
   m_TagString: Untagged
@@ -101,6 +102,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61764453321805756
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1274651612512608}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.000015258789, y: 10.5795}
+  serializedVersion: 2
+  m_Size: {x: 2.2073498, y: 21.798992}
 --- !u!114 &114851597578093370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flam: {fileID: 198597744738166528}
+  player: {fileID: 0}
 --- !u!198 &198597744738166528
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -168,7 +184,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1474215164
+  randomSeed: 1036171626
   InitialModule:
     serializedVersion: 3
     enabled: 1

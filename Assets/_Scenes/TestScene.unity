@@ -1963,31 +1963,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 198597744738166528, guid: d33a5f7de3d7a334a9ca25f776bededf,
+    - target: {fileID: 114851597578093370, guid: d33a5f7de3d7a334a9ca25f776bededf,
         type: 2}
-      propertyPath: lengthInSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198597744738166528, guid: d33a5f7de3d7a334a9ca25f776bededf,
-        type: 2}
-      propertyPath: randomSeed
-      value: 34229871
-      objectReference: {fileID: 0}
-    - target: {fileID: 198597744738166528, guid: d33a5f7de3d7a334a9ca25f776bededf,
-        type: 2}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 198597744738166528, guid: d33a5f7de3d7a334a9ca25f776bededf,
-        type: 2}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198597744738166528, guid: d33a5f7de3d7a334a9ca25f776bededf,
-        type: 2}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2123761760}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d33a5f7de3d7a334a9ca25f776bededf, type: 2}
   m_IsPrefabParent: 0

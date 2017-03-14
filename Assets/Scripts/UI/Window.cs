@@ -40,5 +40,6 @@ public class Window : MonoBehaviour {
     public virtual void Close()
     {
         Display(false);
+        
     }
 }

@@ -22,11 +22,6 @@ public abstract class StateMachine : MonoBehaviour {
         currentState.ExitState();
         currentState = states[newState];
         currentState.EnterState();
-<<<<<<< HEAD
-        // test
-        //Debug.Log(newState);
-=======
->>>>>>> develop
     }
 
 }

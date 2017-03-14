@@ -18,7 +18,7 @@ public class EnemyAttack : MonoBehaviour {
     private Rigidbody2D rbPlayer;
     private Health hcPlayer;
     private GameObject blood;
-    private EnemyMeleeAnimation animation;
+    new private EnemyMeleeAnimation animation;
     private Animator animator;
 
     // Use this for initialization

@@ -24,7 +24,7 @@ public abstract class StateMachine : MonoBehaviour {
         currentState = states[newState];
         currentState.EnterState();
         // test
-        Debug.Log(newState);
+        //Debug.Log(newState);
     }
 
 }

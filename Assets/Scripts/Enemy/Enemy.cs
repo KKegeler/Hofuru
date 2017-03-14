@@ -9,9 +9,11 @@ public class Enemy : MonoBehaviour {
     private float seconds;
     private EnemyMachine stateMachine;
     private float animationSpeed;
+    private List<GameObject> attachedShuriken;
 
 	// Use this for initialization
 	void Start () {
+        this.attachedShuriken = new List<GameObject>();
         dt = 0.0f;
         timer = false;
         stateMachine = GetComponent<EnemyMachine>();
@@ -60,6 +62,16 @@ public class Enemy : MonoBehaviour {
         dt = 0.0f;
         Freeze();
         timer = true;
+    }
+
+    public void AddAttachedShuriken(GameObject shuriken) {
+        this.attachedShuriken.Add(shuriken);
+    }
+
+    public void DestroyAllAttachedShuriken() {
+        foreach(GameObject shuriken in attachedShuriken) {
+            Destroy(shuriken);
+        }
     }
 	
 }

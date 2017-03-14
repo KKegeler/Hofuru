@@ -18,11 +18,16 @@ public class EnemyAttack : MonoBehaviour {
     private Rigidbody2D rbPlayer;
     private Health hcPlayer;
     private GameObject blood;
-    private EnemyMeleeAnimation animation;
+    new private EnemyMeleeAnimation animation;
     private Animator animator;
 
     // Use this for initialization
     void Start () {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         rbPlayer = GameObjectBank.Instance.player.GetComponent<Rigidbody2D>();
         hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
         animation = GetComponent<EnemyMeleeAnimation>();
@@ -31,10 +36,9 @@ public class EnemyAttack : MonoBehaviour {
         attackTime = 0.15f; // a little reaktion time
         dealDamage = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        animator.SetBool("doesMelee", inRange);
+
+    // Update is called once per frame
+    void Update () {
         if (dealDamage)
         {
             if(damageTime <= 0.0f)
@@ -73,26 +77,31 @@ public class EnemyAttack : MonoBehaviour {
         }
         hcPlayer.ReduceHealth(damage);
         //Instantiate(GameObjectBank.Instance.blut, other.transform.position, Quaternion.Euler(new Vector3(0,0,Random.Range(-100, 100))));
-        PoolManager.Instance.ReuseObject2(blood, rbPlayer.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-100, 101))));
+        PoolManager.Instance.ReuseObject2(blood, rbPlayer.position, 
+            Quaternion.Euler(new Vector3(0, 0, Random.Range(-100, 101))));
         //rbPlayer.AddForce(dir * meleeForce, ForceMode2D.Impulse);
-        Instantiate(bloodParticle, rbPlayer.position, Quaternion.identity);
+        //Instantiate(bloodParticle, rbPlayer.position, Quaternion.identity);
+        PoolManager.Instance.ReuseObject(bloodParticle, rbPlayer.position,
+            Quaternion.identity);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.GetComponent<PlayerMovement>())
+        if (collider.gameObject.GetComponent<PlayerMovement>() && this.enabled==true)
         {
             // its the player
             inRange = true;
+            animator.SetBool("doesMelee", true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.GetComponent<PlayerMovement>())
+        if (collider.gameObject.GetComponent<PlayerMovement>() && this.enabled==true)
         {
             // its the player
             inRange = false;
+            animator.SetBool("doesMelee", false);
         }
     }
 }

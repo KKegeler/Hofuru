@@ -16,6 +16,8 @@ public class GameObjectBank : MonoBehaviour {
     public Shader greyscaleShader;
     public EventSystem eventSystem;
     public GameObject groundChecker;
+    public GameObject levelElements;
+    public GameObject slideKickTrigger;
 
     public Button continueButton;
 

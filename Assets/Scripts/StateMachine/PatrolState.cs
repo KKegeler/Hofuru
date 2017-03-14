@@ -43,16 +43,6 @@ public class PatrolState : EnemyState
                 }
             }
         }
-        //// Behaviour //
-        //float distWP = (stateMachine.transform.position - wP.position).sqrMagnitude;
-        //// wayPoint reached?
-        //if (distWP <= 2.0f)
-        //{
-        //    NextWayPoint();
-        //    wP = stateMachine.wayPoints[currentWayPoint];
-        //    seek.target = wP;
-        //    look.target = wP;
-        //}
     }
 
     public void WayPointReachedCallback()

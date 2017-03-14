@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Framework.Pool;
 
 public class Fly : PoolObject {
@@ -10,12 +11,14 @@ public class Fly : PoolObject {
     private Transform privTranse;
     private Rigidbody2D rigiBody;
     private Collider2D privCollider;
+    private bool canFreeze;
 
     private void Awake()
     {
         this.privTranse = this.GetComponent<Transform>();
         this.rigiBody = this.GetComponent<Rigidbody2D>();
         this.privCollider = this.GetComponent<Collider2D>();
+        this.canFreeze = true;
     }
 
     // Update is called once per frame
@@ -33,11 +36,30 @@ public class Fly : PoolObject {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
+        if (canFreeze && collision.collider.GetComponent<Enemy>()) {
+            canFreeze = false;
+            Enemy enemy = collision.collider.GetComponent<Enemy>();
+            this.rigiBody.bodyType = RigidbodyType2D.Kinematic;
+            this.rigiBody.velocity = Vector2.zero;
+            this.isFlying = false;
+            this.gameObject.transform.SetParent(enemy.gameObject.transform);
+            StopAllCoroutines();
+            enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            StartCoroutine(FreezeRoutine(5f, enemy));
+        }
         if (collision.collider.GetComponent<Ground>() != null) {
             this.isFlying = false;
             this.rigiBody.bodyType = RigidbodyType2D.Static;
             this.privCollider.enabled = false;
         }
+    }
+
+    private IEnumerator FreezeRoutine(float duration, Enemy enemy) {
+        enemy.AddAttachedShuriken(this.gameObject);
+        enemy.Freeze();
+        yield return new WaitForSeconds(duration);
+        enemy.DestroyAllAttachedShuriken();
+        enemy.Unfreeze();
     }
 
 }

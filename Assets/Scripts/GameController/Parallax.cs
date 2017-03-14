@@ -17,6 +17,14 @@ public class Parallax : MonoBehaviour
     private Transform _bgStart;
     [SerializeField]
     private Transform _bgEnd;
+    [SerializeField]
+    private Transform _layer1;
+    [SerializeField]
+    private Transform _layer2;
+    [SerializeField]
+    private Transform _layer3;
+    [SerializeField]
+    private Transform _layer4;
 #pragma warning restore
 
     private Transform _mainCam;

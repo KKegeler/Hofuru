@@ -39,17 +39,24 @@ public class FightState : EnemyState
         Bhv_LookAt look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = target;
         look.rightOrientated = true;
+
+        stateMachine.GetComponentInChildren<EnemyAttack>().enabled = true;
+        stateMachine.GetComponentInChildren<EnemyAttack>().Initialize();
     }
 
     override public void ExitState()
     {
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_HoldPosition>());
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
+
+        stateMachine.GetComponentInChildren<EnemyAttack>().enabled = false;
     }
 
     public override void PauseState(bool disable)
     {
         stateMachine.GetComponent<Bhv_HoldPosition>().enabled = !disable;
         stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+        
+        stateMachine.GetComponentInChildren<EnemyAttack>().enabled = !disable;
     }
 }

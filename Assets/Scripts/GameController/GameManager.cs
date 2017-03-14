@@ -6,7 +6,7 @@ using Framework.Messaging;
 using Framework.Log;
 
 /// <summary>
-/// Everything
+/// Manages the GameState
 /// </summary>
 public class GameManager : SingletonAsComponent<GameManager>
 {
@@ -72,6 +72,11 @@ public class GameManager : SingletonAsComponent<GameManager>
         }
 
         _gameState = newState;
+    }
+
+    new public void WakeUp()
+    {
+        DataSerializer.Load();
     }
 
 }

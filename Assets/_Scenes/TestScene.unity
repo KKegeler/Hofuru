@@ -830,10 +830,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 0, y: 600}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1505,7 +1505,6 @@ MonoBehaviour:
   _layer2: {fileID: 791725540}
   _layer3: {fileID: 1716109564}
   _layer4: {fileID: 232396453}
-  _layer5: {fileID: 710163246}
 --- !u!1 &615915131
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
+using Framework.Messaging;
 
 public class FlamesTrap : MonoBehaviour
 {
@@ -8,7 +7,12 @@ public class FlamesTrap : MonoBehaviour
     float time = 5f;
     float wait = 5f;
 
-
+    public GameObject player;
+    private Health hcPlayer;
+    void Start()
+    {
+        hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
+    }
     void Update()
     {
         time -= Time.deltaTime;
@@ -17,11 +21,25 @@ public class FlamesTrap : MonoBehaviour
         
     }
 
+   /// <summary>
+   /// Sent when another object enters a trigger collider attached to this
+   /// object (2D physics only).
+   /// </summary>
+   /// <param name="other">The other Collider2D involved in this collision.</param>
+   void OnTriggerStay2D(Collider2D col)
+   {
+       if(col.gameObject == player && flam.isPlaying){
+           float damage = 50*Time.deltaTime;
+            hcPlayer.ReduceHealth(damage);
+       }
+   }
+
     private void flammen(float timer)
     {
         if (timer > 0)
         {
             flam.Play();
+            
             wait = 2f;
         }
         else if (timer <= 0)

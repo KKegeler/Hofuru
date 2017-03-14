@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Score data
 /// </summary>
 [Serializable]
-public class Highscore
+public class Highscore : IComparable<Highscore>
 {
     #region Variables
     public readonly float score;
@@ -19,24 +18,15 @@ public class Highscore
     #endregion
 
     #region Sorting
-    private class SortDescendingHelper : IComparer<Highscore>
+    public int CompareTo(Highscore other)
     {
-        public int Compare(Highscore x, Highscore y)
-        {
-            if (x.score < y.score)
-                return 1;
+        if (score < other.score)
+            return 1;
 
-            if (x.score > y.score)
-                return -1;
+        if (score > other.score)
+            return -1;
 
-            return 0;
-        }
-
-    }
-
-    public static IComparer<Highscore> SortDescending()
-    {
-        return new SortDescendingHelper();
+        return 0;
     }
     #endregion
 

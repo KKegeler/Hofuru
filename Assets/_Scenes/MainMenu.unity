@@ -3684,6 +3684,7 @@ MonoBehaviour:
   firstSelected: {fileID: 1614998319}
   continueButton: {fileID: 17364720}
   mainCam: {fileID: 1255359660}
+  animationMenu: {fileID: 0}
 --- !u!114 &2146715760
 MonoBehaviour:
   m_ObjectHideFlags: 0

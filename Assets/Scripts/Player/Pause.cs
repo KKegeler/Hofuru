@@ -4,7 +4,7 @@ using Framework.Messaging;
 
 public class Pause : MonoBehaviour {
 
-    private bool isPaused;
+    private bool isPaused = false;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -17,13 +17,9 @@ public class Pause : MonoBehaviour {
 
     public bool PauseHandler(BaseMessage msg){
         PauseMessage pauseMsg = (PauseMessage)msg;
-        if(pauseMsg.isPaused == true)
-        {
-            isPaused = true;
-        }else
-        {
-            isPaused = false;
-        }
+
+        isPaused = pauseMsg.isPaused;
+
         return false;
     }
     public void Paused()
@@ -34,7 +30,8 @@ public class Pause : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused || 
+            Input.GetKeyDown(KeyCode.Joystick1Button7) && !isPaused)
         {
             Paused();
         }

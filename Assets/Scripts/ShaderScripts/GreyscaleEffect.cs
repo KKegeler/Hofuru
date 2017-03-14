@@ -2,18 +2,19 @@
 using System.Collections;
 
 /// <summary>
-/// Graustufeneffekt bei Tod des Spielers
+/// Greyscale effect when the player dies
 /// </summary>
 public class GreyscaleEffect : MonoBehaviour
 {
     #region Variables
     private static GreyscaleEffect _instance;
 
-    private Shader _shader;
     [Range(0f, 1f)]
     private float _greyscale = 0;
     [SerializeField] [Range(0.5f, 3f)]
     private float _blendTime = 0.5f;
+
+    private Shader _shader;   
     private Material _mat;
     #endregion
 
@@ -42,7 +43,7 @@ public class GreyscaleEffect : MonoBehaviour
         if (!_instance)
             _instance = this;
         else if (_instance != this)
-            Destroy(gameObject);
+            enabled = false;
     }
 
     private void Start()
@@ -70,12 +71,15 @@ public class GreyscaleEffect : MonoBehaviour
             Graphics.Blit(sourceTex, destTex);
     }
 
-    public void BlendToGrey()
+    /// <summary>
+    /// Screen turns grey over time
+    /// </summary>
+    public void ActivateEffect()
     {
-        StartCoroutine(Blend());
+        StartCoroutine(Activate());
     }
 
-    private IEnumerator Blend()
+    private IEnumerator Activate()
     {
         while (_greyscale < 1f)
         {

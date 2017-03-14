@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Dynamic background
+/// </summary>
 public class Parallax : MonoBehaviour
 {
     #region Variables
@@ -15,6 +18,7 @@ public class Parallax : MonoBehaviour
     [SerializeField]
     private Transform _bgEnd;
 #pragma warning restore
+
     private Transform _mainCam;
     private float _levelDiff;
     private float _bgDiff;

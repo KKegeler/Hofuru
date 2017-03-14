@@ -26,9 +26,10 @@ public class PlayerMeleeHandling : MonoBehaviour {
         }
         hc.ReduceHealth(60);
         this.GetComponent<Collider2D>().enabled = false;
-        //Instantiate(GameObjectBank.Instance.blut, other.transform.position, Quaternion.Euler(new Vector3(0,0,Random.Range(-100, 100))));
+
         PoolManager.Instance.ReuseObject2(blood, other.transform.position, 
             Quaternion.Euler(new Vector3(0, 0, Random.Range(-100, 101))));
+
         otherRigi.AddForce(dir * meleeForce, ForceMode2D.Impulse);
         Instantiate(bloodParticle, other.transform.position, Quaternion.identity);
     }

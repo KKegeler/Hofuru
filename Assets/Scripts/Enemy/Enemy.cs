@@ -8,13 +8,15 @@ public class Enemy : MonoBehaviour {
     private bool timer;
     private float seconds;
     private EnemyMachine stateMachine;
+    private float animationSpeed;
 
 	// Use this for initialization
 	void Start () {
         dt = 0.0f;
         timer = false;
         stateMachine = GetComponent<EnemyMachine>();
-	}
+        animationSpeed = -1.0f;
+    }
 
     public void Update()
     {
@@ -27,18 +29,18 @@ public class Enemy : MonoBehaviour {
                 Unfreeze();
             }
         }
-        // TEST
-        //if (Input.GetKeyDown(KeyCode.F6))
-        //{
-        //    FreezeForSeconds(5.0f);
-        //}
-        // END TEST
     }
 
     public void Freeze()
     {
         stateMachine.FreezeMachine(); // disables behaviour
         stateMachine.enabled = false;
+        Animator anim = GetComponent<Animator>();
+        if (animationSpeed == -1.0f)
+        {
+            animationSpeed = anim.speed;
+        }
+        anim.speed = 0.0f;
     }
 
     public void Unfreeze()
@@ -48,6 +50,8 @@ public class Enemy : MonoBehaviour {
             stateMachine.enabled = true;
             stateMachine.UnfreezeMachine(); // enables behaviour
         }
+        GetComponent<Animator>().speed = animationSpeed;
+        animationSpeed = -1.0f;
     }
 
     public void FreezeForSeconds(float sec)

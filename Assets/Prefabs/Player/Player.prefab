@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4248863511905660}
   - component: {fileID: 61357760369941132}
   - component: {fileID: 114409962921573958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlideKickTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 4093485082087976}
   - component: {fileID: 61352443905592804}
   - component: {fileID: 114486734994680708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerMeleeTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4047259927250278}
   - component: {fileID: 212776390952995438}
   - component: {fileID: 61116248168653162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TeleportTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d93e43f7418bd641a859a481e02991e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeForce: 600
+  meleeForce: 0
   bloodParticle: {fileID: 1781221808909994, guid: e7b2e5107441f7d4488d7b07e5a7e234,
     type: 2}
 --- !u!114 &114515649619509928

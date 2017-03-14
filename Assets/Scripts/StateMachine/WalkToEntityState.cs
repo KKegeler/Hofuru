@@ -36,7 +36,7 @@ public class WalkToEntityState : EnemyState
             // check collider
             foreach(RaycastHit2D hit in hits)
             {
-                if (!hit.transform.IsChildOf(stateMachine.transform))
+                if (!hit.transform.IsChildOf(stateMachine.transform)) // get the first collider, which is not this gamebject
                 {
                     if(hit.collider.gameObject != target.gameObject)
                     {   // player not visible

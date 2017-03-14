@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// Score-Daten zur Serialisierung
+/// Score data
 /// </summary>
 [Serializable]
 public class Highscore

@@ -15,8 +15,8 @@ public class FightState : EnemyState
     override public void UpdateState(float deltaTime)
     {
         float sqrtDist = (stateMachine.transform.position - target.position).sqrMagnitude;
-        // player out of sight?
-        if (sqrtDist > stateMachine.sightRange * stateMachine.sightRange)
+        // player out of sight? OR player dead
+        if ((sqrtDist > stateMachine.sightRange * stateMachine.sightRange) || (target.GetComponent<Health>().currentHealth <= 0.0f))
         {
             stateMachine.ChangeToState("PATROL");
         }

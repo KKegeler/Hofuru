@@ -23,6 +23,8 @@ public abstract class StateMachine : MonoBehaviour {
         currentState.ExitState();
         currentState = states[newState];
         currentState.EnterState();
+        // test
+        Debug.Log(newState);
     }
 
 }

@@ -8,7 +8,7 @@ public class WayPointTrigger : MonoBehaviour {
     [HideInInspector] public GameObject attachedEnemy;
     [HideInInspector] public bool active = false;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
         if(active && collider.gameObject == attachedEnemy)
         {

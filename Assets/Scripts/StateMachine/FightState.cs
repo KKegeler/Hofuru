@@ -41,6 +41,7 @@ public class FightState : EnemyState
         look.rightOrientated = true;
 
         stateMachine.GetComponentInChildren<EnemyAttack>().enabled = true;
+        stateMachine.GetComponentInChildren<EnemyAttack>().Initialize();
     }
 
     override public void ExitState()

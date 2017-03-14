@@ -25,8 +25,8 @@ public class PatrolState : EnemyState
     {
         // Transitions //
         float sqrtDist = (stateMachine.transform.position - target.position).sqrMagnitude;
-        // player in sight range
-        if (sqrtDist <= stateMachine.sightRange * stateMachine.sightRange)
+        // player is alive AND player in sight range
+        if ((target.GetComponent<Health>().currentHealth > 0.0f) && (sqrtDist <= stateMachine.sightRange * stateMachine.sightRange))
         {
             // Raycast //
             Vector2 dir = target.position - stateMachine.transform.position;

@@ -57,7 +57,7 @@ public class MainMenu : Window
         Time.timeScale = 1;
         PoolManager.Instance.ResetPool();
         GameManager.Instance.State = GameState.INGAME;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void exitGame()

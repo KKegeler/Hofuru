@@ -43,9 +43,10 @@ public class Fly : PoolObject {
             this.rigiBody.velocity = Vector2.zero;
             this.isFlying = false;
             this.gameObject.transform.SetParent(enemy.gameObject.transform);
-            StopAllCoroutines();
-            enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<BoxCollider2D>().enabled = false;
+            StopAllCoroutines();         
             StartCoroutine(FreezeRoutine(5f, enemy));
+            enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
         if (collision.collider.GetComponent<Ground>() != null) {
             this.isFlying = false;

@@ -4,7 +4,6 @@ using System.Collections;
 using Framework;
 using Framework.Messaging;
 using Framework.Log;
-using UnityEngine.EventSystems;
 
 
 /// <summary>
@@ -15,7 +14,6 @@ public class GameManager : SingletonAsComponent<GameManager>
     #region Variables
     private static GameState _gameState = GameState.DEFAULT;
     private static GameState _oldState = GameState.DEFAULT;
-
     #endregion
 
     #region Properties
@@ -48,18 +46,15 @@ public class GameManager : SingletonAsComponent<GameManager>
         {
             case GameState.PAUSE:
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
-
                 Time.timeScale = 0;
-                
-                SceneManager.LoadScene(0, LoadSceneMode.Additive);
-                
+
+                SceneManager.LoadScene(1, LoadSceneMode.Additive);
                 break;
 
             case GameState.INGAME:
                 if (_gameState != GameState.DEFAULT)
                     yield return SceneManager.UnloadSceneAsync("MainMenu");
 
-                
                 Time.timeScale = 1;
                 break;
 
@@ -87,6 +82,9 @@ public class GameManager : SingletonAsComponent<GameManager>
 
 }
 
+/// <summary>
+/// The state the game is in
+/// </summary>
 public enum GameState
 {
     DEFAULT = -1,

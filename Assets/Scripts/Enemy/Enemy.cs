@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour {
 
     public void DestroyAllAttachedShuriken() {
         foreach(GameObject shuriken in attachedShuriken) {
-            Destroy(shuriken);
+            shuriken.gameObject.SetActive(false);
         }
     }
 	

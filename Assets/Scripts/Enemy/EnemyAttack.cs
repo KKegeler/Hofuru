@@ -19,7 +19,6 @@ public class EnemyAttack : MonoBehaviour {
     private Health hcPlayer;
     private GameObject blood;
     new private EnemyMeleeAnimation animation;
-    private Animator animator;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +30,6 @@ public class EnemyAttack : MonoBehaviour {
         rbPlayer = GameObjectBank.Instance.player.GetComponent<Rigidbody2D>();
         hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
         animation = GetComponent<EnemyMeleeAnimation>();
-        animator = transform.parent.GetComponent<Animator>();
         blood = GameObjectBank.Instance.blut;
         attackTime = 0.15f; // a little reaktion time
         dealDamage = false;
@@ -91,7 +89,6 @@ public class EnemyAttack : MonoBehaviour {
         {
             // its the player
             inRange = true;
-            animator.SetBool("doesMelee", true);
         }
     }
 
@@ -101,7 +98,6 @@ public class EnemyAttack : MonoBehaviour {
         {
             // its the player
             inRange = false;
-            animator.SetBool("doesMelee", false);
         }
     }
 }

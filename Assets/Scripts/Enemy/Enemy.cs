@@ -40,9 +40,9 @@ public class Enemy : MonoBehaviour {
         Animator anim = GetComponent<Animator>();
         if (animationSpeed == -1.0f)
         {
-            animationSpeed = anim.speed;
+            animationSpeed = anim.GetFloat("speed");
         }
-        anim.speed = 0.0f;
+        anim.SetFloat("speed", 0.0f);
     }
 
     public void Unfreeze()
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour {
             stateMachine.enabled = true;
             stateMachine.UnfreezeMachine(); // enables behaviour
         }
-        GetComponent<Animator>().speed = animationSpeed;
+        GetComponent<Animator>().SetFloat("speed", animationSpeed);
         animationSpeed = -1.0f;
     }
 

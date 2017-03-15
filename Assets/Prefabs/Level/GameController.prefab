@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1332645038605820}
+  m_IsPrefabParent: 1
+--- !u!1 &1332645038605820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4085968677627052}
+  - component: {fileID: 114212803968609534}
+  - component: {fileID: 114188132493087626}
+  - component: {fileID: 114053234602886032}
+  - component: {fileID: 114807623802042830}
+  - component: {fileID: 114599174006297042}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4085968677627052
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114053234602886032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb58203a4f7dbd46a205b6ae36a57b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.14609277
+      value: 0.32734913
+      inSlope: -1.2272549
+      outSlope: -1.2272549
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114188132493087626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c484dd43ee7dfa4688de4baec8661d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followEffort: 0.05
+--- !u!114 &114212803968609534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d071d7631e9f84e49bd1818c751b26ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  gameController: {fileID: 1332645038605820}
+  mainCamera: {fileID: 0}
+  playerMeleeTrigger: {fileID: 0}
+  teleportTarget: {fileID: 0}
+  blut: {fileID: 1668617113140082, guid: 6ee728c757f9fb1499eba631398fbdd2, type: 2}
+  hud_ShurikenCounter: {fileID: 0}
+  greyscaleShader: {fileID: 4800000, guid: 5f9f8c3bbddabe7488849b8d3014a659, type: 3}
+  eventSystem: {fileID: 0}
+  groundChecker: {fileID: 0}
+  levelElements: {fileID: 0}
+  slideKickTrigger: {fileID: 0}
+  continueButton: {fileID: 0}
+--- !u!114 &114599174006297042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21ebf0fcf5c4da47b774240ec105548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShurikenCount: 50
+  maxTimefreezeTime: 5
+  freezeTimeSlider: {fileID: 0}
+  sliderFillImage: {fileID: 0}
+  minTimeNeededToFreeze: 1
+--- !u!114 &114807623802042830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332645038605820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45402ad2df606a42882797f83c18f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 0
+  _time: 0

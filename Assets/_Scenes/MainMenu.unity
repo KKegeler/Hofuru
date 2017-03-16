@@ -4448,7 +4448,6 @@ MonoBehaviour:
   musicText: {fileID: 1240184240}
   sfxText: {fileID: 881981601}
   qualityText: {fileID: 1886265664}
-  audioObject: {fileID: 143550071}
 --- !u!1 &2146715753
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,13 +15,16 @@ public class MainMenu : Window
 
     void Start()
     {
-        MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
+        if (MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler))
+            Debug.Log("attach successfull\n");
         continueButton.gameObject.SetActive(false);
     }
 
     public bool PauseHandler(BaseMessage msg)
-    {
+    {        
         PauseMessage pauseMsg = (PauseMessage)msg;
+        Debug.LogFormat("Message received. {0}\n", pauseMsg.pause);
+
         if (pauseMsg.pause)
         {
             mainCam.GetComponent<AudioListener>().enabled = false;

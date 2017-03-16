@@ -6,10 +6,13 @@ public class FightState : EnemyState
 
     private Transform target;
 
+    private Animator animator;
+
     public FightState(EnemyMachine machine, Transform target)
     {
         stateMachine = machine;
         this.target = target;
+        animator = stateMachine.GetComponent<Animator>();
     }
 
     override public void UpdateState(float deltaTime)
@@ -42,6 +45,8 @@ public class FightState : EnemyState
 
         stateMachine.GetComponentInChildren<EnemyAttack>().enabled = true;
         stateMachine.GetComponentInChildren<EnemyAttack>().Initialize();
+
+        animator.SetBool("doesMelee", true);
     }
 
     override public void ExitState()
@@ -50,6 +55,8 @@ public class FightState : EnemyState
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
 
         stateMachine.GetComponentInChildren<EnemyAttack>().enabled = false;
+
+        animator.SetBool("doesMelee", false);
     }
 
     public override void PauseState(bool disable)

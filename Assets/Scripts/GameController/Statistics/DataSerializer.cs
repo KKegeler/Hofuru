@@ -64,9 +64,7 @@ public static class DataSerializer
             _scoreList = new List<Highscore>();
     }
 
-    /// <summary>
-    /// Deletes file
-    /// </summary>
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
     public static void Reset()
     {
         if (File.Exists(FilePath))

@@ -23,6 +23,7 @@ public class EnemyDeath : Death {
 
     public override void HandleDeath() {
         MessagingSystem.Instance.QueueMessage(new ScoreMessage(100));
+
         for(int i = 0; i < colliders.Length; i++) {
             Collider2D col = (Collider2D)colliders[i];
             col.enabled = false;
@@ -33,5 +34,8 @@ public class EnemyDeath : Death {
         this.animator.SetBool("isDead", true);
         em.DisableMachine();
         GetComponentInChildren<EnemyAttack>().enabled = false;
+
+        for (int i = 0; i < transform.childCount; ++i)
+            transform.GetChild(i).gameObject.SetActive(false);
     }
 }

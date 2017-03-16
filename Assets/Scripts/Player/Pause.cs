@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Pause : MonoBehaviour
 {
+
+
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Escape) ||
@@ -9,6 +12,7 @@ public class Pause : MonoBehaviour
             && GameManager.Instance.State != GameState.PAUSE)
         {
             GameManager.Instance.State = GameState.PAUSE;
+            
         }
     }
 

@@ -15,7 +15,6 @@ public class MainMenu : Window
 
     void Start()
     {
-        GameManager.Instance.WakeUp();
         MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
         continueButton.gameObject.SetActive(false);
     }
@@ -25,6 +24,8 @@ public class MainMenu : Window
         PauseMessage pauseMsg = (PauseMessage)msg;
         if (pauseMsg.pause)
         {
+            mainCam.GetComponent<AudioListener>().enabled = false;
+
             GameState oldState = GameManager.Instance.OldState;
             if (oldState != GameState.GAME_OVER && oldState != GameState.WIN)
             {
@@ -34,13 +35,11 @@ public class MainMenu : Window
                 firstSelected = continueButton.gameObject;
                 EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().Play("Highlighted");
                 //eventSystem.SetSelectedGameObject(continueButton.gameObject);
-                //eventSystem.currentSelectedGameObject.GetComponent<Animator>().Play("Highlited");
-                mainCam.GetComponent<AudioListener>().enabled = false;
+                //eventSystem.currentSelectedGameObject.GetComponent<Animator>().Play("Highlited");             
             }
-                
+
             //GameObjectBank.Instance.eventSystem.SetSelectedGameObject(continueButton.gameObject);
-            //eventSystem.SetSelectedGameObject(continueButton.gameObject);
-            
+            //eventSystem.SetSelectedGameObject(continueButton.gameObject);           
         }
         else
         {
@@ -62,11 +61,11 @@ public class MainMenu : Window
 
     public void exitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#else
 	    Application.Quit();
-        #endif
+#endif
     }
 
     public void options()

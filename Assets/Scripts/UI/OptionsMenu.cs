@@ -2,13 +2,20 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+
 public class OptionsMenu : Window {
 
-    public Slider soundSlider;
+    public Slider sfxSlider;
     public Slider musicSlider;
 
+    public Slider masterSlider;
+
+    public Text masterText;
     public Text musicText;
+    public Text sfxText;
     public Text qualityText;
+
+    public GameObject audioObject;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -16,8 +23,10 @@ public class OptionsMenu : Window {
     /// </summary>
     void Start()
     {
+        
         UpdateQualityLabel();
 		UpdateVolumeLabel();
+
     }
 
 	public void Back()
@@ -27,16 +36,30 @@ public class OptionsMenu : Window {
         
     }
 
-    public void setVolume()
+    public void setMasterVolume()
 	{
-		AudioListener.volume = musicSlider.value;
+        audioObject.GetComponent<Audio.AudioManager>().MasterVolume = masterSlider.value;
+		//AudioListener.volume = musicSlider.value;
 		UpdateVolumeLabel();
 	}
 
+    public void setMusicVolume()
+    {
+        audioObject.GetComponent<Audio.AudioManager>().MusicVolume = musicSlider.value;
+        UpdateVolumeLabel();
+    }
+
+    public void setSFXVolume()
+    {
+        audioObject.GetComponent<Audio.AudioManager>().SfxVolume = sfxSlider.value;
+        UpdateVolumeLabel();
+    }
+
     private void UpdateVolumeLabel()
     {
-         musicText.text = "MasterVolume - " + (AudioListener.volume * 100).ToString("f2") + "%";
-         
+         masterText.text = "MasterVolume - " + (audioObject.GetComponent<Audio.AudioManager>().MasterVolume * 100).ToString("f2") + "%";
+         musicText.text = "MusicVolume - " + (audioObject.GetComponent<Audio.AudioManager>().MusicVolume * 100).ToString("f2") + "%";
+         sfxText.text = "SFXVolume - " + (audioObject.GetComponent<Audio.AudioManager>().SfxVolume * 100).ToString("f2") + "%";
     }
 
     public void IncreaseQuality()

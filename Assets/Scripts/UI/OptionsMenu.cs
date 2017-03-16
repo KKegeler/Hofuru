@@ -10,9 +10,6 @@ public class OptionsMenu : Window {
     public Text musicText;
     public Text qualityText;
 
-     public Button optionsButton;
-     public Canvas menu;
-
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -25,7 +22,7 @@ public class OptionsMenu : Window {
 
 	public void Back()
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(null);
         manager.Open(0);
         
     }

@@ -47,7 +47,6 @@ public class Statistics : MonoBehaviour
     private void Start()
     {
         MessagingSystem.Instance.AttachListener(typeof(ScoreMessage), ScoreHandler);
-        DataSerializer.Load();
     }
 
     private void Update()

@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update() {
         if (!this.cantMove) {
-            if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount) {
+            if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount && GameManager.Instance.State != GameState.PAUSE) {
                 this.DoJump();
             }
             if (Input.GetAxis("RightTrigger") > 0.1f && !doesSlide && isRunning && isGrounded) {

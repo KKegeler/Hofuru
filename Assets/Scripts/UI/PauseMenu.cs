@@ -8,6 +8,6 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 1;
         PoolManager.Instance.ResetPool();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

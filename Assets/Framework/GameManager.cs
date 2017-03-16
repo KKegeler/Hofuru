@@ -5,6 +5,7 @@ using Framework;
 using Framework.Messaging;
 using Framework.Log;
 
+
 /// <summary>
 /// Manages the GameState
 /// </summary>
@@ -41,13 +42,14 @@ public class GameManager : SingletonAsComponent<GameManager>
     {
         _oldState = _gameState;
 
+        Debug.LogFormat("Old: {0}\nNew: {1}", _gameState, newState);
+
         switch (newState)
         {
-            case GameState.PAUSE:
+            case GameState.PAUSE:                               
+                SceneManager.LoadScene(1, LoadSceneMode.Additive);
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
-
                 Time.timeScale = 0;
-                SceneManager.LoadScene(0, LoadSceneMode.Additive);
                 break;
 
             case GameState.INGAME:
@@ -81,6 +83,9 @@ public class GameManager : SingletonAsComponent<GameManager>
 
 }
 
+/// <summary>
+/// The state the game is in
+/// </summary>
 public enum GameState
 {
     DEFAULT = -1,

@@ -41,13 +41,20 @@ namespace Framework
                 // Iterate the messages or return early if it takes too long
                 while (_messageQueue.Count > 0)
                 {
+                    Debug.Log("There is a message!\n");
+
                     if (timer > _MAX_QUEUE_PROCESSING_TIME)
                         return;
 
-                    BaseMessage msg = _messageQueue.Dequeue();
-                    TriggerMessage(msg);                   
+                    Debug.Log("after if\n");
 
-                    timer += Time.deltaTime;
+                    BaseMessage msg = _messageQueue.Peek();
+                    if (TriggerMessage(msg))
+                        _messageQueue.Dequeue();
+
+                    Debug.Log("after trigger\n");               
+
+                    timer += Time.unscaledDeltaTime;
                 }
             }
 
@@ -56,7 +63,7 @@ namespace Framework
             /// </summary>
             /// <param name="msg">Message</param>
             /// <returns>Could the message be handled by the listener?</returns>
-            private void TriggerMessage(BaseMessage msg)
+            private bool TriggerMessage(BaseMessage msg)
             {
                 _trigger = true;
                 string msgName = msg.name;
@@ -65,7 +72,7 @@ namespace Framework
                 {
                     CustomLogger.LogWarningFormat("Message \"{0}\" is not registered!\n", msgName);
                     _trigger = false;
-                    return;
+                    return false;
                 }
 
                 // Add listeners
@@ -79,15 +86,16 @@ namespace Framework
                 // Iterate the handler functions
                 for (int i = 0; i < _listenerDict[msgName].Count; ++i)
                 {
+                    Debug.Log("Message is processing...\n");
                     if (_listenerDict[msgName][i](msg))
                     {
                         _trigger = false;
-                        return;
+                        return true;
                     }
                 }
 
                 _trigger = false;
-                return;
+                return false;
             }
 
             /// <summary>

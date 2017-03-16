@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
-public class OptionsMenu : Window {
+using Framework.Audio;
 
-    public Slider soundSlider;
+public class OptionsMenu : Window
+{
+
+    public Slider sfxSlider;
     public Slider musicSlider;
 
-    public Text musicText;
-    public Text qualityText;
+    public Slider masterSlider;
 
-     public Button optionsButton;
-     public Canvas menu;
+    public Text masterText;
+    public Text musicText;
+    public Text sfxText;
+    public Text qualityText;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -19,45 +21,64 @@ public class OptionsMenu : Window {
     /// </summary>
     void Start()
     {
+
         UpdateQualityLabel();
-		UpdateVolumeLabel();
+        UpdateVolumeLabel();
+
     }
 
-	public void Back()
+    public void Back()
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(null);
         manager.Open(0);
-        
+
     }
 
-    public void setVolume()
-	{
-		AudioListener.volume = musicSlider.value;
-		UpdateVolumeLabel();
-	}
+    public void setMasterVolume()
+    {
+        AudioManager.Instance.MasterVolume = masterSlider.value;
+        //AudioListener.volume = musicSlider.value;
+        UpdateVolumeLabel();
+    }
+
+    public void setMusicVolume()
+    {
+        AudioManager.Instance.MusicVolume = musicSlider.value;
+        UpdateVolumeLabel();
+    }
+
+    public void setSFXVolume()
+    {
+        AudioManager.Instance.SfxVolume = sfxSlider.value;
+        UpdateVolumeLabel();
+    }
 
     private void UpdateVolumeLabel()
     {
-         musicText.text = "MasterVolume - " + (AudioListener.volume * 100).ToString("f2") + "%";
-         
+        masterText.text = string.Concat("MasterVolume \t- ",
+            (AudioManager.Instance.MasterVolume * 100).ToString("f2"), "%");
+        musicText.text = string.Concat("MusicVolume \t- ",
+            (AudioManager.Instance.MusicVolume * 100).ToString("f2"), "%");
+        sfxText.text = string.Concat("SFXVolume \t\t- ",
+            (AudioManager.Instance.SfxVolume * 100).ToString("f2"), "%");
     }
 
     public void IncreaseQuality()
-	{
-		QualitySettings.IncreaseLevel();
-		UpdateQualityLabel();
-	}
+    {
+        QualitySettings.IncreaseLevel();
+        UpdateQualityLabel();
+    }
 
-	public void DecreaseQuality()
-	{
-		QualitySettings.DecreaseLevel();
-		UpdateQualityLabel();
-	}
+    public void DecreaseQuality()
+    {
+        QualitySettings.DecreaseLevel();
+        UpdateQualityLabel();
+    }
 
     private void UpdateQualityLabel()
     {
         int currentQuality = QualitySettings.GetQualityLevel();
-		string qualityName = QualitySettings.names[currentQuality];
-		qualityText.text = "Quality Level - " + qualityName;
+        string qualityName = QualitySettings.names[currentQuality];
+        qualityText.text = "Quality Level - " + qualityName;
     }
 }

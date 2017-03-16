@@ -20,8 +20,6 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject slideKickTrigger;
     public GameObject levelEnd;
 
-    public Button continueButton;
-
     public static GameObjectBank Instance
     {
         get { return _instance; }

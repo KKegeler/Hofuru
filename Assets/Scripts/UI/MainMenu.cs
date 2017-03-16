@@ -15,15 +15,13 @@ public class MainMenu : Window
 
     void Start()
     {
-        if (MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler))
-            Debug.Log("attach successfull\n");
+        MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
         continueButton.gameObject.SetActive(false);
     }
 
     public bool PauseHandler(BaseMessage msg)
     {        
         PauseMessage pauseMsg = (PauseMessage)msg;
-        Debug.LogFormat("Message received. {0}\n", pauseMsg.pause);
 
         if (pauseMsg.pause)
         {

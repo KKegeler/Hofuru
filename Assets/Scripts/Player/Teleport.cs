@@ -13,9 +13,11 @@ public class Teleport : MonoBehaviour {
     private TimeController timeController;
     private CameraController cameraController;
     private PlayerStats ps;
+    private bool canPort;
     private bool isActive;
 
     void Start() {
+        canPort = true;
         isActive = false;
         player = this.gameObject;
         timeController = GameObjectBank.Instance.GetComponent<TimeController>();
@@ -30,6 +32,7 @@ public class Teleport : MonoBehaviour {
     void Update() {
         if (Input.GetButtonUp("TeleportCall") || ps.GetCurrentTimefreezeTime() <= 0) {
             isActive = false;
+            canPort = true;
             pm.EnableMovement();
             ma.EnableMelee();
             teleportTarget.SetActive(false);
@@ -45,13 +48,13 @@ public class Teleport : MonoBehaviour {
                 teleportTarget.transform.position = player.transform.position;
                 timeController.FreezeTime(0.4f, 0.02f, 20);
                 cameraController.ZoomIn(0.2f, 17);
-                teleportTarget.GetComponent<BoxCollider2D>().size = player.GetComponent<BoxCollider2D>().size;             
+                //teleportTarget.GetComponent<BoxCollider2D>().size = player.GetComponent<BoxCollider2D>().size;             
             }
 
         }
         if (isActive) {
             //Vector3 moveDelta = new Vector3(Input.GetAxis("HorizontalR"), Input.GetAxis("VerticalR") * -1, 0) * Time.unscaledDeltaTime * targetSpeed;
-            if (Vector3.Distance(teleportTarget.transform.position, player.transform.position) > maxDistance + 3) {
+            if (Vector3.Distance(teleportTarget.transform.position, player.transform.position) > maxDistance + 3 || !canPort) {
                 teleportTarget.GetComponent<SpriteRenderer>().color = Color.red;
             }
             else {
@@ -62,7 +65,7 @@ public class Teleport : MonoBehaviour {
             ps.ReduceCurrentFreezeTime(Time.unscaledDeltaTime);
         }
 
-        if (isActive && Input.GetButtonDown("TeleportConfirm")) {
+        if (isActive && Input.GetButtonDown("TeleportConfirm") && canPort) {
             Vector3 newPos = teleportTarget.transform.position;
             player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             newPos.z = 0;
@@ -90,5 +93,9 @@ public class Teleport : MonoBehaviour {
 
     public bool IsTimeFreezing() {
         return isActive;
+    }
+
+    public void SetCanPort(bool value) {
+        this.canPort = value;
     }
 }

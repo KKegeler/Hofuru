@@ -33,7 +33,6 @@ public class Bhv_Flee : MonoBehaviour {
         {
             me.velocity = Vector2.up * me.velocity.y;
         }
-        Debug.Log(speed);
         animator.SetFloat("speed", speed);
     }
 

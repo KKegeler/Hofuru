@@ -12,13 +12,18 @@ public class GroundCheck : MonoBehaviour {
         pm = GetComponentInParent<PlayerMovement>();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.GetComponent<Ground>() != null) {
+            print("Grounded");
             pm.SetisGrounded(true);
+        } else {
+            pm.SetisGrounded(false);
         }
     }
 
-    void OnCollisionExit2D(Collision2D other) {
+    void OnTriggerExit2D(Collider2D other) {
         pm.SetisGrounded(false);
+
+        print("air");
     }
 }

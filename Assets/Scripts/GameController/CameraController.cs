@@ -16,6 +16,9 @@ public class CameraController : MonoBehaviour {
     private float height;
     private float width;
 
+    private float maxWidth;
+    private float maxHeight;
+
     // Use this for initialization
     void Start() {
         this.resetZoomRoutine = ResetZoomRoutine(0.05f);
@@ -29,6 +32,10 @@ public class CameraController : MonoBehaviour {
         width = height * Screen.width / Screen.height;
         height /= 2;
         width /= 2;
+
+        Transform levelEnd = GameObjectBank.Instance.levelEnd.transform;
+        maxWidth = levelEnd.position.x;
+        maxHeight = levelEnd.position.y;
     }
 
     void FixedUpdate() {
@@ -36,8 +43,8 @@ public class CameraController : MonoBehaviour {
         width = height * Screen.width / Screen.height;
         height *= 0.5f;
         width *= 0.5f;
-        newCamPos.x = Mathf.Clamp((followEffort * player.position.x + (1.0f - followEffort) * camTf.position.x), width, 300);
-        newCamPos.y = Mathf.Clamp((followEffort * player.position.y + (1.0f - followEffort) * camTf.position.y), height, 300);
+        newCamPos.x = Mathf.Clamp((followEffort * player.position.x + (1.0f - followEffort) * camTf.position.x), width, maxWidth);
+        newCamPos.y = Mathf.Clamp((followEffort * player.position.y + (1.0f - followEffort) * camTf.position.y), height, maxHeight);
         camTf.position = newCamPos;
     }
 

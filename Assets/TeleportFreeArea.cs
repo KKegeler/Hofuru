@@ -13,7 +13,7 @@ public class TeleportFreeArea : MonoBehaviour {
         this.teleportTarget = GameObjectBank.Instance.teleportTarget;
 	}
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject == teleportTarget) {
             teleport.SetCanPort(false);
         }

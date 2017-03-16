@@ -32,6 +32,7 @@ public class Teleport : MonoBehaviour {
     void Update() {
         if (Input.GetButtonUp("TeleportCall") || ps.GetCurrentTimefreezeTime() <= 0) {
             isActive = false;
+            canPort = true;
             pm.EnableMovement();
             ma.EnableMelee();
             teleportTarget.SetActive(false);

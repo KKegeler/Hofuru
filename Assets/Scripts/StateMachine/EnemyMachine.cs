@@ -59,6 +59,7 @@ public class EnemyMachine : StateMachine {
 
     public void DisableMachine() {
         currentState.ExitState();
+        states.Clear();
         Destroy(this);
     }
 

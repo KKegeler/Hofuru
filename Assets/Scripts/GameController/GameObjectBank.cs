@@ -27,6 +27,8 @@ public class GameObjectBank : MonoBehaviour {
 
     public Button nextLevel;
 
+    public Camera uicam;
+
     public static GameObjectBank Instance
     {
         get { return _instance; }

@@ -50,6 +50,7 @@ public class GameManager : SingletonAsComponent<GameManager>
                 Time.timeScale = 0;
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
                 GameObjectBank.Instance.mainCamera.gameObject.SetActive(false);
+                GameObjectBank.Instance.uicam.gameObject.SetActive(false);
                 break;
 
             case GameState.INGAME:
@@ -57,6 +58,7 @@ public class GameManager : SingletonAsComponent<GameManager>
                 {
                     yield return SceneManager.UnloadSceneAsync("MainMenu");
                     GameObjectBank.Instance.mainCamera.gameObject.SetActive(true);
+                    GameObjectBank.Instance.uicam.gameObject.SetActive(true);
                 }
 
                 Time.timeScale = 1;

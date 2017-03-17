@@ -9,6 +9,10 @@ public class MainMenu : Window
 {
 
     public Button continueButton;
+
+    public Button restartButton;
+
+    public Button newButton;
     public Camera mainCam;
 
     public Animation animationMenu;
@@ -17,6 +21,7 @@ public class MainMenu : Window
     {
         MessagingSystem.Instance.AttachListener(typeof(PauseMessage), PauseHandler);
         continueButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
     }
 
     public bool PauseHandler(BaseMessage msg)
@@ -31,22 +36,20 @@ public class MainMenu : Window
             if (oldState != GameState.GAME_OVER && oldState != GameState.WIN)
             {
                 continueButton.gameObject.SetActive(true);
-                //GameObjectBank.Instance.canvas.SetActive(false);
-                //EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
+                restartButton.gameObject.SetActive(true);
+                newButton.gameObject.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
                 firstSelected = continueButton.gameObject;
                 EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().Play("Highlighted");
-                //eventSystem.SetSelectedGameObject(continueButton.gameObject);
-                //eventSystem.currentSelectedGameObject.GetComponent<Animator>().Play("Highlited");             
-            }
-
-            //GameObjectBank.Instance.eventSystem.SetSelectedGameObject(continueButton.gameObject);
-            //eventSystem.SetSelectedGameObject(continueButton.gameObject);           
+                       
+            }       
         }
         else
         {
             continueButton.gameObject.SetActive(false);
             mainCam.GetComponent<AudioListener>().enabled = true;
-            //GameObjectBank.Instance.canvas.SetActive(true);
+            restartButton.gameObject.SetActive(false);
+            newButton.gameObject.SetActive(true);
         }
 
         return true;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System.Collections;
 using Framework;
 using Framework.Messaging;
@@ -64,10 +65,13 @@ public class GameManager : SingletonAsComponent<GameManager>
             case GameState.GAME_OVER:
                 GreyscaleEffect.Instance.ActivateEffect();
                 DataSerializer.Save();
+                GameObjectBank.Instance.gameOver.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:
                 DataSerializer.Save();
+                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.nextLevel.gameObject);
                 break;
 
             default:

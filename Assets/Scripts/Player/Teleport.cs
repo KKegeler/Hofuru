@@ -65,7 +65,7 @@ public class Teleport : MonoBehaviour {
             ps.ReduceCurrentFreezeTime(Time.unscaledDeltaTime);
         }
 
-        if (isActive && Input.GetButtonDown("TeleportConfirm") && canPort) {
+        if (isActive && Input.GetButtonDown("TeleportConfirm") && canPort && ps.GetCurrentTeleportCount() > 0) {
             Vector3 newPos = teleportTarget.transform.position;
             player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             newPos.z = 0;
@@ -76,6 +76,7 @@ public class Teleport : MonoBehaviour {
             teleportTarget.SetActive(false);
             timeController.SetOriginTime();
             cameraController.ResetZoom();
+            ps.DecreaseCurrTeleportCount();
         }
         if (!isActive && ps.GetCurrentTimefreezeTime() < ps.maxTimefreezeTime) {
             ps.InCreaseCurrentFreezeTime(Time.unscaledDeltaTime / 2);

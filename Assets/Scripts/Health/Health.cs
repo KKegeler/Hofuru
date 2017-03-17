@@ -35,6 +35,12 @@ public class Health : MonoBehaviour {
         }
     }
 
+    public void AddHealth(float value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + value, 0, maxHealth);
+        MessagingSystem.Instance.QueueMessage(new HealthMessage(currentHealth));
+    }
+
     private IEnumerator HitBlinkRoutine() {
         for (int i = 0; i < 5; i++) {
             sr.color = Color.red;

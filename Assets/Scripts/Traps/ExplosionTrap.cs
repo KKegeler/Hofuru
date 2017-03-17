@@ -14,7 +14,7 @@ public class ExplosionTrap : MonoBehaviour {
     {
         if(other.gameObject.GetComponent<CanTriggerBomb>())
         {
-            CameraShake.Instance.ShakeCamera(1f, 10f, 5f);
+            CameraShake.Instance.ShakeCamera(0.6f, 20f, 7.5f);
             damageArea.SetActive(true);
             gameObject.SetActive(false);
             exp.Play();       

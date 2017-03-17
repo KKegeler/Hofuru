@@ -68,6 +68,7 @@ public class CameraShake : MonoBehaviour
 
         while (timer < _shakeTime)
         {
+            pos = _tf.localPosition;
             Vector3 randPoint = pos +
                 Random.insideUnitSphere * _shakeAmount;
 
@@ -90,6 +91,7 @@ public class CameraShake : MonoBehaviour
 
         while (timer < time)
         {
+            pos = _tf.localPosition;
             Vector3 randPoint = pos +
                 Random.insideUnitSphere * amount;
 

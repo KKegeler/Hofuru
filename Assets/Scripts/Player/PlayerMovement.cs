@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour {
         this.cantMove = false;
     }
 
-    private void EndSlide() {
+    public void EndSlide() {
         if (!doesSlide) {
             return;
         }
@@ -171,8 +171,18 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void InterruptSlide() {
-        this.StartCoroutine(Freeze(0.45f));
+        this.StartCoroutine(Freeze(0.3f));
         this.EndSlide();
+    }
+
+    public void InterruptSlideAndThrow(Vector2 dir, float power) {
+        this.EndSlide();
+        this.cantMove = true;
+        this.moveValue = 0;
+        this.rigiBody.velocity = Vector2.up;
+        this.rigiBody.AddForce(dir * power, ForceMode2D.Impulse);
+        this.StopAllCoroutines();
+        this.StartCoroutine(UnfreezeAfterSecond(0.3f));
     }
 
     private IEnumerator Freeze(float duration) {
@@ -181,6 +191,11 @@ public class PlayerMovement : MonoBehaviour {
         this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         yield return new WaitForSeconds(duration);
         cantMove = false;
+    }
+
+    private IEnumerator UnfreezeAfterSecond(float duration) {
+        yield return new WaitForSeconds(duration);
+        this.cantMove = false;
     }
 
 

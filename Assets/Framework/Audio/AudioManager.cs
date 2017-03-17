@@ -16,7 +16,7 @@ namespace Framework
             private static AudioManager _instance;
 
             [Range(0f, 1f)]
-            private static float _masterVolume = 1f;
+            private static float _masterVolume = 0.1f;
             [Range(0f, 1f)]
             private static float _musicVolume = 1f;
             [Range(0f, 1f)]
@@ -24,7 +24,7 @@ namespace Framework
 
             private const float _MIN_FADE_TIME = 1f;
             private const float _MAX_FADE_TIME = 5f;
-            private const float _DEFAULT_FADE_TIME = -1f;
+            private const float _DEFAULT_VALUE = -1f;
 
             [Header("Sound")]
             [SerializeField]
@@ -36,6 +36,8 @@ namespace Framework
             [SerializeField]
             [Range(_MIN_FADE_TIME, _MAX_FADE_TIME)]
             private float _fadeTime = _MIN_FADE_TIME;
+
+            private Dictionary<string, int> _soundByName = new Dictionary<string, int>();
 
             private AudioSource _mainSource;
             private AudioSource _sfxSource;
@@ -91,6 +93,14 @@ namespace Framework
 
                 MusicVolume = _mainSource.volume;
                 SfxVolume = _sfxSource.volume;
+
+                for (int i = 0; i < _music.Count; ++i)
+                    if (!_soundByName.ContainsKey(_music[i].name))
+                        _soundByName.Add(_music[i].name, i);
+
+                for (int i = 0; i < _sfx.Count; ++i)
+                    if (!_soundByName.ContainsKey(_sfx[i].name))
+                        _soundByName.Add(_sfx[i].name, i);
             }
 
             #region SFX
@@ -98,7 +108,7 @@ namespace Framework
             /// Plays SFX on other source
             /// </summary>
             /// <param name="clipIndex">Clip to play by index</param>
-            /// <param name="other">Audio source</param>
+            /// <param name="other">Other source</param>
             public void PlaySfx(int clipIndex, AudioSource other)
             {
                 if (clipIndex < 0 || clipIndex >= _sfx.Count)
@@ -130,10 +140,45 @@ namespace Framework
             }
 
             /// <summary>
+            /// Plays Sfx on other source
+            /// </summary>
+            /// <param name="clipName">Clip to play by name</param>
+            /// <param name="other">Other source</param>
+            public void PlaySfx(string clipName, AudioSource other)
+            {
+                if (!_soundByName.ContainsKey(clipName))
+                {
+                    CustomLogger.LogWarningFormat("{0} was not found!\n",
+                        clipName);
+                    return;
+                }
+
+                AudioClip clip = _sfx[_soundByName[clipName]];
+                other.PlayOneShot(clip, MasterVolume * SfxVolume);
+            }
+
+            /// <summary>
+            /// Plays Sfx
+            /// </summary>
+            /// <param name="clipName">Clip to play by name</param>
+            public void PlaySfx(string clipName)
+            {
+                if (!_soundByName.ContainsKey(clipName))
+                {
+                    CustomLogger.LogWarningFormat("{0} was not found!\n",
+                        clipName);
+                    return;
+                }
+
+                AudioClip clip = _sfx[_soundByName[clipName]];
+                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
+            }
+
+            /// <summary>
             /// Plays Sfx on other Source
             /// </summary>
             /// <param name="clip">Clip to play</param>
-            /// <param name="other">Audio source</param>
+            /// <param name="other">Other source</param>
             public void PlaySfx(AudioClip clip, AudioSource other)
             {
                 other.PlayOneShot(clip, MasterVolume * SfxVolume);
@@ -146,7 +191,7 @@ namespace Framework
             public void PlaySfx(AudioClip clip)
             {
                 _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
-            }
+            }    
             #endregion
 
             #region Music
@@ -164,6 +209,24 @@ namespace Framework
                 }
 
                 AudioClip clip = _music[Mathf.Clamp(clipIndex, 0, _music.Count - 1)];
+                _mainSource.clip = clip;
+                _mainSource.Play();
+            }
+
+            /// <summary>
+            /// Plays music
+            /// </summary>
+            /// <param name="clipName">Clip to play by name</param>
+            public void PlayMusic(string clipName)
+            {
+                if (!_soundByName.ContainsKey(clipName))
+                {
+                    CustomLogger.LogWarningFormat("{0} was not found!\n",
+                        clipName);
+                    return;
+                }
+
+                AudioClip clip = _music[_soundByName[clipName]];
                 _mainSource.clip = clip;
                 _mainSource.Play();
             }
@@ -193,9 +256,9 @@ namespace Framework
             /// Fades music in
             /// </summary>
             /// <param name="time">Time in seconds to fade in</param>
-            public void FadeIn(float time = _DEFAULT_FADE_TIME)
+            public void FadeIn(float time = _DEFAULT_VALUE)
             {
-                if (time != _DEFAULT_FADE_TIME)
+                if (time != _DEFAULT_VALUE)
                     _fadeTime = Mathf.Clamp(time, _MIN_FADE_TIME, _MAX_FADE_TIME);
 
                 StopAllCoroutines();
@@ -206,9 +269,9 @@ namespace Framework
             /// Fades music out
             /// </summary>
             /// <param name="time">Time in seconds to fade out</param>
-            public void FadeOut(float time = _DEFAULT_FADE_TIME)
+            public void FadeOut(float time = _DEFAULT_VALUE)
             {
-                if (time != _DEFAULT_FADE_TIME)
+                if (time != _DEFAULT_VALUE)
                     _fadeTime = Mathf.Clamp(time, _MIN_FADE_TIME, _MAX_FADE_TIME);
 
                 StopAllCoroutines();

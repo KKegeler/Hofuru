@@ -15,29 +15,21 @@ public class OptionsMenu : Window
     public Text sfxText;
     public Text qualityText;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
-
+        masterSlider.value = AudioManager.Instance.MasterVolume;
         UpdateQualityLabel();
         UpdateVolumeLabel();
-
     }
 
     public void Back()
     {
-        //EventSystem.current.SetSelectedGameObject(null);
         manager.Open(0);
-
     }
 
     public void setMasterVolume()
     {
         AudioManager.Instance.MasterVolume = masterSlider.value;
-        //AudioListener.volume = musicSlider.value;
         UpdateVolumeLabel();
     }
 
@@ -79,6 +71,6 @@ public class OptionsMenu : Window
     {
         int currentQuality = QualitySettings.GetQualityLevel();
         string qualityName = QualitySettings.names[currentQuality];
-        qualityText.text = "Quality Level - " + qualityName;
+        qualityText.text = string.Concat("Quality Level - ", qualityName);
     }
 }

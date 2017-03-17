@@ -98,4 +98,8 @@ public class Teleport : MonoBehaviour {
     public void SetCanPort(bool value) {
         this.canPort = value;
     }
+
+    public bool GetIsActive() {
+        return this.isActive;
+    }
 }

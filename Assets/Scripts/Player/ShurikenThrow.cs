@@ -9,17 +9,19 @@ public class ShurikenThrow : MonoBehaviour {
     private bool canShoot;
     private float delta;
     private PlayerStats pStats;
+    private Teleport tp;
     
 
     // Use this for initialization
     void Start() {
         this.pStats = GameObjectBank.Instance.GetComponent<PlayerStats>();
         player = GameObjectBank.Instance.player;
+        tp = player.GetComponent<Teleport>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Shoot") && pStats.GetCurrentShurikenCount() > 0) {
+        if (Input.GetButtonDown("Shoot") && pStats.GetCurrentShurikenCount() > 0 && tp.GetIsActive()) {
             this.pStats.DecreaseCurrSchurikenCount();
             this.Throw(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }    
@@ -31,4 +33,5 @@ public class ShurikenThrow : MonoBehaviour {
         GameObject shuriken = PoolManager.Instance.ReuseObject2(shurikenPrefab, pos, Quaternion.identity);
         shuriken.GetComponent<Fly>().DoFly(x, y);
     }
+
 }

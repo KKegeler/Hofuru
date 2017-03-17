@@ -7,7 +7,7 @@ public class FlamesTrap : MonoBehaviour
     float time = 5f;
     float wait = 5f;
 
-    public GameObject player;
+    //public GameObject player;
     private Health hcPlayer;
     void Start()
     {
@@ -28,7 +28,8 @@ public class FlamesTrap : MonoBehaviour
    /// <param name="other">The other Collider2D involved in this collision.</param>
    void OnTriggerStay2D(Collider2D col)
    {
-       if(col.gameObject == player && flam.isPlaying){
+       if(col.gameObject == GameObjectBank.Instance.player && flam.isPlaying){
+           Debug.Log("IF");
            float damage = 50*Time.deltaTime;
             hcPlayer.ReduceHealth(damage);
        }

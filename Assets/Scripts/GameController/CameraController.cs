@@ -43,8 +43,8 @@ public class CameraController : MonoBehaviour {
         width = height * Screen.width / Screen.height;
         height *= 0.5f;
         width *= 0.5f;
-        newCamPos.x = Mathf.Clamp((followEffort * player.position.x + (1.0f - followEffort) * camTf.position.x), width, maxWidth);
-        newCamPos.y = Mathf.Clamp((followEffort * player.position.y + (1.0f - followEffort) * camTf.position.y), height, maxHeight);
+        newCamPos.x = Mathf.Clamp((followEffort * player.position.x + (1.0f - followEffort) * camTf.position.x), width, maxWidth - width);
+        newCamPos.y = Mathf.Clamp((followEffort * player.position.y + (1.0f - followEffort) * camTf.position.y), height, maxHeight - height);
         camTf.position = newCamPos;
     }
 

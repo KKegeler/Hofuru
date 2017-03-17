@@ -18,6 +18,8 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject groundChecker;
     public GameObject levelElements;
     public GameObject slideKickTrigger;
+    public GameObject levelEnd;
+    public GameObject Background;
 
     public GameObject gameOver;
 

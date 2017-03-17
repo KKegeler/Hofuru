@@ -29,7 +29,6 @@ public class FlamesTrap : MonoBehaviour
    void OnTriggerStay2D(Collider2D col)
    {
        if(col.gameObject == GameObjectBank.Instance.player && flam.isPlaying){
-           Debug.Log("IF");
            float damage = 50*Time.deltaTime;
             hcPlayer.ReduceHealth(damage);
        }

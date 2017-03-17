@@ -65,8 +65,8 @@ public class GameManager : SingletonAsComponent<GameManager>
             case GameState.GAME_OVER:
                 GreyscaleEffect.Instance.ActivateEffect();
                 DataSerializer.Save();
-                GameObjectBank.Instance.gameOver.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
+                //GameObjectBank.Instance.gameOver.SetActive(true);
+                //EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:

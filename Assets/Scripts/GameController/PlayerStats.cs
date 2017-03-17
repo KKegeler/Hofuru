@@ -37,7 +37,11 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public void AddSchuriken(int amount) {
-        this.curShurikenCount += amount;
+        if (curShurikenCount + amount > maxShurikenCount)
+            curShurikenCount = maxShurikenCount;
+        else
+            this.curShurikenCount += amount;
+
         hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
     }
 

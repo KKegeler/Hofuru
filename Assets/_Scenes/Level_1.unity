@@ -1830,12 +1830,12 @@ Prefab:
         type: 2}
       propertyPath: freezeTimeSlider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1429165469}
     - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: sliderFillImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1374391838}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: levelEnd
@@ -1866,6 +1866,26 @@ Prefab:
       propertyPath: uicam
       value: 
       objectReference: {fileID: 782660262}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: hud_teleportCountText
+      value: 
+      objectReference: {fileID: 1161594461}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: maxTimefreezeTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: maxShurikenCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: maxTeleportCount
+      value: 616
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 430c110f495ab6f46b266015bcc6f807, type: 2}
   m_IsPrefabParent: 0
@@ -2312,6 +2332,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50f8efdde702a96489afe47dc0b21322, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1161594461 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114375601028724756, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 782660261}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!4 &1193300432 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4143499751488524, guid: da11b7ebdb6dfdb43bfeb3a2601c5815,
@@ -2470,6 +2496,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4812632345878474, guid: 50f8efdde702a96489afe47dc0b21322,
     type: 2}
   m_PrefabInternal: {fileID: 1929278637}
+--- !u!114 &1374391838 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114379430403145384, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 782660261}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1375113661
 Prefab:
   m_ObjectHideFlags: 0
@@ -2642,6 +2674,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4466145258406918, guid: fc1ee3621be7fdc42a81557b57c812b2,
     type: 2}
   m_PrefabInternal: {fileID: 752530123}
+--- !u!114 &1429165469 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114224255618388810, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 782660261}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1443190017
 Prefab:
   m_ObjectHideFlags: 0

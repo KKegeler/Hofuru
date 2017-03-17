@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114276141277367426}
   - component: {fileID: 114642205047723790}
   - component: {fileID: 95666704276743740}
+  - component: {fileID: 114058529348646292}
   m_Layer: 0
   m_Name: NinjaGirl
   m_TagString: Untagged
@@ -189,6 +190,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114058529348646292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1577919922472208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb67734f7e91974daff5f18a69f7e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114064483833986692
 MonoBehaviour:
   m_ObjectHideFlags: 1

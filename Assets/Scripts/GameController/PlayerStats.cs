@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour {
     public float maxTimefreezeTime;
     public Slider freezeTimeSlider;
     public Image sliderFillImage;
+    public Text hud_teleportCountText;
     public float minTimeNeededToFreeze;
     public int maxTeleportCount;
 
@@ -29,6 +30,7 @@ public class PlayerStats : MonoBehaviour {
         this.hud_ShurikenAnzeige = GameObjectBank.Instance.hud_ShurikenCounter;
         this.originalFreezeTimeSliderColor = sliderFillImage.color;
         hud_ShurikenAnzeige.text = this.curShurikenCount.ToString();
+        hud_teleportCountText.text = this.curTeleportCount.ToString();
     }
 
     public int GetCurrentShurikenCount() {
@@ -57,11 +59,14 @@ public class PlayerStats : MonoBehaviour {
             curTeleportCount = maxTeleportCount;
         else
             this.curShurikenCount += amount;
+
+        hud_teleportCountText.text = this.curTeleportCount.ToString();
     }
 
     public void DecreaseCurrTeleportCount() {
         if (this.curTeleportCount > 0) {
             this.curTeleportCount--;
+            hud_teleportCountText.text = curTeleportCount.ToString();
         }
     }
 

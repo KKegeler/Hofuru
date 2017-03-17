@@ -374,6 +374,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: freezeTimeSlider
+      value: 
+      objectReference: {fileID: 1677688589}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: sliderFillImage
+      value: 
+      objectReference: {fileID: 1527258800}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: player
@@ -419,16 +429,6 @@ Prefab:
       propertyPath: slideKickTrigger
       value: 
       objectReference: {fileID: 1384300439}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: freezeTimeSlider
-      value: 
-      objectReference: {fileID: 1677688589}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: sliderFillImage
-      value: 
-      objectReference: {fileID: 1527258800}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: levelEnd
@@ -439,6 +439,11 @@ Prefab:
       propertyPath: Background
       value: 
       objectReference: {fileID: 1402086334}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: uicam
+      value: 
+      objectReference: {fileID: 2110882505}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 430c110f495ab6f46b266015bcc6f807, type: 2}
   m_IsPrefabParent: 0
@@ -2082,6 +2087,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c38d3690ed66f44683ac14665f9c00a, type: 2}
   m_IsPrefabParent: 0
+--- !u!20 &2110882505 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20322846214804444, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 2110882504}
 --- !u!1 &2123761760 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1177950849891654, guid: 772fafe99a87bf24ebd148d61ba47835,

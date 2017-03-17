@@ -17,7 +17,7 @@ public class Bhv_HoldPosition : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         me.MovePosition(alpha * position + (1.0f - alpha) * me.position);
 	}
 }

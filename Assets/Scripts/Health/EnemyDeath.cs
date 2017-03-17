@@ -44,6 +44,8 @@ public class EnemyDeath : Death {
         this.animator.SetBool("isDead", true);
         em.DisableMachine();
 
+        gameObject.AddComponent<Bhv_Lappen>();
+
         EnemyAttack ea = GetComponentInChildren<EnemyAttack>();
         if (ea) {
             ea.enabled = false;

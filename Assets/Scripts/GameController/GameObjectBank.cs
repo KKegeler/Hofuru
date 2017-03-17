@@ -23,6 +23,8 @@ public class GameObjectBank : MonoBehaviour {
 
     public GameObject gameOver;
 
+    public GameObject levelEnde;
+
     public Button retry;
 
     public Button nextLevel;

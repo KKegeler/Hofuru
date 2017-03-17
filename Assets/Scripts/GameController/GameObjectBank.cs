@@ -19,6 +19,7 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject levelElements;
     public GameObject slideKickTrigger;
     public GameObject levelEnd;
+    public GameObject Background;
 
     public static GameObjectBank Instance
     {

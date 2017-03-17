@@ -19,7 +19,22 @@ public class CameraShake : MonoBehaviour
     private Transform _tf;
     #endregion
 
-    void Start()
+    #region Properties
+    public static CameraShake Instance  
+    {
+        get { return _instance; }
+    }
+    #endregion
+
+    private void Awake() 
+    {
+        if (!_instance)
+            _instance = this;
+        else if (_instance != this)
+            gameObject.SetActive(false);
+    }
+
+    private void Start()
     {
         _tf = transform;
     }

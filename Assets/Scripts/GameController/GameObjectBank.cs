@@ -21,6 +21,12 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject levelEnd;
     public GameObject Background;
 
+    public GameObject gameOver;
+
+    public Button retry;
+
+    public Button nextLevel;
+
     public static GameObjectBank Instance
     {
         get { return _instance; }

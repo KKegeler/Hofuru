@@ -135,6 +135,7 @@ MonoBehaviour:
   freezeTimeSlider: {fileID: 0}
   sliderFillImage: {fileID: 0}
   minTimeNeededToFreeze: 1
+  maxTeleportCount: 5
 --- !u!114 &114807623802042830
 MonoBehaviour:
   m_ObjectHideFlags: 1

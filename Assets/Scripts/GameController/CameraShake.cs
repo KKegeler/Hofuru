@@ -1,66 +1,92 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// CameraShake bei Schaden am Spieler
-
+/// <summary>
+/// Camera Shake
+/// </summary>
 public class CameraShake : MonoBehaviour
 {
-    #region Variablen
-    // Singleton
-    static CameraShake _instance;
-    public static CameraShake instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = FindObjectOfType<CameraShake>();
+    #region Variables
+    private static CameraShake _instance;
+    
+    [SerializeField]
+    private float _shakeTime;
+    [SerializeField]
+    private float _shakeAmount;
+    [SerializeField]
+    private float _shakeSpeed;
 
-            return _instance;
-        }
-    }
-
-    private Transform thisTransform = null;
-
-    public float shakeTime;
-    public float shakeAmount;
-    public float shakeSpeed;
+    private Transform _tf;
     #endregion
 
-    #region Init
     void Start()
     {
-        thisTransform = GetComponent<Transform>();
+        _tf = transform;
+    }
+
+    #region Shake
+    /// <summary>
+    /// Shakes the camera
+    /// </summary>
+    public void ShakeCamera()
+    {
+        StartCoroutine(Shake());
+    }
+
+    /// <summary>
+    /// Shakes the camera
+    /// </summary>
+    /// <param name="time">Shake time</param>
+    /// <param name="amount">Shake amount</param>
+    /// <param name="speed">Shake speed</param>
+    public void ShakeCamera(float time, float amount, float speed)
+    {
+        StartCoroutine(Shake(time, amount, speed));
     }
     #endregion
 
-    #region ShakeCamera
-    public void ShakeCamera()
+    private IEnumerator Shake()
     {
-        StartCoroutine("Shake");
-    }
+        Vector3 pos = _tf.localPosition;
 
-    //Shake camera coroutine
-    IEnumerator Shake()
-    {
-        Vector3 OrigPosition = thisTransform.localPosition;
+        float timer = 0.0f;
 
-        float ElapsedTime = 0.0f;
-
-        while (ElapsedTime < shakeTime)
+        while (timer < _shakeTime)
         {
-            Vector3 RandomPoint = OrigPosition +
-                Random.insideUnitSphere * shakeAmount;
+            Vector3 randPoint = pos +
+                Random.insideUnitSphere * _shakeAmount;
 
-            thisTransform.localPosition = Vector3.Lerp(thisTransform.localPosition, 
-                RandomPoint, Time.deltaTime * shakeSpeed);
+            _tf.localPosition = Vector3.Lerp(_tf.localPosition, 
+                randPoint, Time.deltaTime * _shakeSpeed);
 
             yield return null;
 
-            ElapsedTime += Time.deltaTime;
+            timer += Time.deltaTime;
         }
 
-        thisTransform.localPosition = OrigPosition;
+        _tf.localPosition = pos;
     }
-    #endregion
+
+    private IEnumerator Shake(float time, float amount, float speed)
+    {
+        Vector3 pos = _tf.localPosition;
+
+        float timer = 0.0f;
+
+        while (timer < time)
+        {
+            Vector3 randPoint = pos +
+                Random.insideUnitSphere * amount;
+
+            _tf.localPosition = Vector3.Lerp(_tf.localPosition,
+                randPoint, Time.deltaTime * speed);
+
+            yield return null;
+
+            timer += Time.deltaTime;
+        }
+
+        _tf.localPosition = pos;
+    }
 
 }

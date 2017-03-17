@@ -15,6 +15,7 @@ public class GameManager : SingletonAsComponent<GameManager>
     #region Variables
     private static GameState _gameState = GameState.DEFAULT;
     private static GameState _oldState = GameState.DEFAULT;
+    private static LevelState _levelState = LevelState.DEFAULT;
     #endregion
 
     #region Properties
@@ -36,6 +37,16 @@ public class GameManager : SingletonAsComponent<GameManager>
     public GameState OldState
     {
         get { return _oldState; }
+    }
+
+    public LevelState LState
+    {
+        get { return _levelState; }
+        set
+        {
+            if (_levelState != value)
+                EvaluateLevel(value);
+        }
     }
     #endregion
 
@@ -67,8 +78,8 @@ public class GameManager : SingletonAsComponent<GameManager>
             case GameState.GAME_OVER:
                 GreyscaleEffect.Instance.ActivateEffect();
                 DataSerializer.Save();
-                //GameObjectBank.Instance.gameOver.SetActive(true);
-                //EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
+                GameObjectBank.Instance.gameOver.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:
@@ -82,6 +93,18 @@ public class GameManager : SingletonAsComponent<GameManager>
         }
 
         _gameState = newState;
+    }
+
+    private void EvaluateLevel(LevelState newState)
+    {
+        switch(newState)
+        {
+            default:
+                Debug.LogFormat("New LevelState: {0}!\n", newState);
+                break;
+        }
+
+        _levelState = newState;
     }
 
     new public void WakeUp()
@@ -101,4 +124,15 @@ public enum GameState
     INGAME,
     GAME_OVER,
     WIN
+}
+
+/// <summary>
+/// The level the player is in
+/// </summary>
+public enum LevelState
+{
+    DEFAULT = -1,
+    LEVEL_1,
+    LEVEL_2,
+    LEVEL_3
 }

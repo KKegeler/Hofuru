@@ -18,16 +18,15 @@ public class Bhv_Seek : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         direction = (Vector2)target.position - me.position;
         distanceSqr = direction.sqrMagnitude;
         if (distanceSqr > 0.01f) // walk until near enough
         {
-            direction.y = 0.0f; // Ignore y component, only walk in x direction
             direction.Normalize();
-            direction = me.position + (direction * speed * Time.deltaTime);
-            me.MovePosition(direction);
+            Vector2 newVelo = new Vector2(direction.x * speed, me.velocity.y);
+            me.velocity = newVelo;
         }
         animator.SetFloat("speed", speed);
     }

@@ -18,22 +18,20 @@ public class Bhv_Flee : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
         
-    public void Update()
+    public void FixedUpdate()
     {
         direction = me.position - (Vector2)threat.position;
         distanceSqr = direction.sqrMagnitude;
         if(distanceSqr < maxDistance * maxDistance) // if not at max Distance then run!
         {
-            direction.y = 0.0f; // Ignore y component, only walk in x direction
             direction.Normalize();
-            direction = me.position + (direction * speed * Time.deltaTime);
-            me.MovePosition(direction);
+            Vector2 newVelo = new Vector2(direction.x * speed, me.velocity.y);
+            me.velocity = newVelo;
         }
         else
         {
-            me.velocity = Vector2.up * me.velocity.y;
+            me.velocity = new Vector2(0.0f, me.velocity.y);
         }
-        Debug.Log(speed);
         animator.SetFloat("speed", speed);
     }
 

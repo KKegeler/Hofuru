@@ -42,19 +42,21 @@ public class GameManager : SingletonAsComponent<GameManager>
     {
         _oldState = _gameState;
 
-        Debug.LogFormat("Old: {0}\nNew: {1}", _gameState, newState);
-
         switch (newState)
         {
             case GameState.PAUSE:                               
                 SceneManager.LoadScene(1, LoadSceneMode.Additive);
-                MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
                 Time.timeScale = 0;
+                MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
+                GameObjectBank.Instance.mainCamera.gameObject.SetActive(false);
                 break;
 
             case GameState.INGAME:
                 if (_gameState != GameState.DEFAULT)
+                {
                     yield return SceneManager.UnloadSceneAsync("MainMenu");
+                    GameObjectBank.Instance.mainCamera.gameObject.SetActive(true);
+                }
 
                 Time.timeScale = 1;
                 break;

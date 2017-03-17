@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114477983396455238}
   - component: {fileID: 114515649619509928}
   - component: {fileID: 114308829188200614}
+  - component: {fileID: 114500316652437286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -353,6 +354,17 @@ MonoBehaviour:
   meleeForce: 600
   bloodParticle: {fileID: 1781221808909994, guid: e7b2e5107441f7d4488d7b07e5a7e234,
     type: 2}
+--- !u!114 &114500316652437286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177950849891654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb67734f7e91974daff5f18a69f7e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114515649619509928
 MonoBehaviour:
   m_ObjectHideFlags: 1

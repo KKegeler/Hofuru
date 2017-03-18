@@ -22,6 +22,9 @@ public class Health : MonoBehaviour {
     
     public void ReduceHealth(float value) {
         StopAllCoroutines();
+        if (this.gameObject.GetComponent<PlayerMovement>()) {
+            CameraShake.Instance.ShakeCamera(0.3f, 5f, 5f);
+        }
         StartCoroutine(HitBlinkRoutine());
         this.currentHealth -= value;
         if (this.gameObject.GetComponent<PlayerMovement>())

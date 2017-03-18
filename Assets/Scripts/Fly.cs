@@ -56,9 +56,13 @@ public class Fly : PoolObject {
     }
 
     private IEnumerator FreezeRoutine(float duration, Enemy enemy) {
+
         enemy.AddAttachedShuriken(this.gameObject);
         enemy.Freeze();
+        Rigidbody2D enemyRigi = enemy.gameObject.GetComponent<Rigidbody2D>();
+        enemyRigi.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(duration);
+        enemyRigi.bodyType = RigidbodyType2D.Dynamic;
         enemy.DestroyAllAttachedShuriken();
         enemy.Unfreeze();
     }

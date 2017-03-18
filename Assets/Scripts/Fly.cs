@@ -6,7 +6,7 @@ public class Fly : PoolObject {
 
     public float speed;
     public float rotationSpeed;
-    private Vector3 flyDir;
+    //private Vector3 flyDir;
     private bool isFlying;
     private Transform privTranse;
     private Rigidbody2D rigiBody;
@@ -30,7 +30,7 @@ public class Fly : PoolObject {
     }
 
     public void DoFly(float x, float y) {
-        this.flyDir = new Vector3(x, y, 0).normalized;
+        //this.flyDir = new Vector3(x, y, 0).normalized;
         this.rigiBody.AddForce(new Vector2(x, y).normalized * speed, ForceMode2D.Impulse);
         isFlying = true;
     }

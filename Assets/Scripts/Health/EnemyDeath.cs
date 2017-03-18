@@ -4,10 +4,10 @@ using UnityEngine;
 using Framework.Messaging;
 
 public class EnemyDeath : Death {
-    private bool isDead;
-    Rigidbody2D rb;
+    //private bool isDead;
+    //Rigidbody2D rb;
     Collider2D col;
-    SpriteRenderer sr;
+    //SpriteRenderer sr;
     EnemyMachine em;
     Animator animator;
     Component[] colliders;
@@ -15,8 +15,8 @@ public class EnemyDeath : Death {
     // Use this for initialization
     void Start() {
         col = this.gameObject.GetComponent<Collider2D>();
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
-        sr = this.gameObject.GetComponent<SpriteRenderer>();
+        //rb = this.gameObject.GetComponent<Rigidbody2D>();
+        //sr = this.gameObject.GetComponent<SpriteRenderer>();
         em = GetComponent<EnemyMachine>();
         animator = this.gameObject.GetComponent<Animator>();
         this.colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
@@ -38,7 +38,7 @@ public class EnemyDeath : Death {
             Collider2D col = (Collider2D)colliders[i];
             col.enabled = false;
         }
-        this.isDead = true;
+        //this.isDead = true;
         this.col.enabled = false;
         //this.sr.color = new Color(0, 0, 0, 0.25f);
         this.animator.SetBool("isDead", true);

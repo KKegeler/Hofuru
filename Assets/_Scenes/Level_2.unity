@@ -3433,6 +3433,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4780073832457480, guid: 1788d44a7effe5e47a224299aef01bc3,
     type: 2}
   m_PrefabInternal: {fileID: 1841875517}
+--- !u!114 &852788387 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114375601028724756, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1720838174}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &857642545
 Prefab:
   m_ObjectHideFlags: 0
@@ -5010,6 +5016,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: freezeTimeSlider
+      value: 
+      objectReference: {fileID: 1449662086}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: sliderFillImage
+      value: 
+      objectReference: {fileID: 1621336769}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: hud_teleportCountText
+      value: 
+      objectReference: {fileID: 852788387}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: player
@@ -5047,29 +5068,24 @@ Prefab:
       objectReference: {fileID: 1355877454}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
-      propertyPath: slideKickTrigger
-      value: 
-      objectReference: {fileID: 781480702}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
       propertyPath: levelElements
       value: 
       objectReference: {fileID: 1633035031}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
+      propertyPath: slideKickTrigger
+      value: 
+      objectReference: {fileID: 781480702}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
       propertyPath: levelEnd
       value: 
       objectReference: {fileID: 845262018}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
-      propertyPath: freezeTimeSlider
+      propertyPath: Background
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: sliderFillImage
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1479767443}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: gameOver
@@ -5090,11 +5106,6 @@ Prefab:
       propertyPath: uicam
       value: 
       objectReference: {fileID: 399278849}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: Background
-      value: 
-      objectReference: {fileID: 1479767443}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 430c110f495ab6f46b266015bcc6f807, type: 2}
   m_IsPrefabParent: 0
@@ -5154,6 +5165,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4986756148043888, guid: cd6e67512bc65584883df97d2140606c,
     type: 2}
   m_PrefabInternal: {fileID: 1545414808}
+--- !u!114 &1449662086 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114224255618388810, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1720838174}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1459887113
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,6 +5619,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d33a5f7de3d7a334a9ca25f776bededf, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1621336769 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114379430403145384, guid: 7c38d3690ed66f44683ac14665f9c00a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1720838174}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1632550652 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1780499522650754, guid: 772fafe99a87bf24ebd148d61ba47835,

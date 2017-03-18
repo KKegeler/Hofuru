@@ -4,10 +4,9 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using Framework;
 using Framework.Messaging;
+using Framework.Pool;
 using Framework.Log;
 using UnityEngine.UI;
-
-
 
 /// <summary>
 /// Manages the GameState
@@ -44,11 +43,7 @@ public class GameManager : SingletonAsComponent<GameManager>
     public LevelState LState
     {
         get { return _levelState; }
-        set
-        {
-            if (_levelState != value)
-                EvaluateLevel(value);
-        }
+        set { EvaluateLevel(value); }
     }
     #endregion
 
@@ -58,7 +53,7 @@ public class GameManager : SingletonAsComponent<GameManager>
 
         switch (newState)
         {
-            case GameState.PAUSE:                               
+            case GameState.PAUSE:
                 SceneManager.LoadScene(1, LoadSceneMode.Additive);
                 Time.timeScale = 0;
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
@@ -67,7 +62,7 @@ public class GameManager : SingletonAsComponent<GameManager>
                 break;
 
             case GameState.INGAME:
-                if (_gameState != GameState.DEFAULT)
+                if (_gameState != GameState.DEFAULT && _oldState != GameState.GAME_OVER)
                 {
                     yield return SceneManager.UnloadSceneAsync("MainMenu");
                     GameObjectBank.Instance.mainCamera.gameObject.SetActive(true);
@@ -81,22 +76,18 @@ public class GameManager : SingletonAsComponent<GameManager>
                 GreyscaleEffect.Instance.ActivateEffect();
                 DataSerializer.Save();
                 GameObjectBank.Instance.gameOver.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.retry.gameObject);
+                EventSystem.current.SetSelectedGameObject(
+                    GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:
                 DataSerializer.Save();
-                //GameObjectBank.Instance.levelEnde.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.nextLevel.gameObject);
-                if(_levelState == LevelState.LEVEL_3)
-                {
-                    GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text = "Back to Menu";
-                    GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate() {SceneManager.LoadScene("MainMenu");});
-                }
+                EventSystem.current.SetSelectedGameObject(
+                    GameObjectBank.Instance.nextLevel.gameObject);
                 break;
 
             default:
-                CustomLogger.LogFormat("Unknown Gamestate: {0}\n", _gameState);
+                CustomLogger.LogErrorFormat("Unknown Gamestate: {0}\n", _gameState);
                 break;
         }
 
@@ -105,10 +96,33 @@ public class GameManager : SingletonAsComponent<GameManager>
 
     private void EvaluateLevel(LevelState newState)
     {
-        switch(newState)
+        PoolManager.Instance.ResetPool();
+
+        switch (newState)
         {
+            case LevelState.LEVEL_1:
+                SceneManager.LoadScene("Level_1");
+                break;
+
+            case LevelState.LEVEL_2:
+                SceneManager.LoadScene("Level_2");
+                break;
+
+            case LevelState.LEVEL_3:
+                SceneManager.LoadScene("Level_3");
+
+                GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
+                    "Back to Menu";
+                GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
+                    { SceneManager.LoadScene("MainMenu"); });
+                break;
+
+            case LevelState.END:
+                Debug.Log("You reached the end!\n");
+                break;
+
             default:
-                Debug.LogFormat("New LevelState: {0}!\n", newState);
+                CustomLogger.LogErrorFormat("Unknown LevelState: {0}!\n", newState);
                 break;
         }
 
@@ -142,5 +156,6 @@ public enum LevelState
     DEFAULT = -1,
     LEVEL_1,
     LEVEL_2,
-    LEVEL_3
+    LEVEL_3,
+    END
 }

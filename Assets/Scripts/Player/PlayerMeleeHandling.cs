@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMeleeHandling : MonoBehaviour {
 
+    public int damage;
     private GameObject player;
     public float meleeForce;
     public GameObject bloodParticle;
@@ -24,7 +25,7 @@ public class PlayerMeleeHandling : MonoBehaviour {
         if (player.transform.position.x > other.gameObject.transform.position.x) {
             dir = Vector2.left;
         }
-        hc.ReduceHealth(60);
+        hc.ReduceHealth(damage);
         this.GetComponent<Collider2D>().enabled = false;
 
         PoolManager.Instance.ReuseObject2(blood, other.transform.position, 

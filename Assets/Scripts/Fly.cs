@@ -2,7 +2,8 @@
 using System.Collections;
 using Framework.Pool;
 
-public class Fly : PoolObject {
+public class Fly : PoolObject
+{
 
     public float speed;
     public float rotationSpeed;
@@ -22,21 +23,26 @@ public class Fly : PoolObject {
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
-        if (isFlying) {
+    void FixedUpdate()
+    {
+        if (isFlying)
+        {
             //this.privTranse.position = this.privTranse.position + (flyDir * speed * Time.deltaTime);
             this.privTranse.Rotate(0, 0, rotationSpeed * Time.deltaTime);
         }
     }
 
-    public void DoFly(float x, float y) {
+    public void DoFly(float x, float y)
+    {
         //this.flyDir = new Vector3(x, y, 0).normalized;
         this.rigiBody.AddForce(new Vector2(x, y).normalized * speed, ForceMode2D.Impulse);
         isFlying = true;
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (canFreeze && collision.collider.GetComponent<Enemy>()) {
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (canFreeze && collision.collider.GetComponent<Enemy>())
+        {
             canFreeze = false;
             Enemy enemy = collision.collider.GetComponent<Enemy>();
             this.rigiBody.bodyType = RigidbodyType2D.Kinematic;
@@ -44,18 +50,24 @@ public class Fly : PoolObject {
             this.isFlying = false;
             this.gameObject.transform.SetParent(enemy.gameObject.transform);
             GetComponent<BoxCollider2D>().enabled = false;
-            StopAllCoroutines();         
+            StopAllCoroutines();
             StartCoroutine(FreezeRoutine(5f, enemy));
-            enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+
+            if(rb.bodyType != RigidbodyType2D.Static)
+                enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
-        if (collision.collider.GetComponent<Ground>() != null) {
+        if (collision.collider.GetComponent<Ground>() != null)
+        {
             this.isFlying = false;
             this.rigiBody.bodyType = RigidbodyType2D.Static;
             this.privCollider.enabled = false;
         }
     }
 
-    private IEnumerator FreezeRoutine(float duration, Enemy enemy) {
+    private IEnumerator FreezeRoutine(float duration, Enemy enemy)
+    {
 
         enemy.AddAttachedShuriken(this.gameObject);
         enemy.Freeze();

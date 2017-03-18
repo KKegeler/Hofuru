@@ -34,6 +34,7 @@ namespace Framework
             }
             #endregion
 
+#pragma warning disable 0162
             private void Update()
             {
                 float timer = 0f;
@@ -52,6 +53,7 @@ namespace Framework
                         timer += Time.unscaledDeltaTime;
                 }
             }
+#pragma warning restore
 
             /// <summary>
             /// Calls handler functions

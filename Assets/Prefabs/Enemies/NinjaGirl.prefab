@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1577919922472208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.1, y: 19, z: 0}
+  m_LocalPosition: {x: 97.77, y: 6.8836784, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4416102269257782}
@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668a32506097be8478a1a22fdba8a1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 60
+  currentHealth: 60
 --- !u!114 &114276141277367426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,7 +266,7 @@ MonoBehaviour:
   patrolSpeed: 12
   wayPointPrototype: {fileID: 1061317150133060, guid: a72c88fecf7b23541a2b4aca14e98433,
     type: 2}
-  wPDistance: 20
+  wPDistance: 15
   wayPoints: []
 --- !u!114 &114879008684892444
 MonoBehaviour:

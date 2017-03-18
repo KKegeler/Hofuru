@@ -74,14 +74,12 @@ public class GameManager : SingletonAsComponent<GameManager>
 
             case GameState.GAME_OVER:
                 GreyscaleEffect.Instance.ActivateEffect();
-                DataSerializer.Save();
                 GameObjectBank.Instance.gameOver.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:
-                DataSerializer.Save();
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.nextLevel.gameObject);
                 break;
@@ -109,15 +107,15 @@ public class GameManager : SingletonAsComponent<GameManager>
                 break;
 
             case LevelState.LEVEL_3:
-                SceneManager.LoadScene("Level_3");
-
-                GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
-                    "Back to Menu";
-                GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
-                    { SceneManager.LoadScene("MainMenu"); });
+                SceneManager.LoadScene("Level_3");          
                 break;
 
             case LevelState.END:
+                GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
+                    "Back to Menu";
+                GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
+                { SceneManager.LoadScene("MainMenu"); });
+
                 Debug.Log("You reached the end!\n");
                 break;
 

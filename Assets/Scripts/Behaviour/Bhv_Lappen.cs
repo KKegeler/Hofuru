@@ -13,6 +13,14 @@ public class Bhv_Lappen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        me.velocity = Vector2.up * me.velocity.y;
+        if (GetComponent<Animator>().GetBool("isGrounded"))
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            Destroy(this); // destroy bhv_Lappen
+        }
+        else
+        {
+            me.velocity = Vector2.up * me.velocity.y;
+        }
 	}
 }

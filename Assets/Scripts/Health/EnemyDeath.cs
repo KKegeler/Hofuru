@@ -22,14 +22,14 @@ public class EnemyDeath : Death {
         this.colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
     }
 
-    void Update() {
-        if (isDead) {
-            if (this.animator.GetBool("isGrounded")) {
-                this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                this.enabled = false;
-            }
-        }
-    }
+    //void Update() {
+    //    if (isDead) {
+    //        if (this.animator.GetBool("isGrounded")) {
+    //            this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+    //            this.enabled = false;
+    //        }
+    //    }
+    //}
 
     public override void HandleDeath() {
         MessagingSystem.Instance.QueueMessage(new ScoreMessage(100));
@@ -53,5 +53,7 @@ public class EnemyDeath : Death {
 
         for (int i = 0; i < transform.childCount; ++i)
             transform.GetChild(i).gameObject.SetActive(false);
+
+        this.enabled = false;
     }
 }

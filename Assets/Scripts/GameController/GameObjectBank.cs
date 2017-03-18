@@ -20,16 +20,11 @@ public class GameObjectBank : MonoBehaviour {
     public GameObject slideKickTrigger;
     public GameObject levelEnd;
     public GameObject Background;
-
     public GameObject gameOver;
-
-    public GameObject levelEnde;
-
     public Button retry;
-
     public Button nextLevel;
-
     public Camera uicam;
+    public GameObject nextLevelScreen;
 
     public static GameObjectBank Instance
     {

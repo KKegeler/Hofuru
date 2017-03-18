@@ -5,6 +5,8 @@ using System.Collections;
 using Framework;
 using Framework.Messaging;
 using Framework.Log;
+using UnityEngine.UI;
+
 
 
 /// <summary>
@@ -84,7 +86,13 @@ public class GameManager : SingletonAsComponent<GameManager>
 
             case GameState.WIN:
                 DataSerializer.Save();
+                //GameObjectBank.Instance.levelEnde.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.nextLevel.gameObject);
+                if(_levelState == LevelState.LEVEL_3)
+                {
+                    GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text = "Back to Menu";
+                    GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate() {SceneManager.LoadScene("MainMenu");});
+                }
                 break;
 
             default:

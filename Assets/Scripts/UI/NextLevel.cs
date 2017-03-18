@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class NextLevel : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class NextLevel : MonoBehaviour {
             GameObjectBank.Instance.player.GetComponent<Pause>().enabled = false;
             GameObjectBank.Instance.player.GetComponent<Teleport>().enabled = false;
             GameObjectBank.Instance.player.GetComponent<MeleeAttack>().enabled = false;
+            EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.nextLevel.gameObject);
         }
     }
 

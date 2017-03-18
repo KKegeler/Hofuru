@@ -8,20 +8,20 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpPower;
     public float maxJumpCount;
 
-    private Camera mainCamera;
+    //private Camera mainCamera;
     private int jumpCount;
     private float originalJumpPower;
     private float meleeCoolDown;
     private bool isGrounded;
     private bool facingRight;
-    private bool doesMelee;
+    //private bool doesMelee;
     private bool isRunning;
     private bool doesSlide;
     private bool cantMove;
     private float moveValue;
     private Animator animator;
     private Rigidbody2D rigiBody;
-    private TimeController timeController;
+    //private TimeController timeController;
     private BoxCollider2D playerCollider;
     private bool isSlideInterrupted;
     private BoxCollider2D groundCollider;
@@ -29,13 +29,13 @@ public class PlayerMovement : MonoBehaviour {
     // Use this for initialization
     void Start() {
         this.facingRight = true;
-        this.doesMelee = false;
+        //this.doesMelee = false;
         this.cantMove = false;
         this.originalJumpPower = this.jumpPower;
         this.animator = this.GetComponent<Animator>();
         this.rigiBody = this.GetComponent<Rigidbody2D>();
-        this.timeController = GameObjectBank.Instance.gameController.GetComponent<TimeController>();
-        this.mainCamera = GameObjectBank.Instance.mainCamera.GetComponent<Camera>();
+        //this.timeController = GameObjectBank.Instance.gameController.GetComponent<TimeController>();
+        //this.mainCamera = GameObjectBank.Instance.mainCamera.GetComponent<Camera>();
         this.playerCollider = this.GetComponent<BoxCollider2D>();
         groundCollider = GameObjectBank.Instance.groundChecker.GetComponent<BoxCollider2D>();
     }

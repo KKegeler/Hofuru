@@ -226,6 +226,7 @@ namespace Framework
             /// </summary>
             public void ResetPool()
             {
+                Debug.Log("Reset\n");
                 _pool.Clear();
                 _activeObjects.Clear();
             }

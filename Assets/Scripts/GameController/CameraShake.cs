@@ -19,7 +19,22 @@ public class CameraShake : MonoBehaviour
     private Transform _tf;
     #endregion
 
-    void Start()
+    #region Properties
+    public static CameraShake Instance  
+    {
+        get { return _instance; }
+    }
+    #endregion
+
+    private void Awake() 
+    {
+        if (!_instance)
+            _instance = this;
+        else if (_instance != this)
+            gameObject.SetActive(false);
+    }
+
+    private void Start()
     {
         _tf = transform;
     }
@@ -53,6 +68,7 @@ public class CameraShake : MonoBehaviour
 
         while (timer < _shakeTime)
         {
+            pos = _tf.localPosition;
             Vector3 randPoint = pos +
                 Random.insideUnitSphere * _shakeAmount;
 
@@ -75,6 +91,7 @@ public class CameraShake : MonoBehaviour
 
         while (timer < time)
         {
+            pos = _tf.localPosition;
             Vector3 randPoint = pos +
                 Random.insideUnitSphere * amount;
 

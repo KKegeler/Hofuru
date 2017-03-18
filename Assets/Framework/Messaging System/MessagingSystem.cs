@@ -24,7 +24,7 @@ namespace Framework
                 new Stack<MessageHandlerDelegate>();
 
             private static bool _trigger;
-            private const float _MAX_QUEUE_PROCESSING_TIME = 0.03334f; // 30 FPS
+            private const float _MAX_QUEUE_PROCESSING_TIME = -1;    //0.03334f; // 30 FPS
             #endregion
 
             #region Properties
@@ -41,14 +41,15 @@ namespace Framework
                 // Iterate the messages or return early if it takes too long
                 while (_messageQueue.Count > 0)
                 {
-                    if (timer > _MAX_QUEUE_PROCESSING_TIME)
-                        return;
+                    if(_MAX_QUEUE_PROCESSING_TIME > 0)
+                        if (timer > _MAX_QUEUE_PROCESSING_TIME)
+                            return;
 
-                    BaseMessage msg = _messageQueue.Peek();
-                    if (TriggerMessage(msg))
-                        _messageQueue.Dequeue();
+                    BaseMessage msg = _messageQueue.Dequeue();
+                    TriggerMessage(msg);
 
-                    timer += Time.unscaledDeltaTime;
+                    if(_MAX_QUEUE_PROCESSING_TIME > 0)
+                        timer += Time.unscaledDeltaTime;
                 }
             }
 

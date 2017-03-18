@@ -86,7 +86,7 @@ public class GameManager : SingletonAsComponent<GameManager>
 
             case GameState.WIN:
                 DataSerializer.Save();
-                GameObjectBank.Instance.levelEnde.SetActive(true);
+                //GameObjectBank.Instance.levelEnde.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(GameObjectBank.Instance.nextLevel.gameObject);
                 if(_levelState == LevelState.LEVEL_3)
                 {

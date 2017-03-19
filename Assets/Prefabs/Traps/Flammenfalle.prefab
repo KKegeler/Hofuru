@@ -19,10 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4976819695653182}
-  - component: {fileID: 212896428939419508}
   - component: {fileID: 114851597578093370}
   - component: {fileID: 61764453321805756}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flammenfalle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +38,7 @@ GameObject:
   - component: {fileID: 4345953551507594}
   - component: {fileID: 198597744738166528}
   - component: {fileID: 199955440505291260}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FlammenfalleParticelSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,13 +53,42 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4998124778545580}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flammenfalle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1916530785816852
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4137508174297716}
+  - component: {fileID: 212277182621576114}
+  m_Layer: 2
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4137508174297716
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916530785816852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4976819695653182}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4345953551507594
 Transform:
   m_ObjectHideFlags: 1
@@ -83,7 +111,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4137508174297716}
   m_Father: {fileID: 4998124778545580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509277958638100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.41975, y: 2.52, z: 0}
+  m_LocalPosition: {x: 200.41975, y: 2.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4976819695653182}
@@ -128,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flam: {fileID: 198597744738166528}
-  player: {fileID: 1177950849891654, guid: 772fafe99a87bf24ebd148d61ba47835, type: 2}
 --- !u!198 &198597744738166528
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -184,7 +212,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1036171626
+  randomSeed: 34229871
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2816,12 +2844,12 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
---- !u!212 &212896428939419508
+--- !u!212 &212277182621576114
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1274651612512608}
+  m_GameObject: {fileID: 1916530785816852}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -2847,7 +2875,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3406c2c59b27e5240b0d9d203cee5aa9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bbe39c9b20324a449aae49a2f01b873, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

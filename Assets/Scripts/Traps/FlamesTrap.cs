@@ -8,17 +8,11 @@ public class FlamesTrap : MonoBehaviour
     float wait = 5f;
 
     //public GameObject player;
-    private Health hcPlayer;
-    void Start()
-    {
-        hcPlayer = GameObjectBank.Instance.player.GetComponent<Health>();
-    }
+    
     void Update()
     {
         time -= Time.deltaTime;
         flammen(time);
-        
-        
     }
 
    /// <summary>
@@ -28,9 +22,9 @@ public class FlamesTrap : MonoBehaviour
    /// <param name="other">The other Collider2D involved in this collision.</param>
    void OnTriggerStay2D(Collider2D col)
    {
-       if(col.gameObject == GameObjectBank.Instance.player && flam.isPlaying){
+       if(col.GetComponent<Health>() && flam.isPlaying){
            float damage = 50*Time.deltaTime;
-            hcPlayer.ReduceHealth(damage);
+            col.GetComponent<Health>().ReduceHealth(damage);
        }
    }
 

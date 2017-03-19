@@ -4,8 +4,10 @@ using System.Collections;
 public class Bhv_Seek : MonoBehaviour
 {
 
-    [HideInInspector] public Transform target;
-    [HideInInspector] public float speed;
+    [HideInInspector]
+    public Transform target;
+    [HideInInspector]
+    public float speed;
 
     private Rigidbody2D me;
     private Vector2 direction;
@@ -26,7 +28,8 @@ public class Bhv_Seek : MonoBehaviour
         {
             direction.Normalize();
             Vector2 newVelo = new Vector2(direction.x * speed, me.velocity.y);
-            me.velocity = newVelo;
+            if (me.bodyType != RigidbodyType2D.Static)
+                me.velocity = newVelo;
         }
         animator.SetFloat("speed", speed);
     }

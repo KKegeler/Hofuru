@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class MeleeAttack : MonoBehaviour {
-    public float damage;
-
     private float meleeCoolDownTime;
     private BoxCollider2D playerMeleeTrigger;
     private GameObject player;

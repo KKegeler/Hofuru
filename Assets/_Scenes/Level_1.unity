@@ -4120,6 +4120,10 @@ Prefab:
       propertyPath: m_SizeDelta.x
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1091377351355790, guid: 302e578fa8fdb4d4cac7ff5cdbe8dd1b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 302e578fa8fdb4d4cac7ff5cdbe8dd1b, type: 2}
   m_IsPrefabParent: 0
@@ -4417,7 +4421,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 61439036508079840, guid: 4dde06b923414914aa7a196db533eb8e,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 252008234763322218, guid: 4dde06b923414914aa7a196db533eb8e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 252008234763322218, guid: 4dde06b923414914aa7a196db533eb8e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4dde06b923414914aa7a196db533eb8e, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1796902681 stripped

@@ -1,14 +1,18 @@
-﻿using Framework.Pool;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using System.Collections;
 
 public class GameOver : MonoBehaviour {
 
-	public void ende()
+    public void ende()
 	{
-		Scene activ = SceneManager.GetActiveScene();
-        PoolManager.Instance.ResetPool();
-        GameManager.Instance.State = GameState.INGAME;
-		SceneManager.LoadScene(activ.name);
+        StartCoroutine(WaitForIngame());
 	}
+
+    private IEnumerator WaitForIngame()
+    {
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        GameManager.Instance.State = GameState.INGAME;
+        GameManager.Instance.RestartLevel();
+    }
 }

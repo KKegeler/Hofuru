@@ -9,7 +9,7 @@ using Framework.Log;
 using UnityEngine.UI;
 
 /// <summary>
-/// Manages the GameState
+/// Manages the GameState and LevelState
 /// </summary>
 public class GameManager : SingletonAsComponent<GameManager>
 {
@@ -47,6 +47,46 @@ public class GameManager : SingletonAsComponent<GameManager>
     }
     #endregion
 
+    /// <summary>
+    /// Restarts the current Level
+    /// </summary>
+    public void RestartLevel()
+    {
+        EvaluateLevel(_levelState);
+    }
+
+    new public void WakeUp()
+    {
+        DataSerializer.Load();
+    }
+
+    private void EvaluateLevel(LevelState newState)
+    {
+        PoolManager.Instance.ResetPool();
+
+        switch (newState)
+        {
+            case LevelState.LEVEL_1:
+                SceneManager.LoadScene("Level_1");
+                break;
+
+            case LevelState.LEVEL_2:
+                SceneManager.LoadScene("Level_2");
+                break;
+
+            case LevelState.LEVEL_3:
+                SceneManager.LoadScene("Level_3");
+                StartCoroutine(SetMenuText());
+                break;
+
+            default:
+                CustomLogger.LogErrorFormat("Unknown LevelState: {0}!\n", newState);
+                break;
+        }
+
+        _levelState = newState;
+    }
+
     private IEnumerator OnGameStateChange(GameState newState)
     {
         _oldState = _gameState;
@@ -69,12 +109,18 @@ public class GameManager : SingletonAsComponent<GameManager>
                     GameObjectBank.Instance.uicam.gameObject.SetActive(true);
                 }
 
+                if (_oldState == GameState.GAME_OVER)
+                    GameObjectBank.Instance.gameOver.SetActive(false);
+
                 Time.timeScale = 1;
                 break;
 
             case GameState.GAME_OVER:
-                GreyscaleEffect.Instance.ActivateEffect();
                 GameObjectBank.Instance.uicam.gameObject.SetActive(false);
+                GreyscaleEffect.Instance.ActivateEffect();
+
+                yield return new WaitForSecondsRealtime(0.8f);
+
                 GameObjectBank.Instance.gameOver.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.retry.gameObject);
@@ -93,39 +139,7 @@ public class GameManager : SingletonAsComponent<GameManager>
         _gameState = newState;
     }
 
-    private void EvaluateLevel(LevelState newState)
-    {
-        PoolManager.Instance.ResetPool();
-
-        switch (newState)
-        {
-            case LevelState.LEVEL_1:
-                SceneManager.LoadScene("Level_1");
-                break;
-
-            case LevelState.LEVEL_2:
-                SceneManager.LoadScene("Level_2");
-                break;
-
-            case LevelState.LEVEL_3:
-                SceneManager.LoadScene("Level_3");
-                StartCoroutine(Wait());        
-                break;
-
-            default:
-                CustomLogger.LogErrorFormat("Unknown LevelState: {0}!\n", newState);
-                break;
-        }
-
-        _levelState = newState;
-    }
-
-    new public void WakeUp()
-    {
-        DataSerializer.Load();
-    }
-
-    private IEnumerator Wait()
+    private IEnumerator SetMenuText()
     {
         yield return new WaitForSecondsRealtime(5f);
 

@@ -26,10 +26,10 @@ public class Bhv_Lappen : MonoBehaviour
             me.bodyType = RigidbodyType2D.Static;
             Destroy(this); // destroy bhv_Lappen
         }
-        else
+        /*else
         {
             if (me.bodyType != RigidbodyType2D.Static)
                 me.velocity = Vector2.up * me.velocity.y;
-        }
+        }*/
     }
 }

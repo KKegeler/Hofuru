@@ -51,11 +51,14 @@ public class PatrolState : EnemyState
         NextWayPoint();
         wP = stateMachine.wayPoints[currentWayPoint];
         WayPointTrigger wT = wP.gameObject.GetComponent<WayPointTrigger>();
-        wT.attachedEnemy = stateMachine.gameObject;
-        wT.pState = this;
-        wT.active = true;
-        seek.target = wP;
-        look.target = wP;
+        if (stateMachine)
+        {
+            wT.attachedEnemy = stateMachine.gameObject;
+            wT.pState = this;
+            wT.active = true;
+            seek.target = wP;
+            look.target = wP;
+        }
     }
 
     /// <summary>

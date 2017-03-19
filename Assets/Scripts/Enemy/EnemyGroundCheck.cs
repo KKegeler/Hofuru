@@ -4,6 +4,7 @@ public class EnemyGroundCheck : MonoBehaviour {
 
 
     private Animator animator;
+    public bool grounded = false;
 
     // Use this for initialization
     void Start() {
@@ -13,10 +14,12 @@ public class EnemyGroundCheck : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.GetComponent<Ground>() != null) {
             animator.SetBool("isGrounded", true);
+            grounded = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other) {
         animator.SetBool("isGrounded", false);
+        grounded = false;
     }
 }

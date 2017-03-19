@@ -55,7 +55,7 @@ public class Fly : PoolObject
 
             Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
 
-            if(rb.bodyType != RigidbodyType2D.Static)
+            if (rb.bodyType != RigidbodyType2D.Static)
                 enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
         if (collision.collider.GetComponent<Ground>() != null)
@@ -71,10 +71,10 @@ public class Fly : PoolObject
 
         enemy.AddAttachedShuriken(this.gameObject);
         enemy.Freeze();
-        Rigidbody2D enemyRigi = enemy.gameObject.GetComponent<Rigidbody2D>();
-        enemyRigi.bodyType = RigidbodyType2D.Static;
+        //Rigidbody2D enemyRigi = enemy.gameObject.GetComponent<Rigidbody2D>();
+        //enemyRigi.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(duration);
-        enemyRigi.bodyType = RigidbodyType2D.Dynamic;
+        //enemyRigi.bodyType = RigidbodyType2D.Dynamic;
         enemy.DestroyAllAttachedShuriken();
         enemy.Unfreeze();
     }

@@ -74,6 +74,7 @@ public class GameManager : SingletonAsComponent<GameManager>
 
             case GameState.GAME_OVER:
                 GreyscaleEffect.Instance.ActivateEffect();
+                GameObjectBank.Instance.uicam.gameObject.SetActive(false);
                 GameObjectBank.Instance.gameOver.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.retry.gameObject);

@@ -16,10 +16,6 @@ public class LevelEnde : MonoBehaviour {
             case "Level_2":
                 GameManager.Instance.LState = LevelState.LEVEL_3;
                 break;
-
-            case "Level_3":
-                GameManager.Instance.LState = LevelState.END;
-                break;
         }
 	}
 }

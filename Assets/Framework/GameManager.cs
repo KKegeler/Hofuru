@@ -108,16 +108,8 @@ public class GameManager : SingletonAsComponent<GameManager>
                 break;
 
             case LevelState.LEVEL_3:
-                SceneManager.LoadScene("Level_3");          
-                break;
-
-            case LevelState.END:
-                GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
-                    "Back to Menu";
-                GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
-                { SceneManager.LoadScene("MainMenu"); });
-
-                Debug.Log("You reached the end!\n");
+                SceneManager.LoadScene("Level_3");
+                StartCoroutine(Wait());        
                 break;
 
             default:
@@ -131,6 +123,16 @@ public class GameManager : SingletonAsComponent<GameManager>
     new public void WakeUp()
     {
         DataSerializer.Load();
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+
+        GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
+                    "Back to Menu";
+        GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
+        { SceneManager.LoadScene("MainMenu"); });
     }
 
 }
@@ -156,5 +158,4 @@ public enum LevelState
     LEVEL_1,
     LEVEL_2,
     LEVEL_3,
-    END
 }

@@ -58,7 +58,7 @@ public class PlayerStats : MonoBehaviour {
         if (curTeleportCount + amount > maxTeleportCount)
             curTeleportCount = maxTeleportCount;
         else
-            this.curShurikenCount += amount;
+            this.curTeleportCount += amount;
 
         hud_teleportCountText.text = this.curTeleportCount.ToString();
     }

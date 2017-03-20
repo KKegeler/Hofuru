@@ -5,7 +5,7 @@ using Framework.Messaging;
 public class EnemyDeath : Death
 {
     //private bool isDead;
-    //Rigidbody2D rb;
+    Rigidbody2D rb;
     Collider2D col;
     //SpriteRenderer sr;
     EnemyMachine em;
@@ -20,10 +20,12 @@ public class EnemyDeath : Death
         animator = this.gameObject.GetComponent<Animator>();
         this.colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
         groundCheck = GetComponentInChildren<EnemyGroundCheck>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public override void HandleDeath()
     {
+        rb.bodyType = RigidbodyType2D.Dynamic;
         MessagingSystem.Instance.QueueMessage(new ScoreMessage(100));
 
         em.DisableMachine();

@@ -10,9 +10,11 @@ public class Enemy : MonoBehaviour {
     private EnemyMachine stateMachine;
     private float animationSpeed;
     private List<GameObject> attachedShuriken;
+    private Rigidbody2D rigi;
 
 	// Use this for initialization
 	void Start () {
+        this.rigi = GetComponent<Rigidbody2D>();
         this.attachedShuriken = new List<GameObject>();
         dt = 0.0f;
         timer = false;
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour {
 
     public void Freeze()
     {
+        rigi.bodyType = RigidbodyType2D.Static;
         stateMachine.FreezeMachine(); // disables behaviour
         stateMachine.enabled = false;
         Animator anim = GetComponent<Animator>();
@@ -51,6 +54,7 @@ public class Enemy : MonoBehaviour {
         {
             stateMachine.enabled = true;
             stateMachine.UnfreezeMachine(); // enables behaviour
+            rigi.bodyType = RigidbodyType2D.Dynamic;
         }
         GetComponent<Animator>().SetFloat("speed", animationSpeed);
         animationSpeed = -1.0f;

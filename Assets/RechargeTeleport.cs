@@ -26,7 +26,6 @@ public class RechargeTeleport : MonoBehaviour {
     IEnumerator ReloadRoutine() {
         for (float i = 1; i <= 360; i++) {
             teleportReloader.enabled = true;
-            Debug.Log(i / 360f);
             teleportReloader.fillAmount = i / 360;
             yield return new WaitForSeconds(reloadTime / 360);
         }

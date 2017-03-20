@@ -27,7 +27,7 @@ public class SlideKick : MonoBehaviour {
             Enemy enemy = other.GetComponent<Enemy>();
             Vector2 dir;
             Vector2 dir2;
-            enemy.FreezeForSeconds(2);
+            enemy.FreezeForSeconds(1);
             
             dir = (other.transform.position - this.transform.position);
             dir.x *= 5;

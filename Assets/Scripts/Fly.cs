@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Framework.Pool;
+using Framework.Audio;
 
 public class Fly : PoolObject {
 
@@ -50,7 +51,7 @@ public class Fly : PoolObject {
 
             if (rb.bodyType != RigidbodyType2D.Static) {
                 enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-               // rb.bodyType = RigidbodyType2D.Static;
+                rb.bodyType = RigidbodyType2D.Static;
             }
         }
 
@@ -58,6 +59,7 @@ public class Fly : PoolObject {
             this.isFlying = false;
             this.rigiBody.bodyType = RigidbodyType2D.Static;
             this.privCollider.enabled = false;
+            AudioManager.Instance.PlaySfx("ShurikenHit");
         }
     }
 

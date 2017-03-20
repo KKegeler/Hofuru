@@ -25,6 +25,7 @@ public class GameObjectBank : MonoBehaviour {
     public Button nextLevel;
     public Camera uicam;
     public GameObject nextLevelScreen;
+    public Image teleportReloader;
 
     public static GameObjectBank Instance
     {

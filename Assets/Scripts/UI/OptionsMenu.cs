@@ -18,6 +18,9 @@ public class OptionsMenu : Window
     void Start()
     {
         masterSlider.value = AudioManager.Instance.MasterVolume;
+        musicSlider.value = AudioManager.Instance.MusicVolume;
+        sfxSlider.value = AudioManager.Instance.SfxVolume;
+
         UpdateQualityLabel();
         UpdateVolumeLabel();
     }

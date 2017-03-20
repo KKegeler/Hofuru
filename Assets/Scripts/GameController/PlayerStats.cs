@@ -61,12 +61,18 @@ public class PlayerStats : MonoBehaviour {
             this.curTeleportCount += amount;
 
         hud_teleportCountText.text = this.curTeleportCount.ToString();
+        if (this.curTeleportCount < this.maxTeleportCount) {
+            GetComponent<RechargeTeleport>().StartReload();
+        }
     }
 
     public void DecreaseCurrTeleportCount() {
         if (this.curTeleportCount > 0) {
             this.curTeleportCount--;
             hud_teleportCountText.text = curTeleportCount.ToString();
+        }
+        if (this.curTeleportCount < this.maxTeleportCount) {
+            GetComponent<RechargeTeleport>().StartReload();
         }
     }
 

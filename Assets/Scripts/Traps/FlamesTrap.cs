@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using Framework.Messaging;
+using Framework.Audio;
 
 public class FlamesTrap : MonoBehaviour
 {
+    AudioSource auds;
+
     public ParticleSystem flam;
     float time = 5f;
     float wait = 5f;
 
     //public GameObject player;
-    
+    void Start() {
+        this.auds = GetComponent<AudioSource>();
+    }
     void Update()
     {
         time -= Time.deltaTime;
@@ -33,7 +38,7 @@ public class FlamesTrap : MonoBehaviour
         if (timer > 0)
         {
             flam.Play();
-            
+            AudioManager.Instance.PlaySfx("Flamme", auds);
             wait = 2f;
         }
         else if (timer <= 0)

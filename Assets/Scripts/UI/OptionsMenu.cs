@@ -48,11 +48,11 @@ public class OptionsMenu : Window
     private void UpdateVolumeLabel()
     {
         masterText.text = string.Concat(" MasterVolume - ",
-            (AudioManager.Instance.MasterVolume * 100).ToString(), "%");
+            (AudioManager.Instance.MasterVolume * 100).ToString("f0"), "%");
         musicText.text = string.Concat(" MusicVolume - ",
-            (AudioManager.Instance.MusicVolume * 100).ToString(), "%");
+            (AudioManager.Instance.MusicVolume * 100).ToString("f0"), "%");
         sfxText.text = string.Concat(" SFXVolume - ",
-            (AudioManager.Instance.SfxVolume * 100).ToString(), "%");
+            (AudioManager.Instance.SfxVolume * 100).ToString("f0"), "%");
     }
 
     public void IncreaseQuality()

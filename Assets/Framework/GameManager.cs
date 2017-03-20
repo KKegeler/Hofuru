@@ -52,6 +52,27 @@ public class GameManager : SingletonAsComponent<GameManager>
     /// </summary>
     public void RestartLevel()
     {
+#if UNITY_EDITOR
+        if (_levelState == LevelState.DEFAULT)
+        {
+            string scene = SceneManager.GetActiveScene().name;
+
+            switch (scene)
+            {
+                case "Level_1":
+                    _levelState = LevelState.LEVEL_1;
+                    break;
+
+                case "Level_2":
+                    _levelState = LevelState.LEVEL_2;
+                    break;
+
+                case "Level_3":
+                    _levelState = LevelState.LEVEL_3;
+                    break;
+            }
+        }
+#endif
         EvaluateLevel(_levelState);
     }
 

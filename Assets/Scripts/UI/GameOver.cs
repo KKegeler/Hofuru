@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
@@ -7,6 +8,11 @@ public class GameOver : MonoBehaviour {
 	{
         StartCoroutine(WaitForIngame());
 	}
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
     private IEnumerator WaitForIngame()
     {

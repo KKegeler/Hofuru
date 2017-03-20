@@ -2257,7 +2257,7 @@ Prefab:
     - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: maxShurikenCount
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}

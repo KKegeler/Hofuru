@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Framework.Pool;
+using Framework.Audio;
 
 public class ShurikenThrow : MonoBehaviour {
 
@@ -28,6 +29,7 @@ public class ShurikenThrow : MonoBehaviour {
     }
 
     private void Throw(float x, float y) {
+        AudioManager.Instance.PlaySfx("ShurikenThrow");
         Vector3 pos = player.transform.position + new Vector3(x, y, 0).normalized * 3;
         //GameObject shuriken = (GameObject)Instantiate(shurikenPrefab, pos, Quaternion.identity);
         GameObject shuriken = PoolManager.Instance.ReuseObject2(shurikenPrefab, pos, Quaternion.identity);

@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour {
 
     public void Freeze()
     {
-        rigi.bodyType = RigidbodyType2D.Static;
+        //rigi.bodyType = RigidbodyType2D.Static;
         stateMachine.FreezeMachine(); // disables behaviour
         stateMachine.enabled = false;
         Animator anim = GetComponent<Animator>();

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Framework.Audio;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -80,7 +81,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         */
 
-        
+
 
         if (!this.cantMove && !this.doesSlide) {
             this.moveValue = Input.GetAxis("Horizontal");
@@ -119,6 +120,7 @@ public class PlayerMovement : MonoBehaviour {
     public void SetisGrounded(bool value) {
         this.isGrounded = value;
         if (value) {
+            AudioManager.Instance.PlaySfx("Landing");
             this.jumpCount = 0;
             this.jumpPower = originalJumpPower;
         }
@@ -158,6 +160,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void DoJump() {
+        AudioManager.Instance.PlaySfx("Jump2");
         //Reset Velocity
         this.rigiBody.velocity = Vector3.zero;
         this.jumpCount++;
@@ -197,6 +200,5 @@ public class PlayerMovement : MonoBehaviour {
         yield return new WaitForSeconds(duration);
         this.cantMove = false;
     }
-
 
 }

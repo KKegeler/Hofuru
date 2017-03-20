@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Framework.Audio;
 
 public class MeleeAttack : MonoBehaviour {
     private float meleeCoolDownTime;
@@ -25,6 +26,7 @@ public class MeleeAttack : MonoBehaviour {
     void Update() {
         if (!meleeDisabled) {
             if (Input.GetButtonDown("Melee") && canAttack) {
+                AudioManager.Instance.PlaySfx("HitSound1");
                 canAttack = false;
                 this.playerMeleeTrigger.enabled = true;
                 animator.SetBool("doesMelee", true);

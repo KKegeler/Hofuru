@@ -1,5 +1,6 @@
 ﻿using Framework.Pool;
 using UnityEngine;
+using Framework.Audio;
 
 public class EnemyAttack : MonoBehaviour {
 
@@ -68,6 +69,7 @@ public class EnemyAttack : MonoBehaviour {
 
     private void DealDamage()
     {
+        AudioManager.Instance.PlaySfx("HitSound2");
         Vector2 dir = Vector2.right;
         if (transform.parent.position.x > rbPlayer.position.x)
         {

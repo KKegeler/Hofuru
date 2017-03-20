@@ -50,6 +50,7 @@ public class Fly : PoolObject {
             Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
 
             if (rb.bodyType != RigidbodyType2D.Static) {
+                AudioManager.Instance.PlaySfx("ShurikenHitEnemy");
                 enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 rb.bodyType = RigidbodyType2D.Static;
             }

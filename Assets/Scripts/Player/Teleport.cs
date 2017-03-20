@@ -43,6 +43,7 @@ public class Teleport : MonoBehaviour {
         if (Input.GetButtonDown("TeleportCall") && ps.GetCurrentTimefreezeTime() > ps.minTimeNeededToFreeze) {
             isActive = true;
             if (isActive) {
+                AudioManager.Instance.PlaySfx("Timeslow");
                 pm.DisableMovement();
                 // ma.DisableMelee();
                 teleportTarget.SetActive(true);

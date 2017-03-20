@@ -66,13 +66,19 @@ public class WalkToEntityState : EnemyState {
     }
 
     public override void PauseState(bool disable) {
-        stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
-        stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+        if (stateMachine)
+        {
+            stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
+            stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
 
-        if (disable) {
-            stateMachine.StopAllCoroutines();
-        } else {
-            stateMachine.StartCoroutine(RayCastCoRoutine());
+            if (disable)
+            {
+                stateMachine.StopAllCoroutines();
+            }
+            else
+            {
+                stateMachine.StartCoroutine(RayCastCoRoutine());
+            }
         }
     }
 }

@@ -103,8 +103,11 @@ public class PatrolState : EnemyState
 
     public override void PauseState(bool disable)
     {
-        stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
-        stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+        if (stateMachine)
+        {
+            stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
+            stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+        }
     }
 
 }

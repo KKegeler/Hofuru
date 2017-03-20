@@ -56,7 +56,9 @@ public class FightState : EnemyState
             stateMachine.removeComponent(stateMachine.GetComponents<Bhv_HoldPosition>());
             stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
 
-            stateMachine.GetComponentInChildren<EnemyAttack>().enabled = false;
+            EnemyAttack ea = stateMachine.GetComponentInChildren<EnemyAttack>();
+            if (ea)
+                ea.enabled = false;
         }
 
         animator.SetBool("doesMelee", false);
@@ -66,7 +68,7 @@ public class FightState : EnemyState
     {
         stateMachine.GetComponent<Bhv_HoldPosition>().enabled = !disable;
         stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
-        
+
         stateMachine.GetComponentInChildren<EnemyAttack>().enabled = !disable;
     }
 }

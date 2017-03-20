@@ -6,6 +6,7 @@ using Framework;
 using Framework.Messaging;
 using Framework.Pool;
 using Framework.Log;
+using Framework.Audio;
 using UnityEngine.UI;
 
 /// <summary>
@@ -89,6 +90,8 @@ public class GameManager : SingletonAsComponent<GameManager>
         {
             case LevelState.LEVEL_1:
                 SceneManager.LoadScene("Level_1");
+                AudioManager.Instance.FadeIn();
+                AudioManager.Instance.PlayMusic("EAV2");
                 break;
 
             case LevelState.LEVEL_2:

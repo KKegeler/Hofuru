@@ -7,7 +7,7 @@ public class FlamesTrap : MonoBehaviour {
     AudioSource auds;
 
     public ParticleSystem flam;
-    float time = 5f;
+    //float time = 5f;
     float wait = 5f;
 
     //public GameObject player;
@@ -40,9 +40,9 @@ public class FlamesTrap : MonoBehaviour {
         } else if (timer <= 0) {
             flam.Stop();
             wait -= Time.deltaTime;
-            if (wait <= 0) {
+            /*if (wait <= 0) {
                 time = 2f;
-            }
+            }*/
 
         }
     }

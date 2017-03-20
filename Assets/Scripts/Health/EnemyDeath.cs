@@ -26,18 +26,14 @@ public class EnemyDeath : Death
     public override void HandleDeath()
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
+
         MessagingSystem.Instance.QueueMessage(new ScoreMessage(100));
-
-        em.DisableMachine();
+      
         this.animator.SetBool("isDead", true);
-
-        //gameObject.AddComponent<Bhv_Lappen>();
 
         EnemyAttack ea = GetComponentInChildren<EnemyAttack>();
         if (ea)
-        {
             ea.enabled = false;
-        }
 
         StartCoroutine(WaitForGrounded());
     }
@@ -47,8 +43,7 @@ public class EnemyDeath : Death
         while (!groundCheck.grounded)
             yield return new WaitForEndOfFrame();
 
-        for (int i = 0; i < transform.childCount; ++i)
-            transform.GetChild(i).gameObject.SetActive(false);
+        em.DisableMachine();
 
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -56,9 +51,12 @@ public class EnemyDeath : Death
             collider.enabled = false;
         }
 
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        for (int i = 0; i < transform.childCount; ++i)
+            transform.GetChild(i).gameObject.SetActive(false);
 
         col.enabled = false;
+
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         enabled = false;
     }
 }

@@ -63,13 +63,21 @@ namespace Framework
             public float MusicVolume
             {
                 get { return _musicVolume; }
-                set { _musicVolume = value; }
+                set
+                {
+                    _musicVolume = value;
+                    _mainSource.volume = _masterVolume * _musicVolume;
+                }
             }
 
             public float SfxVolume
             {
                 get { return _sfxVolume; }
-                set { _sfxVolume = value; }
+                set
+                {
+                    _sfxVolume = value;
+                    _sfxSource.volume = _masterVolume * _sfxVolume;
+                }
             }
             #endregion
 

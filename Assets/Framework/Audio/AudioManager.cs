@@ -56,7 +56,7 @@ namespace Framework
                 {
                     _masterVolume = value;
                     _mainSource.volume = _masterVolume * _musicVolume / 2;
-                    _sfxSource.volume = _masterVolume * _sfxVolume;
+                    _sfxSource.volume = _masterVolume * _sfxVolume * 2;
                 }
             }
 
@@ -66,7 +66,7 @@ namespace Framework
                 set
                 {
                     _musicVolume = value;
-                    _mainSource.volume = _masterVolume * _musicVolume;
+                    _mainSource.volume = _masterVolume * _musicVolume / 2;
                 }
             }
 
@@ -76,7 +76,7 @@ namespace Framework
                 set
                 {
                     _sfxVolume = value;
-                    _sfxSource.volume = _masterVolume * _sfxVolume;
+                    _sfxSource.volume = _masterVolume * _sfxVolume * 2;
                 }
             }
             #endregion
@@ -98,9 +98,6 @@ namespace Framework
                 _mainSource = sources[0];
                 _sfxSource = sources[1];
                 _mainSource.loop = true;
-
-                MusicVolume = _mainSource.volume;
-                SfxVolume = _sfxSource.volume;
 
                 for (int i = 0; i < _music.Count; ++i)
                     if (!_soundByName.ContainsKey(_music[i].name))

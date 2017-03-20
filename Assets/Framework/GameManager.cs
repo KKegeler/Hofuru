@@ -121,8 +121,8 @@ public class GameManager : SingletonAsComponent<GameManager>
                 SceneManager.LoadScene(1, LoadSceneMode.Additive);
                 Time.timeScale = 0;
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
-                GameObjectBank.Instance.mainCamera.gameObject.SetActive(false);
                 GameObjectBank.Instance.uicam.gameObject.SetActive(false);
+                GameObjectBank.Instance.mainCamera.gameObject.SetActive(false);
                 break;
 
             case GameState.INGAME:

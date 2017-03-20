@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using Framework.Messaging;
 using Framework.Audio;
+using System.Collections;
 
-public class FlamesTrap : MonoBehaviour
-{
+public class FlamesTrap : MonoBehaviour {
     AudioSource auds;
 
     public ParticleSystem flam;
@@ -13,43 +13,47 @@ public class FlamesTrap : MonoBehaviour
     //public GameObject player;
     void Start() {
         this.auds = GetComponent<AudioSource>();
+        StartCoroutine(BurnRoutine());
     }
-    void Update()
-    {
-        time -= Time.deltaTime;
-        flammen(time);
+    void Update() {
+        // time -= Time.deltaTime;
+        //flammen(time);
     }
 
-   /// <summary>
-   /// Sent when another object enters a trigger collider attached to this
-   /// object (2D physics only).
-   /// </summary>
-   /// <param name="other">The other Collider2D involved in this collision.</param>
-   void OnTriggerStay2D(Collider2D col)
-   {
-       if(col.GetComponent<Health>() && flam.isPlaying){
-           float damage = 50*Time.deltaTime;
+    /// <summary>
+    /// Sent when another object enters a trigger collider attached to this
+    /// object (2D physics only).
+    /// </summary>
+    /// <param name="other">The other Collider2D involved in this collision.</param>
+    void OnTriggerStay2D(Collider2D col) {
+        if (col.GetComponent<Health>() && flam.isPlaying) {
+            float damage = 50 * Time.deltaTime;
             col.GetComponent<Health>().ReduceHealth(damage);
-       }
-   }
+        }
+    }
 
-    private void flammen(float timer)
-    {
-        if (timer > 0)
-        {
+    private void flammen(float timer) {
+        if (timer > 0) {
             flam.Play();
             AudioManager.Instance.PlaySfx("Flamme", auds);
             wait = 2f;
-        }
-        else if (timer <= 0)
-        {
+        } else if (timer <= 0) {
             flam.Stop();
             wait -= Time.deltaTime;
-            if(wait <= 0)
-            {
+            if (wait <= 0) {
                 time = 2f;
             }
-            
+
+        }
+    }
+
+    IEnumerator BurnRoutine() {
+        while (true) {
+            flam.Play();
+            AudioManager.Instance.PlaySfx("Flamme", auds);
+            yield return new WaitForSeconds(2f);
+            flam.Stop();
+            yield return new WaitForSeconds(1f);
         }
     }
 }

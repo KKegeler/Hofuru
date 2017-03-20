@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Framework.Audio;
 
 public class Teleport : MonoBehaviour {
 
@@ -66,6 +67,7 @@ public class Teleport : MonoBehaviour {
         }
 
         if (isActive && Input.GetButtonDown("TeleportConfirm") && canPort && ps.GetCurrentTeleportCount() > 0) {
+            AudioManager.Instance.PlaySfx("Teleport");
             Vector3 newPos = teleportTarget.transform.position;
             player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             newPos.z = 0;

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: []
   _sfx:
-  - {fileID: 8300000, guid: bacaf43df31a31048ad42fc5bb202101, type: 3}
+  - {fileID: 8300000, guid: e61261936614baf489409524822faec2, type: 3}
   - {fileID: 8300000, guid: d9b405169d6781b489c1fe2dc75d74ea, type: 3}
   - {fileID: 8300000, guid: 7540aa2e81770c24dbdcfbcdc4723aab, type: 3}
   - {fileID: 8300000, guid: 83b635d06c202f7439a2c9ede224ba99, type: 3}

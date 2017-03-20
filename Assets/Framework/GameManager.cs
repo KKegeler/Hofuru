@@ -131,7 +131,8 @@ public class GameManager : SingletonAsComponent<GameManager>
                 }
 
                 if (_oldState == GameState.GAME_OVER)
-                    GameObjectBank.Instance.gameOver.SetActive(false);
+                    if (GameObjectBank.Instance.gameOver)
+                        GameObjectBank.Instance.gameOver.SetActive(false);
 
                 Time.timeScale = 1;
                 break;

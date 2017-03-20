@@ -34,7 +34,7 @@ public class Health : MonoBehaviour {
         if (this.currentHealth <= 0) {
             StopAllCoroutines();
             sr.color = Color.white;
-            dc.HandleDeath();
+            dc.HandleDeath();         
         }
     }
 

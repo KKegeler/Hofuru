@@ -24,23 +24,25 @@ public class PlayerDeath : Death {
         if (isDead) {
             if (this.pm.GetIsGrounded()) {
                 this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                this.pm.enabled = false;
                 this.enabled = false;
             }
         }
+        /*
         if (Input.GetKeyDown(KeyCode.F1) && this.gameObject.GetComponent<PlayerMovement>()) {
             this.gameObject.GetComponent<Health>().ReduceHealth(14);
-        }
+        }*/
     }
 
     public override void HandleDeath() {
-
         GameManager.Instance.State = GameState.GAME_OVER;
 
         this.isDead = true;
-        this.pm.enabled = false;
+       
         if (tp.IsTimeFreezing()) {
             tp.EndTimeFreeze();
         }
+
         this.tp.enabled = false;
         this.st.enabled = false;
         this.animator.SetBool("isDead", true);

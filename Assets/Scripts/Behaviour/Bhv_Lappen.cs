@@ -20,14 +20,16 @@ public class Bhv_Lappen : MonoBehaviour
     {
         if (anim.GetBool("isGrounded"))
         {
-            me.velocity = Vector2.zero;
+            if (me.bodyType != RigidbodyType2D.Static)
+                me.velocity = Vector2.zero;
+
             me.bodyType = RigidbodyType2D.Static;
             Destroy(this); // destroy bhv_Lappen
         }
-        else
+        /*else
         {
             if (me.bodyType != RigidbodyType2D.Static)
                 me.velocity = Vector2.up * me.velocity.y;
-        }
+        }*/
     }
 }

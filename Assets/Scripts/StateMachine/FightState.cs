@@ -51,10 +51,13 @@ public class FightState : EnemyState
 
     override public void ExitState()
     {
-        stateMachine.removeComponent(stateMachine.GetComponents<Bhv_HoldPosition>());
-        stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
+        if (stateMachine)
+        {
+            stateMachine.removeComponent(stateMachine.GetComponents<Bhv_HoldPosition>());
+            stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
 
-        stateMachine.GetComponentInChildren<EnemyAttack>().enabled = false;
+            stateMachine.GetComponentInChildren<EnemyAttack>().enabled = false;
+        }
 
         animator.SetBool("doesMelee", false);
     }

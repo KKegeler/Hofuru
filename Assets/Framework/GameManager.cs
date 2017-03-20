@@ -9,7 +9,7 @@ using Framework.Log;
 using UnityEngine.UI;
 
 /// <summary>
-/// Manages the GameState
+/// Manages the GameState and LevelState
 /// </summary>
 public class GameManager : SingletonAsComponent<GameManager>
 {
@@ -47,6 +47,46 @@ public class GameManager : SingletonAsComponent<GameManager>
     }
     #endregion
 
+    /// <summary>
+    /// Restarts the current Level
+    /// </summary>
+    public void RestartLevel()
+    {
+        EvaluateLevel(_levelState);
+    }
+
+    new public void WakeUp()
+    {
+        DataSerializer.Load();
+    }
+
+    private void EvaluateLevel(LevelState newState)
+    {
+        PoolManager.Instance.ResetPool();
+
+        switch (newState)
+        {
+            case LevelState.LEVEL_1:
+                SceneManager.LoadScene("Level_1");
+                break;
+
+            case LevelState.LEVEL_2:
+                SceneManager.LoadScene("Level_2");
+                break;
+
+            case LevelState.LEVEL_3:
+                SceneManager.LoadScene("Level_3");
+                StartCoroutine(SetMenuText());
+                break;
+
+            default:
+                CustomLogger.LogErrorFormat("Unknown LevelState: {0}!\n", newState);
+                break;
+        }
+
+        _levelState = newState;
+    }
+
     private IEnumerator OnGameStateChange(GameState newState)
     {
         _oldState = _gameState;
@@ -69,19 +109,24 @@ public class GameManager : SingletonAsComponent<GameManager>
                     GameObjectBank.Instance.uicam.gameObject.SetActive(true);
                 }
 
+                if (_oldState == GameState.GAME_OVER)
+                    GameObjectBank.Instance.gameOver.SetActive(false);
+
                 Time.timeScale = 1;
                 break;
 
             case GameState.GAME_OVER:
+                GameObjectBank.Instance.uicam.gameObject.SetActive(false);
                 GreyscaleEffect.Instance.ActivateEffect();
-                DataSerializer.Save();
+
+                yield return new WaitForSecondsRealtime(0.8f);
+
                 GameObjectBank.Instance.gameOver.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.retry.gameObject);
                 break;
 
             case GameState.WIN:
-                DataSerializer.Save();
                 EventSystem.current.SetSelectedGameObject(
                     GameObjectBank.Instance.nextLevel.gameObject);
                 break;
@@ -94,44 +139,14 @@ public class GameManager : SingletonAsComponent<GameManager>
         _gameState = newState;
     }
 
-    private void EvaluateLevel(LevelState newState)
+    private IEnumerator SetMenuText()
     {
-        PoolManager.Instance.ResetPool();
+        yield return new WaitForSecondsRealtime(5f);
 
-        switch (newState)
-        {
-            case LevelState.LEVEL_1:
-                SceneManager.LoadScene("Level_1");
-                break;
-
-            case LevelState.LEVEL_2:
-                SceneManager.LoadScene("Level_2");
-                break;
-
-            case LevelState.LEVEL_3:
-                SceneManager.LoadScene("Level_3");
-
-                GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
+        GameObjectBank.Instance.nextLevel.GetComponentInChildren<Text>().text =
                     "Back to Menu";
-                GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
-                    { SceneManager.LoadScene("MainMenu"); });
-                break;
-
-            case LevelState.END:
-                Debug.Log("You reached the end!\n");
-                break;
-
-            default:
-                CustomLogger.LogErrorFormat("Unknown LevelState: {0}!\n", newState);
-                break;
-        }
-
-        _levelState = newState;
-    }
-
-    new public void WakeUp()
-    {
-        DataSerializer.Load();
+        GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
+        { SceneManager.LoadScene("MainMenu"); });
     }
 
 }
@@ -157,5 +172,4 @@ public enum LevelState
     LEVEL_1,
     LEVEL_2,
     LEVEL_3,
-    END
 }

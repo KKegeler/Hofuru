@@ -10,11 +10,11 @@ public class CameraShake : MonoBehaviour
     private static CameraShake _instance;
     
     [SerializeField]
-    private float _shakeTime;
+    private float _shakeTime = 0;
     [SerializeField]
-    private float _shakeAmount;
+    private float _shakeAmount = 0;
     [SerializeField]
-    private float _shakeSpeed;
+    private float _shakeSpeed = 0;
 
     private Transform _tf;
     #endregion

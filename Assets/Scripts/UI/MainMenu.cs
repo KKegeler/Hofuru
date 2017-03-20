@@ -30,7 +30,6 @@ public class MainMenu : Window
 
         if (pauseMsg.pause)
         {
-            //mainCam.GetComponent<AudioListener>().enabled = false;
             GameState oldState = GameManager.Instance.OldState;
             if (oldState != GameState.GAME_OVER && oldState != GameState.WIN)
             {
@@ -46,7 +45,6 @@ public class MainMenu : Window
         else
         {
             continueButton.gameObject.SetActive(false);
-            //mainCam.GetComponent<AudioListener>().enabled = true;
             restartButton.gameObject.SetActive(false);
             newButton.gameObject.SetActive(true);
             
@@ -58,10 +56,8 @@ public class MainMenu : Window
     public void startGame()
     {
         Time.timeScale = 1;
-        PoolManager.Instance.ResetPool();
-        GameManager.Instance.State = GameState.INGAME;
         GameManager.Instance.LState = LevelState.LEVEL_1;
-        SceneManager.LoadScene(3);
+        GameManager.Instance.State = GameState.INGAME;     
     }
 
     public void exitGame()

@@ -55,7 +55,7 @@ namespace Framework
                 set
                 {
                     _masterVolume = value;
-                    _mainSource.volume = _masterVolume * _musicVolume;
+                    _mainSource.volume = _masterVolume * _musicVolume / 2;
                     _sfxSource.volume = _masterVolume * _sfxVolume;
                 }
             }
@@ -127,7 +127,7 @@ namespace Framework
                 }
 
                 AudioClip clip = _sfx[clipIndex];
-                other.PlayOneShot(clip, MasterVolume * SfxVolume);
+                other.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Framework
                 }
 
                 AudioClip clip = _sfx[clipIndex];
-                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
+                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }
 
             /// <summary>
@@ -162,7 +162,7 @@ namespace Framework
                 }
 
                 AudioClip clip = _sfx[_soundByName[clipName]];
-                other.PlayOneShot(clip, MasterVolume * SfxVolume);
+                other.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }
 
             /// <summary>
@@ -179,7 +179,7 @@ namespace Framework
                 }
 
                 AudioClip clip = _sfx[_soundByName[clipName]];
-                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
+                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }
 
             /// <summary>
@@ -189,7 +189,7 @@ namespace Framework
             /// <param name="other">Other source</param>
             public void PlaySfx(AudioClip clip, AudioSource other)
             {
-                other.PlayOneShot(clip, MasterVolume * SfxVolume);
+                other.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }
 
             /// <summary>
@@ -198,7 +198,7 @@ namespace Framework
             /// <param name="clip">Clip to play</param>
             public void PlaySfx(AudioClip clip)
             {
-                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
+                _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume * 2);
             }    
             #endregion
 

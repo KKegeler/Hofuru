@@ -25,6 +25,8 @@ public class EnemyDeath : Death
 
     public override void HandleDeath()
     {
+        em.DisableMachine();
+
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         MessagingSystem.Instance.QueueMessage(new ScoreMessage(100));
@@ -43,7 +45,7 @@ public class EnemyDeath : Death
         while (!groundCheck.grounded)
             yield return new WaitForEndOfFrame();
 
-        em.DisableMachine();
+        
 
         for (int i = 0; i < colliders.Length; i++)
         {

@@ -22,7 +22,7 @@ namespace Framework
             [Range(0f, 1f)]
             private static float _sfxVolume = 1f;
 
-            private const float _MIN_FADE_TIME = 1f;
+            private const float _MIN_FADE_TIME = 0.5f;
             private const float _MAX_FADE_TIME = 5f;
             private const float _DEFAULT_VALUE = -1f;
 
@@ -65,7 +65,7 @@ namespace Framework
                 get { return _musicVolume; }
                 set
                 {
-                    _musicVolume = value;
+                    _musicVolume = Mathf.Clamp01(value);
                     _mainSource.volume = _masterVolume * _musicVolume / 2;
                 }
             }
@@ -285,23 +285,23 @@ namespace Framework
 
             private IEnumerator FadeInRoutine()
             {
-                float oldVolume = MasterVolume;
-                MasterVolume = 0;
+                float oldVolume = MusicVolume;
+                MusicVolume = 0;
 
-                while (MasterVolume < oldVolume)
+                while (MusicVolume < oldVolume)
                 {
-                    MasterVolume += Time.deltaTime / _fadeTime * oldVolume * MusicVolume;
+                    MusicVolume += Time.deltaTime / _fadeTime * oldVolume;
                     yield return new WaitForEndOfFrame();
                 }
             }
 
             private IEnumerator FadeOutRoutine()
             {
-                float oldVolume = MasterVolume;
+                float oldVolume = MusicVolume;
 
-                while (MasterVolume > 0)
+                while (MusicVolume > 0)
                 {
-                    MasterVolume -= Time.deltaTime / _fadeTime * oldVolume * MusicVolume;
+                    MusicVolume -= Time.deltaTime / _fadeTime * oldVolume;
                     yield return new WaitForEndOfFrame();
                 }
             }

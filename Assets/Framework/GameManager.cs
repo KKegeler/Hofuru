@@ -80,6 +80,7 @@ public class GameManager : SingletonAsComponent<GameManager>
     new public void WakeUp()
     {
         DataSerializer.Load();
+        StartCoroutine(WaitAndPlayMusic());
     }
 
     private void EvaluateLevel(LevelState newState)
@@ -90,8 +91,7 @@ public class GameManager : SingletonAsComponent<GameManager>
         {
             case LevelState.LEVEL_1:
                 SceneManager.LoadScene("Level_1");
-                AudioManager.Instance.FadeIn();
-                AudioManager.Instance.PlayMusic("EAV2");
+                
                 break;
 
             case LevelState.LEVEL_2:
@@ -118,7 +118,7 @@ public class GameManager : SingletonAsComponent<GameManager>
         switch (newState)
         {
             case GameState.PAUSE:
-                SceneManager.LoadScene(1, LoadSceneMode.Additive);
+                yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
                 Time.timeScale = 0;
                 MessagingSystem.Instance.QueueMessage(new PauseMessage(true));
                 GameObjectBank.Instance.uicam.gameObject.SetActive(false);
@@ -172,6 +172,14 @@ public class GameManager : SingletonAsComponent<GameManager>
                     "Back to Menu";
         GameObjectBank.Instance.nextLevel.onClick.AddListener(delegate ()
         { SceneManager.LoadScene("MainMenu"); });
+    }
+
+    private IEnumerator WaitAndPlayMusic()
+    {
+        yield return new WaitForSeconds(1f);
+
+        AudioManager.Instance.FadeIn();
+        AudioManager.Instance.PlayMusic("EAV2");
     }
 
 }

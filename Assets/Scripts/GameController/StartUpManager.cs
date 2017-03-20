@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using Framework.Messaging;
 using Framework.Pool;
 
@@ -18,7 +19,13 @@ namespace StartUp
             MessagingSystem.Instance.WakeUp();
             PoolManager.Instance.WakeUp();
 
-            SceneManager.LoadScene(1);
+            StartCoroutine(Wait());
+        }
+
+        private IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(2f);
+            yield return SceneManager.LoadSceneAsync("MainMenu");
         }
 
     }

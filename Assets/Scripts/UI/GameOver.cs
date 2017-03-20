@@ -11,7 +11,7 @@ public class GameOver : MonoBehaviour {
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     private IEnumerator WaitForIngame()

@@ -15,11 +15,11 @@ public class OptionsMenu : Window
     public Text sfxText;
     public Text qualityText;
 
-    void Start()
+    private void Start()
     {
         masterSlider.value = AudioManager.Instance.MasterVolume;
-        musicSlider.value = AudioManager.Instance.MusicVolume;
         sfxSlider.value = AudioManager.Instance.SfxVolume;
+        musicSlider.value = AudioManager.Instance.MusicVolume;
 
         UpdateQualityLabel();
         UpdateVolumeLabel();

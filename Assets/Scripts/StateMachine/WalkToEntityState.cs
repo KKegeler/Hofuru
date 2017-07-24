@@ -21,23 +21,18 @@ public class WalkToEntityState : EnemyState {
         if (sqrtDist <= stateMachine.attackDistance * stateMachine.attackDistance) {
             stateMachine.ChangeToState("FIGHT");
         }
-    }
-
-    IEnumerator RayCastCoRoutine() {
-        while (true) {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(stateMachine.transform.position, (target.position - stateMachine.transform.position));
-            // check collider
-            foreach (RaycastHit2D hit in hits) {
-                if (!hit.transform.IsChildOf(stateMachine.transform)) // get the first collider, which is not this gamebject
-                {
-                    if (hit.collider.gameObject != target.gameObject) {   // player not visible
-                        stateMachine.ChangeToState("PATROL");
-                    } else {
-                        break;
-                    }
+        // player in sight? collision check
+        RaycastHit2D[] hits = Physics2D.RaycastAll(stateMachine.transform.position, (target.position - stateMachine.transform.position));
+        // check collider
+        foreach (RaycastHit2D hit in hits) {
+            if (!hit.transform.IsChildOf(stateMachine.transform)) // get the first collider, which is not this gamebject
+            {
+                if (hit.collider.gameObject != target.gameObject) {   // player not visible
+                    stateMachine.ChangeToState("PATROL");
+                } else {
+                    break;
                 }
             }
-            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -52,16 +47,12 @@ public class WalkToEntityState : EnemyState {
         Bhv_LookAt look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = target;
         look.rightOrientated = true;
-
-        stateMachine.StartCoroutine(RayCastCoRoutine());
     }
 
     override public void ExitState() {
         if (stateMachine != null) {
             stateMachine.removeComponent(stateMachine.GetComponents<Bhv_Seek>());
             stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
-
-            stateMachine.StopAllCoroutines();
         }
     }
 
@@ -70,15 +61,6 @@ public class WalkToEntityState : EnemyState {
         {
             stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
             stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
-
-            if (disable)
-            {
-                stateMachine.StopAllCoroutines();
-            }
-            else
-            {
-                stateMachine.StartCoroutine(RayCastCoRoutine());
-            }
         }
     }
 }

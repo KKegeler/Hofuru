@@ -43,8 +43,13 @@ public class EnemyMachine : StateMachine {
         wayPoints[1] = wP.transform;
     }
 
-    new public void Update() {
-        currentState.UpdateState(Time.deltaTime);
+    new public void FixedUpdate() {
+        float dt = Time.deltaTime;
+        time += dt;
+        if(time >= 1.0f){
+            time -= 1.0f;
+            currentState.UpdateState(Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

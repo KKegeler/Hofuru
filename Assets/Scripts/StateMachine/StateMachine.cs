@@ -5,16 +5,23 @@ public abstract class StateMachine : MonoBehaviour {
 
     protected Dictionary<string, State> states;
     protected State currentState;
+    protected float time;
 
     public void Start()
     {
         states = new Dictionary<string, State>();
+        time = 0.0f;
     }
 
     // Update is called once per frame
-    public void Update()
+    public void FixedUpdate()
     {
-        currentState.UpdateState(Time.deltaTime);
+        float dt = Time.deltaTime;
+        time += dt;
+        if(time >= 1.0f){
+            time -= 1.0f;
+            currentState.UpdateState(dt);
+        }
     }
 
     public void ChangeToState(string newState)

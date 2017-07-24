@@ -71,6 +71,9 @@ public class GameManager : SingletonAsComponent<GameManager>
                 case "Level_3":
                     _levelState = LevelState.LEVEL_3;
                     break;
+                case "GYM_KI":
+                    _levelState = LevelState.GYM_KI;
+                    break;
             }
         }
 #endif
@@ -101,6 +104,10 @@ public class GameManager : SingletonAsComponent<GameManager>
             case LevelState.LEVEL_3:
                 SceneManager.LoadScene("Level_3");
                 StartCoroutine(SetMenuText());
+                break;
+
+            case LevelState.GYM_KI:
+                SceneManager.LoadScene("GYM_KI");
                 break;
 
             default:
@@ -205,4 +212,5 @@ public enum LevelState
     LEVEL_1,
     LEVEL_2,
     LEVEL_3,
+    GYM_KI,
 }

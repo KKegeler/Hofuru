@@ -76,8 +76,13 @@ public class MainMenu : Window
     }
 
     public void highscores(){
+        manager.Open(3);
+    }
+
+    public void level(){
         manager.Open(2);
     }
+
     private void OnDestroy()
     {
         if (MessagingSystem.IsAlive)

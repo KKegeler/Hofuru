@@ -201,6 +201,13 @@ public class GraphManager : MonoBehaviour {
         neighborhood[node2] = n2;
     }
 
+    /// <summary>
+    /// searches and returns for the closest node on the platform (from pos) 
+    /// which is in the same direction as the target position.
+    /// </summary>
+    /// <param name="pos">Any position in world coordinated</param>
+    /// <param name="target">Any target position in world coordinates</param>
+    /// <returns>Closest node to pos, which is in the same direction as the target or null</returns>
     public Node GetClosestGraphNode(Vector2 pos, Vector2 target)
     {
         // get index of platform
@@ -234,9 +241,17 @@ public class GraphManager : MonoBehaviour {
         return best;
     }
 
-    public void Getneighbors(Node node, ArrayList neighbors)
+    /// <summary>
+    /// returns the neighbor nodes from any node
+    /// </summary>
+    /// <param name="node">any node on the graph</param>
+    /// <param name="neighbors">this Arraylist is filled by the function with all the neighbors frome node</param>
+    public void GetNeighbors(Node node, ArrayList neighbors)
     {
-        // TODO
+        Neighbors n = (Neighbors)neighborhood[nodes.IndexOf(node)];
+        int[] indices = n.GetNeighborIndices();
+        for (int i = 0; i < indices.Length; ++i)
+            neighbors.Add((Node)nodes[indices[i]]);
     }
 
     private void OnDrawGizmos()

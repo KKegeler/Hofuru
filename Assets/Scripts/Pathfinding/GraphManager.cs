@@ -201,10 +201,37 @@ public class GraphManager : MonoBehaviour {
         neighborhood[node2] = n2;
     }
 
-    public int GetGraphIndex(Vector2 pos)
+    public Node GetClosestGraphNode(Vector2 pos, Vector2 target)
     {
-        // TODO
-        return 0;
+        // get index of platform
+        bool hitted = false;
+        Neighbors neighbors = new Neighbors();
+        RaycastHit2D[] hits = Physics2D.RaycastAll(pos, Vector2.down, agentHeight);
+        foreach(RaycastHit2D hit in hits)
+            if (hit.transform.tag.Equals("ground"))
+            {
+                hitted = true;
+                neighbors = ((Neighbors)neighborsByPlatform[platforms.IndexOf(hit.transform.gameObject)]);
+                break;
+            }
+        if(!hitted) return null;
+        int[] indices = neighbors.GetNeighborIndices();
+        Node best = null;
+        float bestCost = 0.0f;
+        bool left = (target.x - pos.x) < 0.0f;
+        for(int i = 0; i < indices.Length; ++i)
+        {
+            Node candidate = (Node)nodes[indices[i]];
+            Vector2 cPos = candidate.position;
+            float cCost = (cPos - pos).magnitude;
+            bool cDir = (target.x - cPos.x) < 0.0f;
+            if((null == best) || ((left == cDir) && (cCost < bestCost)))
+            {
+                bestCost = cCost;
+                best = candidate;
+            }
+        }
+        return best;
     }
 
     public void Getneighbors(Node node, ArrayList neighbors)

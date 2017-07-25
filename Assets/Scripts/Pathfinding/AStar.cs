@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStar : MonoBehaviour {
+public class AStar {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static PriorityQueue closedList, openList;
+
+    private static float HeristicEstimatedCost(Node curNode, Node goalNode)
+    {
+        Vector2 dir = goalNode.position - curNode.position;
+        return dir.magnitude;
+    }
+
 }

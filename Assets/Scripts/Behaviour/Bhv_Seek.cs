@@ -8,6 +8,7 @@ public class Bhv_Seek : MonoBehaviour
     public Transform target;
     [HideInInspector]
     public float speed;
+    public float dist = 0.01f;
 
     private Rigidbody2D me;
     private Vector2 direction;
@@ -24,7 +25,7 @@ public class Bhv_Seek : MonoBehaviour
     {
         direction = (Vector2)target.position - me.position;
         distanceSqr = direction.sqrMagnitude;
-        if (distanceSqr > 0.01f) // walk until near enough
+        if (distanceSqr > dist) // walk until near enough
         {
             direction.Normalize();
             Vector2 newVelo = new Vector2(direction.x * speed, me.velocity.y);

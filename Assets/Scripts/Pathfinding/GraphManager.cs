@@ -41,7 +41,7 @@ public class GraphManager : MonoBehaviour {
         //
         // get level elements such as platforms, obstacles and traps
         GameObject[] platforms = GameObject.FindGameObjectsWithTag("ground");
-        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("obstacles");
+        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("obstacle");
         GameObject[] traps = GameObject.FindGameObjectsWithTag("trap");
         //
         // save platform indices
@@ -145,12 +145,16 @@ public class GraphManager : MonoBehaviour {
         Neighbours n = (Neighbours)neighboursByPlatform[platformIndex];
         n.Add(nodes.Count - 1); // because node was just added to nodes
         neighboursByPlatform[platformIndex] = n;
+        // make a new neighbourhood for node
+        neighbourhood.Add(new Neighbours());
         // make nodes adjacent
         if (neighbour >= 0)
         {
-            neighbourhood.Add(new Neighbours().Add(neighbour));
+            Neighbours nCurrent = (Neighbours)neighbourhood[nodes.Count - 1];
             Neighbours nNeighbour = (Neighbours)neighbourhood[neighbour];
+            nCurrent.Add(neighbour);
             nNeighbour.Add(nodes.Count - 1);
+            neighbourhood[nodes.Count - 1] = nCurrent;
             neighbourhood[neighbour] = nNeighbour;
         }
         return node;

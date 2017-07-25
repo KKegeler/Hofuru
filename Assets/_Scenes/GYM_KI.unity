@@ -1568,6 +1568,7 @@ MonoBehaviour:
   agentHeight: 4.127
   agentMaxAngle: 50
   maxJumpHeight: 12
+  drawGraph: 1
 --- !u!1001 &496663777
 Prefab:
   m_ObjectHideFlags: 0

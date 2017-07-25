@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Neighbours {
+public class Neighbors {
 
     private ArrayList nodeIndices = new ArrayList();
 
-    public Neighbours Add(int index)
+    public Neighbors Add(int index)
     {
         if (!nodeIndices.Contains(index))
             nodeIndices.Add(index);
         return this;
     }
 
-    public int[] GetNeighbourIndices()
+    public int[] GetNeighborIndices()
     {
         int[] indices = new int[nodeIndices.Count];
         for (int i = 0; i < nodeIndices.Count; ++i)

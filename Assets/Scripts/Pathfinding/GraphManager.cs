@@ -13,7 +13,7 @@ public class GraphManager : MonoBehaviour {
 
     public float agentHeight = 4.127f; // height of ninjaGirls boxCollider
     public float agentMaxAngle = 50.0f; // angle in degrees
-    public float maxJumpHeight = 12.0f; //for platforms with two blocks
+    public float maxJumpHeight = 11.5f; //for platforms with two blocks
     private float maxJumpDistance = 0.0f;
     private Vector2 leftDir;
     private Vector2 rightDir;
@@ -84,6 +84,7 @@ public class GraphManager : MonoBehaviour {
             GameObject p = (GameObject)this.platforms[i];
             BoxCollider2D c = p.GetComponent<BoxCollider2D>();
             Vector2 leftCorner = new Vector2(p.transform.position.x, p.transform.position.y) + (Vector2.up * c.size.y * 0.5f) + (Vector2.left * c.size.x * 0.5f);
+            leftCorner += Vector2.up * c.offset.y + Vector2.right * c.offset.x;
             Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x);
             // create edgeNodes by platforms
             Node leftNode = CreateNode(leftCorner, i, Node.NodeType.EDGE, -1);
@@ -98,6 +99,7 @@ public class GraphManager : MonoBehaviour {
             // calculate lower left and lower right corner
             BoxCollider2D c = obstacles[i].GetComponent<BoxCollider2D>();
             Vector2 leftCorner = new Vector2(c.transform.position.x, c.transform.position.y) + (Vector2.down * c.size.y * 0.5f) + (Vector2.left * c.size.x * 0.5f);
+            leftCorner += Vector2.up * c.offset.y + Vector2.right * c.offset.x;
             Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x);
             // get platform under obstacle
             RaycastHit2D[] hits = Physics2D.RaycastAll(leftCorner, Vector2.down, (c.size.y * 0.5f)+4.0f);

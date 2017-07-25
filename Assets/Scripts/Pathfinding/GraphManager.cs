@@ -13,7 +13,7 @@ public class GraphManager : MonoBehaviour {
 
     public float agentHeight = 4.127f; // height of ninjaGirls boxCollider
     public float agentMaxAngle = 50.0f; // angle in degrees
-    public float maxJumpHeight = 11.5f; //for platforms with two blocks
+    public float maxJumpHeight = 10.0f; //for platforms with two blocks
     private float maxJumpDistance = 0.0f;
     private Vector2 leftDir;
     private Vector2 rightDir;
@@ -133,7 +133,7 @@ public class GraphManager : MonoBehaviour {
                         CreateNode(leftCorner, pIndex, Node.NodeType.JUMPABLE, -1);
                         CreateNode(rightCorner, pIndex, Node.NodeType.JUMPABLE, -1);
                     }
-                    else
+                    else if(hit.transform.tag.Equals("obstacle") || hit.transform.tag.Equals("trap"))
                         break;
         }
     }
@@ -143,7 +143,11 @@ public class GraphManager : MonoBehaviour {
         RaycastHit2D[] hits = Physics2D.RaycastAll(pos, Vector2.up, agentHeight);
         foreach(RaycastHit2D hit in hits)
             if (!hit.transform.IsChildOf(((GameObject)this.platforms[platformIndex]).transform))
-                return null;
+            {
+                string tag = hit.transform.tag;
+                if(tag.Equals("ground") || tag.Equals("obstacle") || tag.Equals("trap"))
+                    return null;
+            }
         Node node = new Node(pos);
         node.type = nType;
         // save node at nodes and at neighborsByPlatform
@@ -171,7 +175,8 @@ public class GraphManager : MonoBehaviour {
         RaycastHit2D[] hits = Physics2D.RaycastAll(pos, left ? leftDir : rightDir, maxJumpDistance);
         foreach (RaycastHit2D hit in hits)
             if (!hit.transform.IsChildOf(((GameObject)this.platforms[platformIndex]).transform))
-                if (hit.transform.tag.Equals("ground"))
+                if (hit.transform.tag.Equals("obstacle") || hit.transform.tag.Equals("trap")) break;
+                else if (hit.transform.tag.Equals("ground"))
                 {
                     GameObject platform = hit.transform.gameObject;
                     int index = this.platforms.IndexOf(platform);

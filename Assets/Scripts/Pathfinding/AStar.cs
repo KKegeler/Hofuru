@@ -31,7 +31,7 @@ public class AStar {
             // Get neighbors as ArrayList
             ArrayList neighbours = new ArrayList();
             GraphManager.Instance.GetNeighbours(node, neighbours);
-            // check each neighbor
+            // check each neighbor (=process the current node)
             for(int i = 0; i < neighbours.Count; ++i)
             {
                 Node neighbourNode = (Node)neighbours[i];
@@ -49,7 +49,7 @@ public class AStar {
                         openList.Push(neighbourNode);
                 }
             }
-            // currentNode is closed
+            // currentNode is closed (=processed)
             closedList.Push(node);
         }
         return (node.position != goal.position) ? null : CalculatePath(node);
@@ -57,7 +57,14 @@ public class AStar {
 
     private static ArrayList CalculatePath(Node node)
     {
-        return null;
+        ArrayList list = new ArrayList();
+        while(node != null)
+        {
+            list.Add(node);
+            node = node.parent;
+        }
+        list.Reverse();
+        return list;
     }
 
 }

@@ -83,9 +83,11 @@ public class GraphManager : MonoBehaviour {
             // calculate the upper left and upper right corner
             GameObject p = (GameObject)this.platforms[i];
             BoxCollider2D c = p.GetComponent<BoxCollider2D>();
-            Vector2 leftCorner = new Vector2(p.transform.position.x, p.transform.position.y) + (Vector2.up * c.size.y * 0.5f) + (Vector2.left * c.size.x * 0.5f);
-            leftCorner += Vector2.up * c.offset.y + Vector2.right * c.offset.x;
-            Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x);
+            Vector2 leftCorner = new Vector2(p.transform.position.x, p.transform.position.y) + 
+                                 (Vector2.up * c.size.y * 0.5f * p.transform.lossyScale.y) + 
+                                 (Vector2.left * c.size.x * 0.5f * p.transform.lossyScale.x) + 
+                                 (Vector2.up * c.offset.y + Vector2.right * c.offset.x);
+            Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x * p.transform.lossyScale.x);
             // create edgeNodes by platforms
             Node leftNode = CreateNode(leftCorner, i, Node.NodeType.EDGE, -1);
             Node rightNode = CreateNode(rightCorner, i, Node.NodeType.EDGE, -1);
@@ -98,9 +100,11 @@ public class GraphManager : MonoBehaviour {
         {
             // calculate lower left and lower right corner
             BoxCollider2D c = obstacles[i].GetComponent<BoxCollider2D>();
-            Vector2 leftCorner = new Vector2(c.transform.position.x, c.transform.position.y) + (Vector2.down * c.size.y * 0.5f) + (Vector2.left * c.size.x * 0.5f);
-            leftCorner += Vector2.up * c.offset.y + Vector2.right * c.offset.x;
-            Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x);
+            Vector2 leftCorner = new Vector2(c.transform.position.x, c.transform.position.y) + 
+                                 (Vector2.down * c.size.y * 0.5f * c.transform.lossyScale.y) + 
+                                 (Vector2.left * c.size.x * 0.5f * c.transform.lossyScale.x) + 
+                                 (Vector2.up * c.offset.y + Vector2.right * c.offset.x);
+            Vector2 rightCorner = leftCorner + (Vector2.right * c.size.x * c.transform.lossyScale.x);
             // get platform under obstacle
             RaycastHit2D[] hits = Physics2D.RaycastAll(leftCorner, Vector2.down, (c.size.y * 0.5f)+4.0f);
             foreach (RaycastHit2D hit in hits)
@@ -130,8 +134,8 @@ public class GraphManager : MonoBehaviour {
                     {
                         int pIndex = this.platforms.IndexOf(hit.transform.gameObject);
                         // create Nodes
-                        CreateNode(leftCorner, pIndex, Node.NodeType.JUMPABLE, -1);
-                        CreateNode(rightCorner, pIndex, Node.NodeType.JUMPABLE, -1);
+                        CreateNode(new Vector2(leftCorner.x, hit.point.y), pIndex, Node.NodeType.JUMPABLE, -1);
+                        CreateNode(new Vector2(rightCorner.x, hit.point.y), pIndex, Node.NodeType.JUMPABLE, -1);
                     }
                     else if(hit.transform.tag.Equals("obstacle") || hit.transform.tag.Equals("trap"))
                         break;

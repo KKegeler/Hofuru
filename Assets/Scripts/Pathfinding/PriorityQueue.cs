@@ -20,15 +20,8 @@ public class PriorityQueue {
 
     public PriorityQueue Push(Node node)
     {
-        if(nodes.Count == 0)
-            nodes.Add(node);
-        else
-        {
-            int i = nodes.Count;
-            while ((i > 0) && (((Node)nodes[i - 1]).CompareTo(node) == 1))
-                --i;
-            nodes.Insert(i, node);
-        }
+        nodes.Add(node);
+        nodes.Sort();
         return this;
     }
 
@@ -40,6 +33,7 @@ public class PriorityQueue {
 
     public Node Pop()
     {
+        nodes.Sort();
         Node node = (nodes.Count > 0) ? (Node) nodes[0] : null;
         if (null != node)
             nodes.RemoveAt(0);

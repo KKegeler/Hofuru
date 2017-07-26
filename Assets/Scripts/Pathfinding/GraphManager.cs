@@ -255,7 +255,11 @@ public class GraphManager : MonoBehaviour {
         Neighbours n = (Neighbours)neighbourhood[nodes.IndexOf(node)];
         int[] indices = n.GetNeighbourIndices();
         for (int i = 0; i < indices.Length; ++i)
-            neighbours.Add((Node)nodes[indices[i]]);
+        {
+            Node nodeToAdd = ((Node)nodes[indices[i]]);
+            nodeToAdd.parent = null;
+            neighbours.Add(nodeToAdd);
+        }
     }
 
     private void OnDrawGizmos()

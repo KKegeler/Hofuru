@@ -234,7 +234,7 @@ public class GraphManager : MonoBehaviour {
         {
             Node candidate = (Node)nodes[indices[i]];
             Vector2 cPos = candidate.position;
-            float cCost = (cPos - pos).magnitude;
+            float cCost = (cPos - pos).sqrMagnitude;
             bool cDir = (target.x - cPos.x) < 0.0f;
             if((null == best) || ((left == cDir) && (cCost < bestCost)))
             {

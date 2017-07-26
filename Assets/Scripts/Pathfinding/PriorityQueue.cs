@@ -45,4 +45,10 @@ public class PriorityQueue {
         return nodes.Contains(node);
     }
 
+    public void FinalCleanUp()
+    {
+        for (int i = 0; i < nodes.Count; ++i)
+            ((Node)nodes[i]).Reset();
+    }
+
 }

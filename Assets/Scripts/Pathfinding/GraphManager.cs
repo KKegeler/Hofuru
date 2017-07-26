@@ -240,7 +240,7 @@ public class GraphManager : MonoBehaviour {
                 best = candidate;
             }
         }
-        return best.Reset();
+        return best;
     }
 
     /// <summary>
@@ -254,7 +254,7 @@ public class GraphManager : MonoBehaviour {
         int[] indices = n.GetNeighbourIndices();
         for (int i = 0; i < indices.Length; ++i)
         {
-            Node nodeToAdd = ((Node)nodes[indices[i]]).Reset();
+            Node nodeToAdd = ((Node)nodes[indices[i]]);
             neighbours.Add(nodeToAdd);
         }
     }

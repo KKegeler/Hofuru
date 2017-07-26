@@ -24,7 +24,9 @@ public class FollowPlayer : MonoBehaviour {
 	void Start () {
         me = GetComponent<Rigidbody2D>();
         player = GameObjectBank.Instance.player.transform;
-        target = player.position;
+        CheckPath();
+        if(path== null)
+            target = player.position;
 	}
 
     public void FixedUpdate()

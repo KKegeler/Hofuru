@@ -27,7 +27,7 @@ public class AStar {
             node = openList.Pop();
             // check if current node is goal node
             if (node.position == goal.position)
-                return CalculatePath(node);
+                break;
             // Get neighbors as ArrayList
             ArrayList neighbours = new ArrayList();
             GraphManager.Instance.GetNeighbours(node, neighbours);
@@ -52,7 +52,17 @@ public class AStar {
             // currentNode is closed (=processed)
             closedList.Push(node);
         }
-        return (node.position != goal.position) ? null : CalculatePath(node);
+        return GetPath(node, goal);
+    }
+
+    private static ArrayList GetPath(Node node, Node goal)
+    {
+        ArrayList path = (node.position == goal.position) ? CalculatePath(node) : null;
+        openList.FinalCleanUp();
+        closedList.FinalCleanUp();
+        goal.Reset();
+        return path;
+
     }
 
     private static ArrayList CalculatePath(Node node)

@@ -46,4 +46,9 @@ public class PriorityQueue {
         return node;
     }
 
+    public bool Contains(object node)
+    {
+        return nodes.Contains(node);
+    }
+
 }

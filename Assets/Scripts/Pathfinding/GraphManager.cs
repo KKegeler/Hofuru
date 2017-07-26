@@ -70,7 +70,7 @@ public class GraphManager : MonoBehaviour {
             Neighbours n = ((Neighbours)neighboursByPlatform[i]);
             int[] array = n.GetNeighbourIndices();
             for (int j = 0; j < array.Length; ++j)
-                for (int k = j; k < array.Length; ++k)
+                for (int k = j+1; k < array.Length; ++k)
                     makeAdjacent(array[j], array[k]);
         }
     }
@@ -197,8 +197,8 @@ public class GraphManager : MonoBehaviour {
         foreach (RaycastHit2D hit in hits)
             if (hit.transform.tag.Equals("obstacle") || hit.transform.tag.Equals("ground"))
                 return;
-        Neighbours n2 = ((Neighbours)neighbourhood[node2]);
         Neighbours n1 = ((Neighbours)neighbourhood[node1]);
+        Neighbours n2 = ((Neighbours)neighbourhood[node2]);
         n1.Add(node2);
         n2.Add(node1);
         neighbourhood[node1] = n1;

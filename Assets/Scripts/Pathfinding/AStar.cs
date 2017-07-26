@@ -35,7 +35,7 @@ public class AStar {
             for(int i = 0; i < neighbours.Count; ++i)
             {
                 Node neighbourNode = (Node)neighbours[i];
-                if (!closedList.Contains(node))
+                if (!closedList.Contains(neighbourNode))
                 {
                     float cost = HeristicEstimatedCost(node, neighbourNode);
                     float totalCost = node.nodeTotalCost + cost;

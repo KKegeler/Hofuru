@@ -242,7 +242,7 @@ public class GraphManager : MonoBehaviour {
                 best = candidate;
             }
         }
-        return best;
+        return best.Reset();
     }
 
     /// <summary>

@@ -23,8 +23,6 @@ public class Node : IComparable {
     public Node Reset()
     {
         parent = null;
-        estimatedCost = 0.0f;
-        nodeTotalCost = 1.0f;
         return this;
     }
 

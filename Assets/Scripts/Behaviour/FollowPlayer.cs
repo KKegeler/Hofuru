@@ -40,14 +40,16 @@ public class FollowPlayer : MonoBehaviour {
 
     private void Seek()
     {
+        if (null == path)
+            target = player.position;
         direction = (Vector2)target - me.position;
         distanceSqr = direction.sqrMagnitude;
         if (distanceSqr > (dist * dist))
         {
             Vector2 velo = new Vector2(direction.normalized.x * speed, me.velocity.y);
             me.velocity = velo;
-        }
-        UpdateTarget();
+        }else
+            UpdateTarget();
     }
 
     private void UpdateTarget()
@@ -112,6 +114,20 @@ public class FollowPlayer : MonoBehaviour {
     {
         Debug.Log("jump");
         me.AddForce(Vector2.up * 450.0f, ForceMode2D.Impulse);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (null != path)
+        {
+            for(int i = 1; i < path.Count; ++i)
+            {
+                Vector3 pos1 = ((Node)path[i - 1]).position;
+                Vector3 pos2 = ((Node)path[i]).position;
+                Debug.DrawLine(pos1, pos2, Color.red);
+            }
+            Gizmos.DrawSphere(curr.position, 1.0f);
+        }
     }
 
 }

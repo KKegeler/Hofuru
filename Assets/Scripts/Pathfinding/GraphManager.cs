@@ -206,7 +206,7 @@ public class GraphManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// searches and returns for the closest node on the platform (from pos) 
+    /// searches and returns the closest node on the platform (from pos) 
     /// which is in the same direction as the target position.
     /// </summary>
     /// <param name="pos">Any position in world coordinated</param>
@@ -229,14 +229,12 @@ public class GraphManager : MonoBehaviour {
         int[] indices = neighbours.GetNeighbourIndices();
         Node best = null;
         float bestCost = 0.0f;
-        bool left = (target.x - pos.x) < 0.0f;
         for(int i = 0; i < indices.Length; ++i)
         {
             Node candidate = (Node)nodes[indices[i]];
             Vector2 cPos = candidate.position;
             float cCost = (cPos - pos).sqrMagnitude;
-            bool cDir = (target.x - cPos.x) < 0.0f;
-            if((null == best) || ((left == cDir) && (cCost < bestCost)))
+            if((null == best) || (cCost < bestCost))
             {
                 bestCost = cCost;
                 best = candidate;
@@ -274,7 +272,7 @@ public class GraphManager : MonoBehaviour {
                 for(int j = 0; j < neighbours.Length; ++j)
                 {
                     Vector2 pos2 = ((Node)nodes[neighbours[j]]).position;
-                    Debug.DrawLine(new Vector3(pos1.x, pos1.y, 0.0f), new Vector3(pos2.x, pos2.y, 0.0f), Color.red);
+                    Debug.DrawLine(new Vector3(pos1.x, pos1.y, 0.0f), new Vector3(pos2.x, pos2.y, 0.0f), Color.cyan);
                 }
             }
         }

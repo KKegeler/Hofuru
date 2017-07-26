@@ -12,7 +12,7 @@ public class FollowPlayer : MonoBehaviour {
     private Rigidbody2D me;
     private Vector2 direction;
     private float distanceSqr;
-
+    
     private float dt = 0.0f;
 
     private ArrayList path;
@@ -47,8 +47,7 @@ public class FollowPlayer : MonoBehaviour {
             Vector2 velo = new Vector2(direction.normalized.x * speed, me.velocity.y);
             me.velocity = velo;
         }
-        else
-            UpdateTarget();
+        UpdateTarget();
     }
 
     private void UpdateTarget()
@@ -112,6 +111,7 @@ public class FollowPlayer : MonoBehaviour {
     private void Jump()
     {
         Debug.Log("jump");
+        me.AddForce(Vector2.up * 450.0f, ForceMode2D.Impulse);
     }
 
 }

@@ -256,8 +256,7 @@ public class GraphManager : MonoBehaviour {
         int[] indices = n.GetNeighbourIndices();
         for (int i = 0; i < indices.Length; ++i)
         {
-            Node nodeToAdd = ((Node)nodes[indices[i]]);
-            nodeToAdd.parent = null;
+            Node nodeToAdd = ((Node)nodes[indices[i]]).Reset();
             neighbours.Add(nodeToAdd);
         }
     }

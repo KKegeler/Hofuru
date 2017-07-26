@@ -20,6 +20,14 @@ public class Node : IComparable {
         position = pos;
     }
 
+    public Node Reset()
+    {
+        parent = null;
+        estimatedCost = 0.0f;
+        nodeTotalCost = 1.0f;
+        return this;
+    }
+
     public int CompareTo(object obj)
     {
         Node node = (Node) obj;

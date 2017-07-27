@@ -12,13 +12,16 @@ public class FollowPlayer : MonoBehaviour {
     private Rigidbody2D me;
     private Vector2 direction;
     private float distanceSqr;
-    
+    private Vector2 jumpDirRight;
+
     private float dt = 0.0f;
 
     private ArrayList path;
     private int currentNode;
 
     private Node prev, curr;
+
+    private EnemyGroundCheck groundCheck;
     
 	// Use this for initialization
 	void Start () {
@@ -27,7 +30,18 @@ public class FollowPlayer : MonoBehaviour {
         CheckPath();
         if(path== null)
             target = player.position;
+        float alpha = 50.0f * Mathf.Deg2Rad;
+        jumpDirRight = new Vector2(Mathf.Cos(alpha), Mathf.Sin(alpha));
+        groundCheck = GetComponentInChildren<EnemyGroundCheck>();
 	}
+
+    public void Update()
+    {
+        if (Input.GetButtonDown("TEST_KI")){
+            Debug.Log("jump");
+            Jump();
+        }
+    }
 
     public void FixedUpdate()
     {
@@ -37,14 +51,17 @@ public class FollowPlayer : MonoBehaviour {
             dt -= 1.0f;
             CheckPath();
         }
-        Seek();
+        if((null != groundCheck) && (groundCheck.grounded))
+            Seek();
     }
 
     private void Seek()
     {
         if (null == path)
             target = player.position;
+        dist = (null == path) ? 5.0f : 1.0f;
         direction = (Vector2)target - me.position;
+        direction.y = 0.0f;
         distanceSqr = direction.sqrMagnitude;
         if (distanceSqr > (dist * dist))
         {
@@ -114,7 +131,14 @@ public class FollowPlayer : MonoBehaviour {
 
     private void Jump()
     {
-        me.AddForce(Vector2.up * 450.0f, ForceMode2D.Impulse);
+        bool left = me.velocity.x < 0;
+        if (groundCheck != null)
+            groundCheck.grounded = false; // make sure so seek is active
+        me.velocity = Vector2.zero;
+        Vector2 dirUp = new Vector2(0.0f, jumpDirRight.y);
+        Vector2 dir = new Vector2(left ? -1.0f * jumpDirRight.x : jumpDirRight.x, 0.0f);
+        me.AddForce((dirUp + dir) * 450.0f, ForceMode2D.Impulse);
+        //me.AddForce(dir, ForceMode2D.Force);
     }
 
     private void OnDrawGizmos()

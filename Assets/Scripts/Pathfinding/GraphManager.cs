@@ -124,8 +124,8 @@ public class GraphManager : MonoBehaviour {
         {
             // calculate lower left and lower right corner
             GameObject t = traps[i];
-            Vector2 leftCorner = new Vector2(t.transform.position.x, t.transform.position.y) + (Vector2.left * 4.0f);
-            Vector2 rightCorner = leftCorner + (Vector2.right * 8.0f);
+            Vector2 leftCorner = new Vector2(t.transform.position.x, t.transform.position.y) + (Vector2.left * 5.0f);
+            Vector2 rightCorner = leftCorner + (Vector2.right * 10.0f);
             // get platform under trap
             RaycastHit2D[] hits = Physics2D.RaycastAll(leftCorner, Vector2.down, 4.0f);
             foreach (RaycastHit2D hit in hits)

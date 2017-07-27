@@ -25,7 +25,8 @@ public class EnemyDeath : Death
 
     public override void HandleDeath()
     {
-        em.DisableMachine();
+        if(null != em)
+            em.DisableMachine();
 
         rb.bodyType = RigidbodyType2D.Dynamic;
 

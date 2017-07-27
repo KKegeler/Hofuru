@@ -38,8 +38,11 @@ public class Enemy : MonoBehaviour {
     public void Freeze()
     {
         //rigi.bodyType = RigidbodyType2D.Static;
-        stateMachine.FreezeMachine(); // disables behaviour
-        stateMachine.enabled = false;
+        if (null != stateMachine)
+        {
+            stateMachine.FreezeMachine(); // disables behaviour
+            stateMachine.enabled = false;
+        }
         Animator anim = GetComponent<Animator>();
         if (animationSpeed == -1.0f)
         {

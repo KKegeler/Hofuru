@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff285943a684a0245a886721f31f709d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentHeight: 4.127
+  agentHeight: 2
   agentMaxAngle: 50
   maxJumpHeight: 10
   drawGraph: 1

@@ -217,7 +217,7 @@ public class GraphManager : MonoBehaviour {
         // get index of platform
         bool hitted = false;
         Neighbours neighbours = new Neighbours();
-        RaycastHit2D[] hits = Physics2D.RaycastAll(pos, Vector2.down, agentHeight);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(pos, Vector2.down, 4.0f);
         foreach(RaycastHit2D hit in hits)
             if (hit.transform.tag.Equals("ground"))
             {

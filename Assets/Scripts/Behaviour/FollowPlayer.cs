@@ -114,7 +114,6 @@ public class FollowPlayer : MonoBehaviour {
 
     private void Jump()
     {
-        Debug.Log("jump");
         me.AddForce(Vector2.up * 450.0f, ForceMode2D.Impulse);
     }
 

@@ -7,6 +7,8 @@ TagManager:
   - ground
   - trap
   - obstacle
+  - left
+  - right
   layers:
   - Default
   - TransparentFX

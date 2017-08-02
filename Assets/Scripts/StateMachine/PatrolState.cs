@@ -71,11 +71,7 @@ public class PatrolState : EnemyState
 
         currentWayPoint += (up ? 1 : -1);
     }
-
-    override public void OnTriggerEnter2D(Collider2D other)
-    {
-    }
-
+    
     override public void EnterState()
     {
         currentWayPoint = 0;
@@ -110,4 +106,8 @@ public class PatrolState : EnemyState
         }
     }
 
+    public override void UnblockPathCheck()
+    {
+        throw new NotImplementedException();
+    }
 }

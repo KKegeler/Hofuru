@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class FightState : EnemyState
 {
@@ -19,7 +20,7 @@ public class FightState : EnemyState
     {
         float sqrtDist = (stateMachine.transform.position - target.position).sqrMagnitude;
         // player out of sight? OR player dead
-        if ((sqrtDist > stateMachine.sightRange * stateMachine.sightRange) || (target.GetComponent<Health>().currentHealth <= 0.0f))
+        if (target.GetComponent<Health>().currentHealth <= 0.0f)
         {
             stateMachine.ChangeToState("PATROL");
         }
@@ -29,11 +30,7 @@ public class FightState : EnemyState
             stateMachine.ChangeToState("WALKTOENTITY");
         }
     }
-
-    override public void OnTriggerEnter2D(Collider2D other)
-    {
-    }
-
+    
     override public void EnterState()
     {
         Bhv_HoldPosition hP = stateMachine.gameObject.AddComponent<Bhv_HoldPosition>();
@@ -70,5 +67,10 @@ public class FightState : EnemyState
         stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
 
         stateMachine.GetComponentInChildren<EnemyAttack>().enabled = !disable;
+    }
+
+    public override void UnblockPathCheck()
+    {
+        throw new NotImplementedException();
     }
 }

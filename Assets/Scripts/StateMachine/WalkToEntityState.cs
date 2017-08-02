@@ -35,10 +35,7 @@ public class WalkToEntityState : EnemyState {
             }
         }
     }
-
-    override public void OnTriggerEnter2D(Collider2D other) {
-    }
-
+    
     override public void EnterState() {
         Bhv_Seek seek = stateMachine.gameObject.AddComponent<Bhv_Seek>();
         seek.target = target;
@@ -62,5 +59,10 @@ public class WalkToEntityState : EnemyState {
             stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
             stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
         }
+    }
+
+    public override void UnblockPathCheck()
+    {
+        throw new NotImplementedException();
     }
 }

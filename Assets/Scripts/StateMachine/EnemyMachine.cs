@@ -46,11 +46,7 @@ public class EnemyMachine : StateMachine {
             currentState.UpdateState(Time.deltaTime);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        ((EnemyState)currentState).OnTriggerEnter2D(other);
-    }
-
+    
     public void removeComponent(Component[] comp) {
         foreach (Component c in comp) {
             Destroy(c);
@@ -71,6 +67,11 @@ public class EnemyMachine : StateMachine {
     public void UnfreezeMachine()
     {
         currentState.PauseState(false);
+    }
+
+    public void UnblockPathCheck()
+    {
+        ((EnemyState)currentState).UnblockPathCheck();
     }
 
 }

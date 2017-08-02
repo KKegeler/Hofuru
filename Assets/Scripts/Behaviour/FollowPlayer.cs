@@ -133,7 +133,7 @@ public class FollowPlayer : MonoBehaviour {
     {
         bool left = me.velocity.x < 0;
         if (groundCheck != null)
-            groundCheck.grounded = false; // make sure so seek is active
+            groundCheck.grounded = false; // make sure seek is not active
         me.velocity = Vector2.zero;
         Vector2 dirUp = new Vector2(0.0f, jumpDirRight.y);
         Vector2 dir = new Vector2(left ? -1.0f * jumpDirRight.x : jumpDirRight.x, 0.0f);

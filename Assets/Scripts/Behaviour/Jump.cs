@@ -8,7 +8,7 @@ public class Jump : MonoBehaviour {
     private EnemyGroundCheck groundCheck;
     private Vector2 jumpDirLeft;
     private Vector2 jumpDirRight;
-    public float jumpForce = 350.0f;
+    private const float jumpForce = 300.0f;
 
     void Start()
     {
@@ -21,34 +21,21 @@ public class Jump : MonoBehaviour {
         jumpDirRight = new Vector2(cos, sin);
     }
 
-    public void JumpLeft()
+    public void JumpLeft(float force = jumpForce)
+    {
+        JumpTo(jumpDirLeft, force);
+    }
+
+    public void JumpRight(float force = jumpForce)
+    {
+        JumpTo(jumpDirRight, force);
+    }
+    
+    public void JumpTo(Vector2 direction, float force)
     {
         groundCheck.grounded = false;
         body.velocity = Vector2.zero;
-        body.AddForce(jumpDirLeft * jumpForce, ForceMode2D.Impulse);
-    }
-
-    public void JumpRight()
-    {
-        groundCheck.grounded = false;
-        body.velocity = Vector2.zero;
-        body.AddForce(jumpDirRight * jumpForce, ForceMode2D.Impulse);
-    }
-
-    public void JumpLeft(float force)
-    {
-        float tmp = jumpForce;
-        jumpForce = force;
-        JumpLeft();
-        jumpForce = tmp;
-    }
-
-    public void JumpRight(float force)
-    {
-        float tmp = jumpForce;
-        jumpForce = force;
-        JumpRight();
-        jumpForce = tmp;
+        body.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
 }

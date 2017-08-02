@@ -37,7 +37,7 @@ public class PatrolState : EnemyState
                 {   // Just test first collider, after this gameObject
                     if (hit.collider.transform.IsChildOf(target))
                     { // player is in sightRange and isn't hiding
-                        stateMachine.ChangeToState(stateMachine.shooting ? "SHOOT" : "WALKTOENTITY");
+                        stateMachine.ChangeToState("WALKTOENTITY");
                     }
                     break;
                 }

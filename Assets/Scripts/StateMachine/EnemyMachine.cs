@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class EnemyMachine : StateMachine {
 
     public string initState;
-    public bool shooting;
     public float runSpeed;
     public float sightRange;
     public float attackDistance;
@@ -22,12 +21,8 @@ public class EnemyMachine : StateMachine {
         }
         Transform player = GameObjectBank.Instance.player.transform;
         states.Add("PATROL", new PatrolState(this, player));
-        if (shooting) {
-            states.Add("SHOOT", new ShooterState(this, player));
-        } else {
-            states.Add("WALKTOENTITY", new WalkToEntityState(this, player));
-            states.Add("FIGHT", new FightState(this, player));
-        }
+        states.Add("WALKTOENTITY", new WalkToEntityState(this, player));
+        states.Add("FIGHT", new FightState(this, player));
         currentState = (states.ContainsKey(initState.ToUpper())) ? states[initState.ToUpper()] : states["PATROL"];
         currentState.EnterState();
     }

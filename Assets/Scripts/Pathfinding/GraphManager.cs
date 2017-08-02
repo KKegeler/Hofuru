@@ -10,6 +10,7 @@ public class GraphManager : MonoBehaviour {
     private ArrayList neighbourhood = new ArrayList();
     private ArrayList platforms = new ArrayList();
     private ArrayList neighboursByPlatform = new ArrayList();
+    private PositionComparer comparer;
 
     public float agentHeight = 4.127f; // height of ninjaGirls boxCollider
     public float agentMaxAngle = 50.0f; // angle in degrees
@@ -33,6 +34,7 @@ public class GraphManager : MonoBehaviour {
             maxJumpDistance = (maxJumpHeight / Mathf.Sin(a));
             leftDir = new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * (-1.0f);
             rightDir = new Vector2(Mathf.Cos(b), Mathf.Sin(a)) * (-1.0f);
+            comparer = new PositionComparer();
             MakeGraph();
             readyToDraw = drawGraph;
         }
@@ -68,11 +70,11 @@ public class GraphManager : MonoBehaviour {
             // make each node at a platform adjacent to all other nodes
             // on the platform if possible (raycasting)
             Neighbours n = ((Neighbours)neighboursByPlatform[i]);
-            int[] array = n.GetNeighbourIndices();
-            for (int j = 0; j < array.Length; ++j)
-                for (int k = j+1; k < array.Length; ++k)
-                    makeAdjacent(array[j], array[k]);
-        }
+            int[] array = SortedIndices(n.GetNeighbourIndices());
+            for (int j = 1; j < array.Length; ++j)
+                makeAdjacent(array[j - 1], array[j]);
+        }        
+        comparer = null;
     }
 
     private void CreateNodes(GameObject[] obstacles, GameObject[] traps)
@@ -94,6 +96,14 @@ public class GraphManager : MonoBehaviour {
             // for each edgeNode create a node on an other platform if possible
             if (null != leftNode) CheckJumpLocation(leftCorner, i, true, nodes.IndexOf(leftNode));
             if (null != rightNode) CheckJumpLocation(rightCorner, i, false, nodes.IndexOf(rightNode));
+            // create nodes by platform at a certain distance
+            float stepSize = 10.0f;
+            Vector2 currentPos = leftCorner + Vector2.right * stepSize;
+            while(currentPos.x < rightCorner.x)
+            {
+                CreateNode(currentPos, i, Node.NodeType.DEFAULT, -1);
+                currentPos += Vector2.right * stepSize;
+            }
         }
         // create nodes at bottom of obstacles
         for (int i = 0; i < obstacles.Length; ++i)
@@ -117,27 +127,6 @@ public class GraphManager : MonoBehaviour {
                         CreateNode(rightCorner + Vector2.right * c.size.x, pIndex, Node.NodeType.DEFAULT, -1);
                     }
                     else
-                        break;
-        }
-        // create nodes next to traps (to jump over)
-        for (int i = 0; i < traps.Length; ++i)
-        {
-            // calculate lower left and lower right corner
-            GameObject t = traps[i];
-            Vector2 leftCorner = new Vector2(t.transform.position.x, t.transform.position.y) + (Vector2.left * 5.0f);
-            Vector2 rightCorner = leftCorner + (Vector2.right * 10.0f);
-            // get platform under trap
-            RaycastHit2D[] hits = Physics2D.RaycastAll(leftCorner, Vector2.down, 4.0f);
-            foreach (RaycastHit2D hit in hits)
-                if (!hit.transform.IsChildOf(t.transform))
-                    if (hit.transform.tag.Equals("ground"))
-                    {
-                        int pIndex = this.platforms.IndexOf(hit.transform.gameObject);
-                        // create Nodes
-                        CreateNode(new Vector2(leftCorner.x, hit.point.y), pIndex, Node.NodeType.JUMPABLE, -1);
-                        CreateNode(new Vector2(rightCorner.x, hit.point.y), pIndex, Node.NodeType.JUMPABLE, -1);
-                    }
-                    else if(hit.transform.tag.Equals("obstacle") || hit.transform.tag.Equals("trap"))
                         break;
         }
     }
@@ -203,6 +192,18 @@ public class GraphManager : MonoBehaviour {
         n2.Add(node1);
         neighbourhood[node1] = n1;
         neighbourhood[node2] = n2;
+    }
+
+    private int[] SortedIndices(int[] indices)
+    {
+        ArrayList n = new ArrayList();
+        foreach (int i in indices)
+            n.Add(nodes[i]);
+        n.Sort(comparer);
+        int[] result = new int[indices.Length];
+        for (int i = 0; i < indices.Length; ++i)
+            result[i] = nodes.IndexOf(n[i]);
+        return result;
     }
 
     /// <summary>
@@ -272,7 +273,7 @@ public class GraphManager : MonoBehaviour {
                 for(int j = 0; j < neighbours.Length; ++j)
                 {
                     Vector2 pos2 = ((Node)nodes[neighbours[j]]).position;
-                    Debug.DrawLine(new Vector3(pos1.x, pos1.y, 0.0f), new Vector3(pos2.x, pos2.y, 0.0f), Color.cyan);
+                    Debug.DrawLine(new Vector3(pos1.x, pos1.y, 0.0f), new Vector3(pos2.x, pos2.y, 0.0f), Color.red);
                 }
             }
         }

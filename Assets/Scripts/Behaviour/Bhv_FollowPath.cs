@@ -60,7 +60,7 @@ public class Bhv_FollowPath : MonoBehaviour {
     {
         if (pathActive && groundCheck.grounded)
             Seek();
-        animator.SetFloat("speed", speed);
+        if(null != animator) animator.SetFloat("speed", speed);
     }
 
     private void Seek()

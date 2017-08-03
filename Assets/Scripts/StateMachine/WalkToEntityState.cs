@@ -62,11 +62,12 @@ public class WalkToEntityState : EnemyState {
 
         fpath = stateMachine.gameObject.AddComponent<Bhv_FollowPath>();
         pathActive = false;
-        CheckPath();
 
         look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = target;
         look.rightOrientated = true;
+
+        CheckPath();
     }
 
     override public void ExitState() {
@@ -80,7 +81,7 @@ public class WalkToEntityState : EnemyState {
     public override void PauseState(bool disable) {
         if (stateMachine)
         {
-            stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+            look.enabled = !disable;
             seek.enabled = !disable;
             fpath.enabled = !disable;
             if(!disable) CheckPath();
@@ -91,6 +92,7 @@ public class WalkToEntityState : EnemyState {
     {
         pathActive = true;
         seek.enabled = false;
+        look.enabled = false;
         fpath.enabled = true;
         if (!fpath.Init(stateMachine, (Vector2)target.position, stateMachine.runSpeed))
             UnblockPathCheck();
@@ -101,5 +103,6 @@ public class WalkToEntityState : EnemyState {
         pathActive = false;
         fpath.enabled = false;
         seek.enabled = true;
+        look.enabled = true;
     }
 }

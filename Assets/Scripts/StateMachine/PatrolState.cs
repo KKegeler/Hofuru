@@ -112,7 +112,7 @@ public class PatrolState : EnemyState
     {
         if (stateMachine)
         {
-            stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+            look.enabled = !disable;
             seek.enabled = !disable;
             fpath.enabled = !disable;
             if (!disable) CheckPath();

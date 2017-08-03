@@ -31,7 +31,7 @@ public class Bhv_FollowPath : MonoBehaviour {
         dist = 1.0f;
     }
 
-    public void Init(EnemyMachine stateMachine, Vector2 dstPos, float speed)
+    public bool Init(EnemyMachine stateMachine, Vector2 dstPos, float speed)
     {
         this.speed = speed;
         this.stateMachine = stateMachine;
@@ -47,10 +47,7 @@ public class Bhv_FollowPath : MonoBehaviour {
             UpdateTarget();
             pathActive = true;
         }
-        else
-        {
-            stateMachine.UnblockPathCheck();
-        }
+        return null != path;
     }
 
     public void FixedUpdate()
@@ -89,6 +86,20 @@ public class Bhv_FollowPath : MonoBehaviour {
                 else if (currentNode.position.x > body.position.x)
                     jump.JumpRight();
             target = currentNode.position;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (pathActive)
+        {
+            for(int i = currentIndex+1; i < path.Count;++i)
+            {
+                Vector3 pos1 = ((Node)path[i - 1]).position;
+                Vector3 pos2 = ((Node)path[i]).position;
+                Debug.DrawLine(pos1, pos2, Color.blue);
+            }
+            Gizmos.DrawSphere(currentNode.position, 1.0f);
         }
     }
 

@@ -8,9 +8,12 @@ public class PatrolState : EnemyState
     private int currentWayPoint;
     private Transform wP;
     private Transform target;
-    private Bhv_Seek seek;
     private Bhv_LookAt look;
     private bool up;
+    
+    private Bhv_Seek seek;
+    private Bhv_FollowPath fpath;
+    private bool pathActive;
 
     public PatrolState(EnemyMachine machine, Transform entity)
     {
@@ -19,6 +22,7 @@ public class PatrolState : EnemyState
         currentWayPoint = 0;
         wP = stateMachine.wayPoints[currentWayPoint];
         up = true;
+        pathActive = false;
     }
 
     override public void UpdateState(float deltaTime)
@@ -43,6 +47,7 @@ public class PatrolState : EnemyState
                 }
             }
         }
+        CheckPath();
     }
 
     public void WayPointReachedCallback()
@@ -85,6 +90,10 @@ public class PatrolState : EnemyState
         seek = stateMachine.gameObject.AddComponent<Bhv_Seek>();
         seek.target = wP;
         seek.speed = stateMachine.patrolSpeed;
+        
+        fpath = stateMachine.gameObject.AddComponent<Bhv_FollowPath>();
+        pathActive = false;
+        CheckPath();
 
         look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = wP;
@@ -95,19 +104,58 @@ public class PatrolState : EnemyState
     {
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_Seek>());
         stateMachine.removeComponent(stateMachine.GetComponents<Bhv_LookAt>());
+        stateMachine.removeComponent(stateMachine.GetComponents<Bhv_FollowPath>());
     }
 
     public override void PauseState(bool disable)
     {
         if (stateMachine)
         {
-            stateMachine.GetComponent<Bhv_Seek>().enabled = !disable;
             stateMachine.GetComponent<Bhv_LookAt>().enabled = !disable;
+            seek.enabled = !disable;
+            fpath.enabled = !disable;
+            if (!disable) CheckPath();
         }
+    }
+
+    private void BlockPathCheck()
+    {
+        pathActive = true;
+        seek.enabled = false;
+        fpath.enabled = true;
+        if (!fpath.Init(stateMachine, (Vector2)target.position, stateMachine.runSpeed))
+            UnblockPathCheck();
     }
 
     public override void UnblockPathCheck()
     {
-        throw new NotImplementedException();
+        pathActive = false;
+        fpath.enabled = false;
+        seek.enabled = true;
+    }
+
+    private void CheckPath()
+    {
+        if (!pathActive)
+        {
+            if (Mathf.Abs(target.position.y - stateMachine.transform.position.y) > 4.0f)
+            {
+                BlockPathCheck();
+                return;
+            }
+            // player in sight? collision check
+            Vector2 dir = (Vector2)(target.position - stateMachine.transform.position);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(stateMachine.transform.position, dir, dir.magnitude);
+            // check collider
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (!hit.transform.IsChildOf(stateMachine.transform)) // get the first collider, which is not this gamebject
+                {
+                    if (!hit.transform.IsChildOf(target))
+                        BlockPathCheck();
+                    return;
+                }
+            }
+        }
     }
 }

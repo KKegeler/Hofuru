@@ -69,7 +69,7 @@ public class Bhv_FollowPath : MonoBehaviour {
         direction.y = 0.0f;
         if (direction.sqrMagnitude > (dist * dist))
         {
-            Vector2 v = new Vector2(direction.normalized.x * speed, body.velocity.y);
+            Vector2 v = new Vector2(direction.normalized.x * speed, (body.velocity.y != float.NaN)? body.velocity.y : 0.0f);
             body.velocity = v;
         }
         else

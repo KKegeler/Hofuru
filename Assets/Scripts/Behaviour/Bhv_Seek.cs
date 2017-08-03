@@ -30,7 +30,7 @@ public class Bhv_Seek : MonoBehaviour
         if ((distanceSqr > dist) && (groundCheck.grounded)) // walk until near enough
         {
             direction.Normalize();
-            Vector2 newVelo = new Vector2(direction.x * speed, me.velocity.y);
+            Vector2 newVelo = new Vector2(direction.x * speed, (me.velocity.y != float.NaN) ? me.velocity.y : 0.0f);
             if (me.bodyType != RigidbodyType2D.Static)
                 me.velocity = newVelo;
         }

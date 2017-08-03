@@ -123,7 +123,7 @@ public class PatrolState : EnemyState
         pathActive = true;
         seek.enabled = false;
         fpath.enabled = true;
-        if (!fpath.Init(stateMachine, (Vector2)target.position, stateMachine.runSpeed))
+        if (!fpath.Init(stateMachine, (Vector2)wP.position, stateMachine.patrolSpeed))
             UnblockPathCheck();
     }
 
@@ -151,7 +151,7 @@ public class PatrolState : EnemyState
             {
                 if (!hit.transform.IsChildOf(stateMachine.transform)) // get the first collider, which is not this gamebject
                 {
-                    if (!hit.transform.IsChildOf(target))
+                    if (!hit.transform.IsChildOf(wP))
                         BlockPathCheck();
                     return;
                 }

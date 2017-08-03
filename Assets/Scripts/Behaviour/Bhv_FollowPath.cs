@@ -10,10 +10,12 @@ public class Bhv_FollowPath : MonoBehaviour {
     private float speed;
     private float dist;
     private Vector2 direction;
+    private float jumpForce = 380.0f;
 
     // other components
     private EnemyMachine stateMachine;
     private EnemyGroundCheck groundCheck;
+    private Animator animator;
     private Jump jump;
 
     // path
@@ -21,12 +23,13 @@ public class Bhv_FollowPath : MonoBehaviour {
     private int currentIndex;
     private Node previousNode, currentNode;
     private bool pathActive;
-
-    public void Start()
+    
+    private void InitMembers()
     {
-        body = GetComponent<Rigidbody2D>();
-        groundCheck = GetComponentInChildren<EnemyGroundCheck>();
-        jump = GetComponentInChildren<Jump>();
+        body = stateMachine.GetComponent<Rigidbody2D>();
+        groundCheck = stateMachine.GetComponentInChildren<EnemyGroundCheck>();
+        jump = stateMachine.GetComponentInChildren<Jump>();
+        animator = stateMachine.GetComponent<Animator>();
         pathActive = false;
         dist = 1.0f;
     }
@@ -35,6 +38,7 @@ public class Bhv_FollowPath : MonoBehaviour {
     {
         this.speed = speed;
         this.stateMachine = stateMachine;
+        InitMembers();
         // make path
         Vector2 srcPos = body.position;
         Node start = GraphManager.Instance.GetClosestGraphNode(srcPos, dstPos);
@@ -54,6 +58,7 @@ public class Bhv_FollowPath : MonoBehaviour {
     {
         if (pathActive && groundCheck.grounded)
             Seek();
+        animator.SetFloat("speed", speed);
     }
 
     private void Seek()
@@ -79,12 +84,12 @@ public class Bhv_FollowPath : MonoBehaviour {
             previousNode = currentNode;
             currentNode = ((Node)path[currentIndex]);
             // test if a jump is necessary
-            if ((previousNode.type == Node.NodeType.JUMPABLE) &&
+            if ((null != previousNode) && (previousNode.type == Node.NodeType.JUMPABLE) &&
                 ((currentNode.type == Node.NodeType.JUMPABLE) || (currentNode.type == Node.NodeType.EDGE)))
                 if (currentNode.position.x < body.position.x)
-                    jump.JumpLeft();
+                    jump.JumpLeft(jumpForce);
                 else if (currentNode.position.x > body.position.x)
-                    jump.JumpRight();
+                    jump.JumpRight(jumpForce);
             target = currentNode.position;
         }
     }

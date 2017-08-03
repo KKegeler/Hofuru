@@ -142,13 +142,13 @@ public class PatrolState : EnemyState
     {
         if (!pathActive)
         {
-            if (Mathf.Abs(target.position.y - stateMachine.transform.position.y) > 4.0f)
+            if (Mathf.Abs(wP.position.y - stateMachine.transform.position.y) > 4.0f)
             {
                 BlockPathCheck();
                 return;
             }
-            // player in sight? collision check
-            Vector2 dir = (Vector2)(target.position - stateMachine.transform.position);
+            // wP in sight? collision check
+            Vector2 dir = (Vector2)(wP.position - stateMachine.transform.position);
             RaycastHit2D[] hits = Physics2D.RaycastAll(stateMachine.transform.position, dir, dir.magnitude);
             // check collider
             foreach (RaycastHit2D hit in hits)

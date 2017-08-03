@@ -31,7 +31,7 @@ public class Bhv_FollowPath : MonoBehaviour {
         jump = stateMachine.GetComponentInChildren<Jump>();
         animator = stateMachine.GetComponent<Animator>();
         pathActive = false;
-        dist = 1.0f;
+        dist = 0.2f;
     }
 
     public bool Init(EnemyMachine stateMachine, Vector2 dstPos, float speed)
@@ -86,12 +86,20 @@ public class Bhv_FollowPath : MonoBehaviour {
             // test if a jump is necessary
             if ((null != previousNode) && (previousNode.type == Node.NodeType.JUMPABLE) &&
                 ((currentNode.type == Node.NodeType.JUMPABLE) || (currentNode.type == Node.NodeType.EDGE)))
-                if (currentNode.position.x < body.position.x)
-                    jump.JumpLeft(jumpForce);
-                else if (currentNode.position.x > body.position.x)
-                    jump.JumpRight(jumpForce);
+                CalculateJump(currentNode.position.x > body.position.x);
             target = currentNode.position;
         }
+    }
+
+    private void CalculateJump(bool right)
+    {
+        float distance = (currentNode.position - previousNode.position).magnitude;
+        Vector2 T = 0.707f * (right ? Vector2.right : Vector2.left) + 0.707f * Vector2.down;
+        T *= distance;
+        Vector2 jumpDir = 2.0f * currentNode.position - 2.0f * previousNode.position - T;
+        distance = jumpDir.magnitude;
+        jumpDir.Normalize();
+        jump.JumpTo(jumpDir, distance * 13.8f); // please don't ask why exactly 13.8f, but it looks good.
     }
 
     private void OnDrawGizmos()

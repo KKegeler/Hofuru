@@ -539,7 +539,7 @@ Prefab:
     - target: {fileID: 224393590228034428, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 224445520645211484, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -559,7 +559,7 @@ Prefab:
     - target: {fileID: 224445520645211484, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 224691153776258800, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -579,7 +579,7 @@ Prefab:
     - target: {fileID: 224691153776258800, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 224539231929381034, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -599,7 +599,7 @@ Prefab:
     - target: {fileID: 224539231929381034, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 224063560605090906, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -619,7 +619,7 @@ Prefab:
     - target: {fileID: 224063560605090906, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 224792115247894056, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -639,7 +639,7 @@ Prefab:
     - target: {fileID: 224792115247894056, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 224743620959054970, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -669,7 +669,7 @@ Prefab:
     - target: {fileID: 224174144406100830, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -137.2
       objectReference: {fileID: 0}
     - target: {fileID: 224362062513521006, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -689,7 +689,7 @@ Prefab:
     - target: {fileID: 224362062513521006, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224435900616187904, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
@@ -709,7 +709,7 @@ Prefab:
     - target: {fileID: 224435900616187904, guid: 7c38d3690ed66f44683ac14665f9c00a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c38d3690ed66f44683ac14665f9c00a, type: 2}
@@ -1229,31 +1229,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
-      propertyPath: levelElements
+      propertyPath: freezeTimeSlider
       value: 
-      objectReference: {fileID: 1974887187}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+      objectReference: {fileID: 538893423}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
-      propertyPath: mainCamera
+      propertyPath: sliderFillImage
       value: 
-      objectReference: {fileID: 433796807}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+      objectReference: {fileID: 857901049}
+    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
-      propertyPath: hud_ShurikenCounter
+      propertyPath: hud_teleportCountText
       value: 
-      objectReference: {fileID: 1551528891}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 1924457581}
+      objectReference: {fileID: 1852470140}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1429694515}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 433796807}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: playerMeleeTrigger
@@ -1266,24 +1266,29 @@ Prefab:
       objectReference: {fileID: 121424690}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
+      propertyPath: hud_ShurikenCounter
+      value: 
+      objectReference: {fileID: 1551528891}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1924457581}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
       propertyPath: groundChecker
       value: 
       objectReference: {fileID: 1489874854}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
+      propertyPath: levelElements
+      value: 
+      objectReference: {fileID: 1974887187}
+    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
+        type: 2}
       propertyPath: slideKickTrigger
       value: 
       objectReference: {fileID: 2017827697}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: freezeTimeSlider
-      value: 
-      objectReference: {fileID: 538893423}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: sliderFillImage
-      value: 
-      objectReference: {fileID: 857901049}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: levelEnd
@@ -1314,34 +1319,9 @@ Prefab:
       propertyPath: uicam
       value: 
       objectReference: {fileID: 961174668}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: hud_teleportCountText
-      value: 
-      objectReference: {fileID: 1852470140}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: maxTimefreezeTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: maxShurikenCount
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114599174006297042, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: maxTeleportCount
-      value: 616
-      objectReference: {fileID: 0}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
         type: 2}
       propertyPath: nextLevelScreen
-      value: 
-      objectReference: {fileID: 430441822}
-    - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
-        type: 2}
-      propertyPath: levelEnde
       value: 
       objectReference: {fileID: 430441822}
     - target: {fileID: 114212803968609534, guid: 430c110f495ab6f46b266015bcc6f807,
@@ -1352,26 +1332,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 430c110f495ab6f46b266015bcc6f807, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &490558858 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1332645038605820, guid: 430c110f495ab6f46b266015bcc6f807,
-    type: 2}
-  m_PrefabInternal: {fileID: 490558857}
---- !u!114 &490558859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 490558858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff285943a684a0245a886721f31f709d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentHeight: 3.911154
-  agentMaxAngle: 50
-  maxJumpHeight: 10
-  drawGraph: 1
 --- !u!1001 &506870208
 Prefab:
   m_ObjectHideFlags: 0
@@ -1826,6 +1786,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114679120453464610, guid: ed2673813c38e604cab85af7c2a5aa2b,
+        type: 2}
+      propertyPath: wayPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4608935341873786, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 239.2
@@ -1868,10 +1833,7 @@ Prefab:
       propertyPath: wayPoints.Array.data[1]
       value: 
       objectReference: {fileID: 110597589}
-    m_RemovedComponents:
-    - {fileID: 114676412411674338, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
-    - {fileID: 114067745927802754, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
-    - {fileID: 114208077101169560, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed2673813c38e604cab85af7c2a5aa2b, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &857901049 stripped

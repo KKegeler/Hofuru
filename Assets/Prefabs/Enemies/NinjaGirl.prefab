@@ -80,9 +80,6 @@ GameObject:
   - component: {fileID: 114642205047723790}
   - component: {fileID: 95666704276743740}
   - component: {fileID: 114058529348646292}
-  - component: {fileID: 114676412411674338}
-  - component: {fileID: 114067745927802754}
-  - component: {fileID: 114208077101169560}
   m_Layer: 0
   m_Name: NinjaGirl
   m_TagString: Untagged
@@ -391,17 +388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grounded: 1
---- !u!114 &114067745927802754
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577919922472208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71cf7cdc64134614b8673c15fc19dcf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114174039072010692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,19 +401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 60
   currentHealth: 60
---- !u!114 &114208077101169560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577919922472208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11340ae3685c6e9478ac7c03831de4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rightOrientated: 1
 --- !u!114 &114211708992654600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,20 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9717decb7fc7e0c43b3a75bc14d19a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114676412411674338
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577919922472208}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4588c6339b011ca4393974ed6c41b0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 12
-  dist: 0.01
 --- !u!114 &114679120453464610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,9 +465,7 @@ MonoBehaviour:
   wayPointPrototype: {fileID: 1061317150133060, guid: a72c88fecf7b23541a2b4aca14e98433,
     type: 2}
   wPDistance: 15
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  wayPoints: []
 --- !u!114 &114879008684892444
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -104,5 +104,6 @@ public class WalkToEntityState : EnemyState {
         fpath.enabled = false;
         seek.enabled = true;
         look.enabled = true;
+        look.target = target;
     }
 }

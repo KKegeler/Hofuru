@@ -135,6 +135,7 @@ public class PatrolState : EnemyState
         fpath.enabled = false;
         seek.enabled = true;
         look.enabled = true;
+        look.target = wP;
     }
 
     private void CheckPath()

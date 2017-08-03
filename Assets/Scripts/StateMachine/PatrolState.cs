@@ -93,11 +93,12 @@ public class PatrolState : EnemyState
         
         fpath = stateMachine.gameObject.AddComponent<Bhv_FollowPath>();
         pathActive = false;
-        CheckPath();
 
         look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = wP;
         look.rightOrientated = true;
+
+        CheckPath();
     }
 
     override public void ExitState()
@@ -122,6 +123,7 @@ public class PatrolState : EnemyState
     {
         pathActive = true;
         seek.enabled = false;
+        look.enabled = false;
         fpath.enabled = true;
         if (!fpath.Init(stateMachine, (Vector2)wP.position, stateMachine.patrolSpeed))
             UnblockPathCheck();
@@ -132,6 +134,7 @@ public class PatrolState : EnemyState
         pathActive = false;
         fpath.enabled = false;
         seek.enabled = true;
+        look.enabled = true;
     }
 
     private void CheckPath()

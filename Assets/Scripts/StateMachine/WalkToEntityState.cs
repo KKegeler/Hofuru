@@ -9,6 +9,7 @@ public class WalkToEntityState : EnemyState {
 
     private Bhv_Seek seek;
     private Bhv_FollowPath fpath;
+    private Bhv_LookAt look;
 
     public WalkToEntityState(EnemyMachine machine, Transform entity) {
         stateMachine = machine;
@@ -63,7 +64,7 @@ public class WalkToEntityState : EnemyState {
         pathActive = false;
         CheckPath();
 
-        Bhv_LookAt look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
+        look = stateMachine.gameObject.AddComponent<Bhv_LookAt>();
         look.target = target;
         look.rightOrientated = true;
     }

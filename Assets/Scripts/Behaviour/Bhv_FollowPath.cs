@@ -17,6 +17,7 @@ public class Bhv_FollowPath : MonoBehaviour {
     private EnemyGroundCheck groundCheck;
     private Animator animator;
     private Jump jump;
+    private SpriteRenderer renderer;
 
     // path
     private ArrayList path;
@@ -30,6 +31,7 @@ public class Bhv_FollowPath : MonoBehaviour {
         groundCheck = stateMachine.GetComponentInChildren<EnemyGroundCheck>();
         jump = stateMachine.GetComponentInChildren<Jump>();
         animator = stateMachine.GetComponent<Animator>();
+        renderer = stateMachine.GetComponent<SpriteRenderer>();
         pathActive = false;
         dist = 0.2f;
     }
@@ -88,6 +90,7 @@ public class Bhv_FollowPath : MonoBehaviour {
                 ((currentNode.type == Node.NodeType.JUMPABLE) || (currentNode.type == Node.NodeType.EDGE)))
                 CalculateJump(currentNode.position.x > body.position.x);
             target = currentNode.position;
+            renderer.flipX = target.x < body.position.x;
         }
     }
 

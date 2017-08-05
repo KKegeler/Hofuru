@@ -10,14 +10,14 @@ public class Bhv_FollowPath : MonoBehaviour {
     private float speed;
     private float dist;
     private Vector2 direction;
-    private float jumpForce = 380.0f;
+    private Vector2 dstPos;
 
     // other components
     private EnemyMachine stateMachine;
     private EnemyGroundCheck groundCheck;
     private Animator animator;
     private Jump jump;
-    private SpriteRenderer renderer;
+    private SpriteRenderer sRenderer;
 
     // path
     private ArrayList path;
@@ -31,28 +31,34 @@ public class Bhv_FollowPath : MonoBehaviour {
         groundCheck = stateMachine.GetComponentInChildren<EnemyGroundCheck>();
         jump = stateMachine.GetComponentInChildren<Jump>();
         animator = stateMachine.GetComponent<Animator>();
-        renderer = stateMachine.GetComponent<SpriteRenderer>();
+        sRenderer = stateMachine.GetComponent<SpriteRenderer>();
         pathActive = false;
-        dist = 0.2f;
+        dist = 0.1f;
     }
 
-    public bool Init(EnemyMachine stateMachine, Vector2 dstPos, float speed)
+    private void MakePath()
     {
-        this.speed = speed;
-        this.stateMachine = stateMachine;
-        InitMembers();
         // make path
         Vector2 srcPos = body.position;
         Node start = GraphManager.Instance.GetClosestGraphNode(srcPos, dstPos);
         Node goal = GraphManager.Instance.GetClosestGraphNode(dstPos, srcPos);
         path = ((null != start) && (null != goal)) ? AStar.FindPath(start, goal) : null;
-        if(null != path)
+        if (null != path)
         {
             currentIndex = -1;
             currentNode = null;
             UpdateTarget();
             pathActive = true;
         }
+    }
+    
+    public bool Init(EnemyMachine stateMachine, Vector2 dstPos, float speed)
+    {
+        this.speed = speed;
+        this.stateMachine = stateMachine;
+        this.dstPos = dstPos;
+        InitMembers();
+        MakePath();
         return null != path;
     }
 
@@ -60,6 +66,8 @@ public class Bhv_FollowPath : MonoBehaviour {
     {
         if (pathActive && groundCheck.grounded)
             Seek();
+        else if (pathActive && !groundCheck.grounded)
+            WhileJumping();
         if(null != animator) animator.SetFloat("speed", speed);
     }
 
@@ -73,6 +81,14 @@ public class Bhv_FollowPath : MonoBehaviour {
             body.velocity = v;
         }
         else
+            UpdateTarget();
+    }
+
+    private void WhileJumping()
+    {
+        direction = target - body.position;
+        direction.y = 0.0f;
+        if (direction.sqrMagnitude <= (dist * dist))
             UpdateTarget();
     }
 
@@ -90,19 +106,21 @@ public class Bhv_FollowPath : MonoBehaviour {
                 ((currentNode.type == Node.NodeType.JUMPABLE) || (currentNode.type == Node.NodeType.EDGE)))
                 CalculateJump(currentNode.position.x > body.position.x);
             target = currentNode.position;
-            renderer.flipX = target.x < body.position.x;
+            sRenderer.flipX = target.x < body.position.x;
         }
     }
 
     private void CalculateJump(bool right)
     {
-        float distance = (currentNode.position - previousNode.position).magnitude;
-        Vector2 T = 0.707f * (right ? Vector2.right : Vector2.left) + 0.707f * Vector2.down;
+        Vector2 prevPos = new Vector2(body.position.x, previousNode.position.y);
+        float distance = (currentNode.position - prevPos).magnitude;
+        Vector2 T = (2.0f * (right ? Vector2.right : Vector2.left) + 1.0f * Vector2.down).normalized;
         T *= distance;
-        Vector2 jumpDir = 2.0f * currentNode.position - 2.0f * previousNode.position - T;
-        distance = jumpDir.magnitude;
-        jumpDir.Normalize();
-        jump.JumpTo(jumpDir, distance * 13.8f); // please don't ask why exactly 13.8f, but it looks good.
+        Vector2 jumpDir = 2.0f * currentNode.position - 2.0f * prevPos - T;
+        float jumpForce = 385.0f;
+        if (distance <= 10.0f) jumpForce = 350.0f;
+        if (distance <= 5.6f) jumpForce = 250.0f;
+        jump.JumpTo(jumpDir.normalized, jumpForce);
     }
 
     private void OnDrawGizmos()

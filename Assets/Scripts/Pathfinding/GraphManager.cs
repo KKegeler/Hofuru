@@ -244,6 +244,11 @@ public class GraphManager : MonoBehaviour {
         return best;
     }
 
+    private bool IsNotBlocked(Vector2 from, Vector2 to)
+    {
+        return true;
+    }
+
     /// <summary>
     /// returns the neighbour nodes from any node
     /// </summary>

@@ -13,7 +13,7 @@ public class Jump : MonoBehaviour {
     void Start()
     {
         body = GetComponentInParent<Rigidbody2D>(); // this script is part of the TrapEvasion
-        groundCheck = transform.parent.GetComponentInChildren<EnemyGroundCheck>();
+        groundCheck = (transform.parent != null) ? transform.parent.GetComponentInChildren<EnemyGroundCheck>() : null;
         float a = 60.0f * Mathf.Deg2Rad;
         float cos = Mathf.Cos(a);
         float sin = Mathf.Sin(a);
@@ -33,7 +33,7 @@ public class Jump : MonoBehaviour {
     
     public void JumpTo(Vector2 direction, float force)
     {
-        groundCheck.grounded = false;
+        if(null != groundCheck) groundCheck.grounded = false;
         body.velocity = Vector2.zero;
         body.AddForce(direction * force, ForceMode2D.Impulse);
     }

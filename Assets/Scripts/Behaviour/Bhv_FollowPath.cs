@@ -18,6 +18,7 @@ public class Bhv_FollowPath : MonoBehaviour {
     private Animator animator;
     private Jump jump;
     private SpriteRenderer sRenderer;
+    private GameObject trapEvasion;
 
     // path
     private ArrayList path;
@@ -32,8 +33,11 @@ public class Bhv_FollowPath : MonoBehaviour {
         jump = stateMachine.GetComponentInChildren<Jump>();
         animator = stateMachine.GetComponent<Animator>();
         sRenderer = stateMachine.GetComponent<SpriteRenderer>();
+        trapEvasion = stateMachine.transform.GetChild(2).gameObject;
         pathActive = false;
         dist = 0.1f;
+        if ((null == body) || (null == groundCheck) || (null == jump) || (null == animator) || (null == sRenderer) || (null == trapEvasion))
+            MakePath();
     }
 
     private void MakePath()
@@ -73,6 +77,7 @@ public class Bhv_FollowPath : MonoBehaviour {
 
     private void Seek()
     {
+        trapEvasion.SetActive(true);
         direction = target - body.position;
         direction.y = 0.0f;
         if (direction.sqrMagnitude > (dist * dist))
@@ -86,6 +91,7 @@ public class Bhv_FollowPath : MonoBehaviour {
 
     private void WhileJumping()
     {
+        trapEvasion.SetActive(false);
         direction = target - body.position;
         direction.y = 0.0f;
         if (direction.sqrMagnitude <= (dist * dist))
@@ -112,15 +118,19 @@ public class Bhv_FollowPath : MonoBehaviour {
 
     private void CalculateJump(bool right)
     {
-        Vector2 prevPos = new Vector2(body.position.x, previousNode.position.y);
-        float distance = (currentNode.position - prevPos).magnitude;
-        Vector2 T = (2.0f * (right ? Vector2.right : Vector2.left) + 1.0f * Vector2.down).normalized;
-        T *= distance;
-        Vector2 jumpDir = 2.0f * currentNode.position - 2.0f * prevPos - T;
-        float jumpForce = 385.0f;
-        if (distance <= 10.0f) jumpForce = 350.0f;
-        if (distance <= 5.6f) jumpForce = 250.0f;
-        jump.JumpTo(jumpDir.normalized, jumpForce);
+        if (null != jump)
+        {
+            trapEvasion.SetActive(false);
+            float distance = (currentNode.position - previousNode.position).magnitude;
+            float angle = 70.0f * Mathf.Deg2Rad;
+            Vector2 dir = new Vector2((right ? 1.0f : -1.0f) * Mathf.Cos(angle), Mathf.Sin(angle));
+            if (distance >= 12.0f)
+                jump.JumpTo(dir, 350.0f);
+            else if (distance >= 6.0f)
+                jump.JumpTo(dir, 340.0f);
+            else
+                jump.JumpTo(dir, 250.0f);
+        }
     }
 
     private void OnDrawGizmos()

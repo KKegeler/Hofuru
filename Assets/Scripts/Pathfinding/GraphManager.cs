@@ -48,7 +48,6 @@ public class GraphManager : MonoBehaviour {
         // get level elements such as platforms, obstacles and traps
         GameObject[] platforms = GameObject.FindGameObjectsWithTag("ground");
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("obstacle");
-        GameObject[] traps = GameObject.FindGameObjectsWithTag("trap");
         //
         // save platform indices
         for (int i = 0; i < platforms.Length; ++i)
@@ -62,7 +61,7 @@ public class GraphManager : MonoBehaviour {
             this.neighboursByPlatform.Add(new Neighbours());
         //
         // create nodes
-        CreateNodes(obstacles, traps);
+        CreateNodes(obstacles);
         //
         // search for neighbours by platform
         for(int i = 0; i < this.platforms.Count; ++i)
@@ -77,7 +76,7 @@ public class GraphManager : MonoBehaviour {
         comparer = null;
     }
 
-    private void CreateNodes(GameObject[] obstacles, GameObject[] traps)
+    private void CreateNodes(GameObject[] obstacles)
     {
         // create platform nodes (edges)
         for (int i = 0; i < this.platforms.Count; ++i)
@@ -208,12 +207,10 @@ public class GraphManager : MonoBehaviour {
 
     /// <summary>
     /// searches and returns the closest node on the platform (from pos) 
-    /// which is in the same direction as the target position.
     /// </summary>
     /// <param name="pos">Any position in world coordinated</param>
-    /// <param name="target">Any target position in world coordinates</param>
-    /// <returns>Closest node to pos, which is in the same direction as the target or null</returns>
-    public Node GetClosestGraphNode(Vector2 pos, Vector2 target)
+    /// <returns>Closest node to pos or null</returns>
+    public Node GetClosestGraphNode(Vector2 pos)
     {
         // get index of platform
         bool hitted = false;
@@ -227,6 +224,7 @@ public class GraphManager : MonoBehaviour {
                 break;
             }
         if(!hitted) return null;
+        // check all nodes from this platform and find the best
         int[] indices = neighbours.GetNeighbourIndices();
         Node best = null;
         float bestCost = 0.0f;

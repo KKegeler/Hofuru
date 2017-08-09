@@ -44,8 +44,8 @@ public class Bhv_FollowPath : MonoBehaviour {
     {
         // make path
         Vector2 srcPos = body.position;
-        Node start = GraphManager.Instance.GetClosestGraphNode(srcPos, dstPos);
-        Node goal = GraphManager.Instance.GetClosestGraphNode(dstPos, srcPos);
+        Node start = GraphManager.Instance.GetClosestGraphNode(srcPos);
+        Node goal = GraphManager.Instance.GetClosestGraphNode(dstPos);
         path = ((null != start) && (null != goal)) ? AStar.FindPath(start, goal) : null;
         if (null != path)
         {
@@ -109,7 +109,7 @@ public class Bhv_FollowPath : MonoBehaviour {
             currentNode = ((Node)path[currentIndex]);
             // test if a jump is necessary
             if ((null != previousNode) && (previousNode.type == Node.NodeType.JUMPABLE) &&
-                ((currentNode.type == Node.NodeType.JUMPABLE) || (currentNode.type == Node.NodeType.EDGE)))
+                (currentNode.type == Node.NodeType.EDGE) && (currentNode.position.y > previousNode.position.y))
                 CalculateJump(currentNode.position.x > body.position.x);
             target = currentNode.position;
             sRenderer.flipX = target.x < body.position.x;
